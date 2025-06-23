@@ -1,0 +1,32 @@
+<form method="POST">
+    {{ form.hidden_tag() }}
+    
+    <p>
+        {{ form.name.label }}<br>
+        {{ form.name(size=32) }}
+    </p>
+    
+    <p>
+        {{ form.email.label }}<br>
+        {{ form.email(size=32) }}
+    </p>
+    
+    <p>
+        {{ form.message.label }}<br>
+        {{ form.message(rows=5, cols=40) }}
+    </p>
+    
+    <p>{{ form.submit() }}</p>
+</form>
+{% if form.errors %}
+    <ul class="error-list">
+        {% for field, errors in form.errors.items() %}
+            {% for error in errors %}
+                <li>{{ field.label }}: {{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+{% endif %}
+{% if success %}
+    <p class="success-message">Thank you for your message!</p>
+{% endif %}

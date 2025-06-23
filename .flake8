@@ -1,0 +1,4 @@
+[flake8]
+exclude=migrations, venv
+ignore=F401, F402, F405, W291
+max-line-length=120
