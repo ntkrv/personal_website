@@ -5,6 +5,7 @@ from datetime import datetime
 
 db = SQLAlchemy()
 
+
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150))
@@ -12,12 +13,15 @@ class Project(db.Model):
     long_description = db.Column(db.Text)
     image_path = db.Column(db.String(120))
     skills = db.Column(db.String(200))
+    git_link = db.Column(db.String(255))
+
 
 class Certificate(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150))
     issuer = db.Column(db.String(100))
-    image_path = db.Column(db.String(120))
+    link = db.Column(db.String(120))
+
 
 class ContactMessage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -25,6 +29,7 @@ class ContactMessage(db.Model):
     email = db.Column(db.String(120), nullable=False)
     message = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
 
 class AdminUser(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)

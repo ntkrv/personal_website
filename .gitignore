@@ -45,9 +45,39 @@ MANIFEST
 # Black / formatting
 __pypackages__/
 
-# OS files
-.DS_Store
-Thumbs.db
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
 
-# Optional scripts or notes
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
 notes.txt
+instance/
+node_modules/
