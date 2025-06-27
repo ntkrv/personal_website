@@ -13,7 +13,7 @@ def login():
         user = AdminUser.query.filter_by(username=username).first()
         if user and user.check_password(password):
             login_user(user)
-            return redirect(url_for("admin.index"))
+            return redirect(url_for("main.index"))
         else:
             flash("Invalid username or password")
     return render_template("admin_login.html")

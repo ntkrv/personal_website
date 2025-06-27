@@ -9,5 +9,5 @@ def contact():
     form = ContactForm()
     if form.validate_on_submit():
         flash("Message has been sent", "success")
-        return redirect(url_for("contact.contact"))
-    return render_template("contact.html", form=form)
+        return redirect(url_for("main.contact"))
+    return render_template("index.html", form=form)

@@ -13,6 +13,7 @@ class Project(db.Model):
     long_description = db.Column(db.Text)
     image_path = db.Column(db.String(120))
     skills = db.Column(db.String(200))
+    git_link = db.Column(db.String(255))
 
 
 class Certificate(db.Model):

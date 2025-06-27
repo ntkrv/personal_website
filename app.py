@@ -1,12 +1,16 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate  # <-- NEW
 from config import DevelopmentConfig
 from flask_login import LoginManager
 from flask_admin import Admin
+
 from routes.main import main_bp
 from routes.projects import projects_bp
 from routes.certificates import certificates_bp
 from routes.contact import contact_bp
 from routes.admin_auth import admin_auth_bp
+
 from models import db, Project, Certificate, ContactMessage, AdminUser
 from admin_panel import MyAdminIndexView, SecureModelView
 
@@ -15,6 +19,9 @@ app.config.from_object(DevelopmentConfig)
 
 # DB init
 db.init_app(app)
+
+# Migrate init
+migrate = Migrate(app, db)  # <-- THIS LINE
 
 # Flask-Login
 login_manager = LoginManager()
@@ -42,7 +49,7 @@ app.register_blueprint(certificates_bp)
 app.register_blueprint(contact_bp)
 app.register_blueprint(admin_auth_bp)
 
-# DB create
+# DB create (не нужен при использовании миграций, но не мешает)
 with app.app_context():
     db.create_all()
 

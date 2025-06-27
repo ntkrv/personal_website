@@ -1,25 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Admin Login</title>
-</head>
-<body>
-    <h2 class="text-3xl font-bold text-blue-500">Login</h2>
-    <form method="post">
-        <input name="username" placeholder="Username"><br>
-        <input name="password" type="password" placeholder="Password"><br>
-        <button type="submit">Login</button>
+{% extends "base.html" %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-white px-4">
+  <div class="w-full max-w-md bg-[#f9fafb] p-8 rounded-xl shadow-md border border-gray-200">
+    <h2 class="text-2xl font-bold text-center text-[#121416] mb-6">Admin Login</h2>
+
+    <form method="POST" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-[#121416] mb-1" for="username">Username</label>
+        <input
+          name="username"
+          type="text"
+          required
+          placeholder="Enter your username"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-[#121416] focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-[#121416] mb-1" for="password">Password</label>
+        <input
+          name="password"
+          type="password"
+          required
+          placeholder="Enter your password"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-[#121416] focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <div>
+        <button
+          type="submit"
+          class="w-full py-2 px-4 bg-[#3f7fbf] text-white font-semibold rounded-lg hover:bg-blue-700 transition"
+        >
+          Login
+        </button>
+      </div>
     </form>
 
     {% with messages = get_flashed_messages() %}
       {% if messages %}
-        <ul>
+        <div class="mt-4">
           {% for msg in messages %}
-            <li style="color: red;">{{ msg }}</li>
+            <p class="text-sm text-red-600">{{ msg }}</p>
           {% endfor %}
-        </ul>
+        </div>
       {% endif %}
     {% endwith %}
-</body>
-</html>
+  </div>
+</div>
+{% endblock %}
