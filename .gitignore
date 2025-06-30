@@ -81,3 +81,5 @@ dmypy.json
 notes.txt
 instance/
 node_modules/
+
+.coverage
