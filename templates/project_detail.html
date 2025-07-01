@@ -3,28 +3,45 @@
 {% block title %}{{ project.title }}{% endblock %}
 
 {% block content %}
-<section class="px-4 py-8 max-w-4xl mx-auto">
-  <h1 class="text-3xl font-bold text-black dark:text-white mb-4">{{ project.title }}</h1>
+<section class="px-4 py-8 w-full max-w-screen-md mx-auto">
+  
+  <!-- Back Button -->
+  <a href="{{ url_for('projects.projects') }}"
+     class="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-brand dark:hover:text-brand mb-4 transition-colors">
+    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+    </svg>
+    Back to Projects
+  </a>
 
+  <!-- Title -->
+  <h1 class="text-3xl font-bold text-black dark:text-white mb-4 break-words">{{ project.title }}</h1>
+
+  <!-- Image -->
   {% if project.image %}
-    <div class="w-full aspect-video bg-cover bg-center rounded-lg mb-6" style="background-image: url('{{ project.image }}');"></div>
+  <div class="w-full aspect-video bg-cover bg-center rounded-lg mb-6" style="background-image: url('{{ project.image }}');"></div>
   {% endif %}
 
-  <p class="text-base text-gray-700 dark:text-gray-300 mb-6">{{ project.description }}</p>
+  <!-- Description -->
+  <p class="text-base text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">{{ project.description }}</p>
 
+  <!-- Technologies -->
   {% if project.technologies %}
     <h2 class="text-xl font-semibold text-black dark:text-white mb-2">Technologies Used</h2>
-    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 mb-6">
+    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 mb-6 space-y-1">
       {% for tech in project.technologies %}
       <li>{{ tech }}</li>
       {% endfor %}
     </ul>
   {% endif %}
 
+  <!-- External Link -->
   {% if project.link %}
-    <a href="{{ project.link }}" class="inline-block bg-brand text-white px-6 py-2 rounded-full font-semibold text-sm hover:bg-[#2b5a8c] transition" target="_blank">
+    <a href="{{ project.link }}" target="_blank"
+       class="inline-block bg-brand text-white px-6 py-2 rounded-full font-semibold text-sm hover:bg-[#2b5a8c] transition-colors duration-200">
       Visit Project
     </a>
   {% endif %}
+
 </section>
 {% endblock %}
