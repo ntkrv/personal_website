@@ -3,37 +3,37 @@
 {% block title %}Admin Login{% endblock %}
 
 {% block content %}
-<div class="min-h-screen flex items-center justify-center bg-white px-4">
-  <div class="w-full max-w-md bg-[#f9fafb] p-8 rounded-xl shadow-md border border-gray-200">
-    <h2 class="text-2xl font-bold text-center text-[#121416] mb-6">Admin Login</h2>
+<div class="min-h-screen flex items-center justify-center px-4">
+  <div class="w-full max-w-md bg-white dark:bg-[#2c2c2c] p-8 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
+    <h2 class="text-2xl font-bold text-center text-black dark:text-white mb-6">Admin Login</h2>
 
     <form method="POST" class="space-y-4">
       <div>
-        <label class="block text-sm font-medium text-[#121416] mb-1" for="username">Username</label>
+        <label class="block text-sm font-medium text-black dark:text-white mb-1" for="username">Username</label>
         <input
           name="username"
           type="text"
           required
           placeholder="Enter your username"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-[#121416] focus:outline-none focus:ring-2 focus:ring-blue-500"
+          class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-brand"
         />
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-[#121416] mb-1" for="password">Password</label>
+        <label class="block text-sm font-medium text-black dark:text-white mb-1" for="password">Password</label>
         <input
           name="password"
           type="password"
           required
           placeholder="Enter your password"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-[#121416] focus:outline-none focus:ring-2 focus:ring-blue-500"
+          class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-brand"
         />
       </div>
 
       <div>
         <button
           type="submit"
-          class="w-full py-2 px-4 bg-[#3f7fbf] text-white font-semibold rounded-lg hover:bg-blue-700 transition"
+          class="w-full py-2 px-4 bg-brand text-white font-semibold rounded-lg hover:bg-[#2b5a8c] transition"
         >
           Login
         </button>
@@ -44,7 +44,7 @@
       {% if messages %}
         <div class="mt-4">
           {% for msg in messages %}
-            <p class="text-sm text-red-600">{{ msg }}</p>
+            <div class="text-sm text-red-500">{{ msg }}</div>
           {% endfor %}
         </div>
       {% endif %}

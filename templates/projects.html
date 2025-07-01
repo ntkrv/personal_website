@@ -3,21 +3,29 @@
 {% block title %}Projects{% endblock %}
 
 {% block content %}
-  <section class="px-4 py-8">
-    <h1 class="text-[#121416] text-3xl font-bold mb-6">My Projects</h1>
-    <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6">
-      {% for project in projects %}
-        <div class="flex flex-col gap-3 rounded-xl shadow-md p-4 bg-white">
-          <div class="aspect-video bg-cover bg-center rounded-md" style="background-image: url('{{ project.image }}');"></div>
-          <h2 class="text-lg font-semibold text-[#121416]">{{ project.title }}</h2>
-          <p class="text-sm text-[#6a7581]">{{ project.description }}</p>
-          {% if project.link %}
-            <a href="{{ project.link }}" class="text-blue-600 text-sm font-medium hover:underline" target="_blank">View Project</a>
-          {% endif %}
-        </div>
-      {% else %}
-        <p class="text-[#6a7581] text-sm">No projects available at the moment.</p>
-      {% endfor %}
+<section class="px-4 py-8">
+   <!-- Back button -->
+   <a href="{{ url_for('main.index') }}"
+   class="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-brand dark:hover:text-brand mb-4 transition-colors">
+  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+  </svg>
+  Back to Home
+</a>
+  <h1 class="text-3xl font-bold text-black dark:text-white mb-6">My Projects</h1>
+  <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6">
+    {% for project in projects %}
+    <div class="flex flex-col gap-3 rounded-xl shadow-md p-4 bg-white dark:bg-[#2c2c2c] transition-colors">
+      <div class="aspect-video bg-cover bg-center rounded-md" style="background-image: url('{{ project.image }}');"></div>
+      <h2 class="text-lg font-semibold text-black dark:text-white">{{ project.title }}</h2>
+      <p class="text-sm text-gray-600 dark:text-gray-300">{{ project.description }}</p>
+      {% if project.link %}
+        <a href="{{ project.link }}" class="text-brand text-sm font-medium hover:underline" target="_blank">View Project</a>
+      {% endif %}
     </div>
-  </section>
+    {% else %}
+    <p class="text-gray-500 dark:text-gray-400 text-sm">No projects available at the moment.</p>
+    {% endfor %}
+  </div>
+</section>
 {% endblock %}

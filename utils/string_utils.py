@@ -2,6 +2,7 @@ import re
 import unicodedata
 from markupsafe import escape
 
+
 def sanitize_input(text: str) -> str:
     """
     Sanitize user input by trimming and escaping HTML.
@@ -14,6 +15,7 @@ def sanitize_input(text: str) -> str:
     """
     return escape(text.strip())
 
+
 def allowed_file(filename: str, allowed_extensions: set[str]) -> bool:
     """
     Check if uploaded file has a valid extension.
@@ -25,7 +27,8 @@ def allowed_file(filename: str, allowed_extensions: set[str]) -> bool:
     Returns:
         bool: True if valid, else False.
     """
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in allowed_extensions
+
 
 def slugify(text: str) -> str:
     """

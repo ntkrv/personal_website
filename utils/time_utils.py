@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 def format_datetime(dt: datetime) -> str:
     """
     Format a datetime object for display.
@@ -11,6 +12,7 @@ def format_datetime(dt: datetime) -> str:
         str: Formatted date string.
     """
     return dt.strftime("%d.%m.%Y %H:%M") if dt else ""
+
 
 def current_timestamp() -> datetime:
     """
