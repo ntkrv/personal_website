@@ -3,32 +3,41 @@
 {% block title %}Certificates{% endblock %}
 
 {% block content %}
-<section class="px-4 py-8 max-w-5xl mx-auto">
-  <h1 class="text-3xl font-bold text-[#121416] mb-8">Certificates</h1>
-
-  <div class="grid gap-6 md:grid-cols-2">
+<section class="px-4 py-8">
+  <!-- Back button -->
+  <a href="{{ url_for('main.index') }}"
+   class="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-brand dark:hover:text-brand mb-4 transition-colors">
+  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+  </svg>
+  Back to Home
+</a>
+  <h1 class="text-3xl font-bold text-black dark:text-white mb-6">Certificates</h1>
+  <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6">
     {% for cert in certificates %}
-    <div class="bg-[#f9fafb] rounded-xl p-6 shadow-sm border border-[#e5e7eb]">
-      <h2 class="text-xl font-semibold text-[#121416]">{{ cert.title }}</h2>
-      <p class="text-sm text-[#6a7581] mt-1">{{ cert.organization }}</p>
-      <p class="text-sm text-[#6a7581]">{{ cert.period }}</p>
+    <div class="bg-white dark:bg-[#2c2c2c] rounded-xl p-6 shadow-md border border-gray-200 dark:border-gray-700 transition">
+      <h2 class="text-lg font-semibold text-black dark:text-white">{{ cert.title }}</h2>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">{{ cert.organization }}</p>
+      <p class="text-sm text-gray-600 dark:text-gray-400">{{ cert.period }}</p>
 
       {% if cert.technologies %}
       <div class="flex flex-wrap gap-2 mt-3">
         {% for tech in cert.technologies %}
-        <span class="bg-[#e5e7eb] text-[#121416] text-xs font-medium px-3 py-1 rounded-full">{{ tech }}</span>
+        <span class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs font-medium px-3 py-1 rounded-full">{{ tech }}</span>
         {% endfor %}
       </div>
       {% endif %}
 
       {% if cert.link %}
       <div class="mt-4">
-        <a href="{{ cert.link }}" class="text-sm text-blue-600 font-medium hover:underline" target="_blank">
+        <a href="{{ cert.link }}" class="text-sm text-brand font-medium hover:underline" target="_blank">
           View Certificate
         </a>
       </div>
       {% endif %}
     </div>
+    {% else %}
+    <p class="text-gray-500 dark:text-gray-400 text-sm">No certificates available at the moment.</p>
     {% endfor %}
   </div>
 </section>

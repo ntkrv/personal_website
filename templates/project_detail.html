@@ -4,25 +4,25 @@
 
 {% block content %}
 <section class="px-4 py-8 max-w-4xl mx-auto">
-  <h1 class="text-3xl font-bold text-[#121416] mb-4">{{ project.title }}</h1>
-  
+  <h1 class="text-3xl font-bold text-black dark:text-white mb-4">{{ project.title }}</h1>
+
   {% if project.image %}
     <div class="w-full aspect-video bg-cover bg-center rounded-lg mb-6" style="background-image: url('{{ project.image }}');"></div>
   {% endif %}
 
-  <p class="text-base text-[#121416] mb-6">{{ project.description }}</p>
+  <p class="text-base text-gray-700 dark:text-gray-300 mb-6">{{ project.description }}</p>
 
   {% if project.technologies %}
-    <h2 class="text-xl font-semibold text-[#121416] mb-2">Technologies Used</h2>
-    <ul class="list-disc list-inside text-[#6a7581] mb-6">
+    <h2 class="text-xl font-semibold text-black dark:text-white mb-2">Technologies Used</h2>
+    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 mb-6">
       {% for tech in project.technologies %}
-        <li>{{ tech }}</li>
+      <li>{{ tech }}</li>
       {% endfor %}
     </ul>
   {% endif %}
 
   {% if project.link %}
-    <a href="{{ project.link }}" class="inline-block bg-[#3f7fbf] text-white px-6 py-2 rounded-full font-semibold text-sm hover:bg-blue-700 transition" target="_blank">
+    <a href="{{ project.link }}" class="inline-block bg-brand text-white px-6 py-2 rounded-full font-semibold text-sm hover:bg-[#2b5a8c] transition" target="_blank">
       Visit Project
     </a>
   {% endif %}

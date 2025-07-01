@@ -1,6 +1,7 @@
 from flask import current_app
 from itsdangerous import URLSafeTimedSerializer
 
+
 def generate_token(data: str, salt: str = "default") -> str:
     """
     Generate a secure token for the given data.
@@ -14,6 +15,7 @@ def generate_token(data: str, salt: str = "default") -> str:
     """
     serializer = URLSafeTimedSerializer(current_app.config["SECRET_KEY"])
     return serializer.dumps(data, salt=salt)
+
 
 def verify_token(token: str, salt: str = "default", max_age: int = 3600) -> str | None:
     """
