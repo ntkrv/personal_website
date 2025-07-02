@@ -28,7 +28,5 @@ class ProductionConfig(Config):
 class TestingConfig(Config):
     TESTING = True
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.getenv(
-        "TEST_DATABASE_URL"
-    )  # Fallback for testing database
+    SQLALCHEMY_DATABASE_URI = os.environ.get("TEST_DATABASE_URL")
     WTF_CSRF_ENABLED = False

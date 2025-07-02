@@ -9,7 +9,7 @@ class MyAdminIndexView(AdminIndexView):
     def index(self):
         if not current_user.is_authenticated:
             return redirect(url_for("admin_auth.login"))
-        return super().index()
+        return self.render("admin/dashboard.html")
 
 
 class SecureModelView(ModelView):

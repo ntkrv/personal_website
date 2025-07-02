@@ -13,6 +13,7 @@ echo "🎨 Running black..."
 black .
 
 echo "🧪 Running tests with coverage..."
+export FLASK_ENV=testing
 coverage run -m pytest
 coverage report -m
 
@@ -20,13 +21,19 @@ echo "🧬 Running migrations..."
 export FLASK_APP=app.py
 export FLASK_ENV=development
 
-# Run `db init` only if migrations folder doesn't exist
-if [ ! -d "migrations" ]; then
-  flask db init
-fi
+# Удаление старых миграций и базы
+rm -rf migrations
+rm -f instance/ntkrv.db
 
-flask db migrate -m "Auto migration"
+# Убедимся, что instance существует
+mkdir -p instance
+
+flask db init
+flask db migrate -m "Initial migration"
 flask db upgrade
+
+echo "👤 Creating admin user..."
+python3 create_admin.py
 
 echo "🎨 Building Tailwind CSS..."
 npm run build:css &
