@@ -35,6 +35,7 @@ flask db upgrade
 echo "👤 Creating admin user..."
 python3 create_admin.py
 
+
 echo "🎨 Building Tailwind CSS..."
 npm run build:css &
 
