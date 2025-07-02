@@ -12,7 +12,7 @@ class Project(db.Model):
     short_description = db.Column(db.String(300))
     long_description = db.Column(db.Text)
     image_path = db.Column(db.String(120))
-    skills = db.Column(db.String(200))
+    stack = db.Column(db.String(200))
     git_link = db.Column(db.String(255))
 
 
@@ -20,6 +20,7 @@ class Certificate(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150))
     issuer = db.Column(db.String(100))
+    skills = db.Column(db.String(200))
     link = db.Column(db.String(120))
 
 

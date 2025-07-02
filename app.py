@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify, request, redirect
+from flask import Flask, jsonify, request
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_admin import Admin
@@ -12,6 +12,7 @@ from routes.projects import projects_bp
 from routes.certificates import certificates_bp
 from routes.contact import contact_bp
 from routes.admin_auth import admin_auth_bp
+from routes.admin_manage import admin_manage_bp
 
 from models import db, Project, Certificate, ContactMessage, AdminUser
 from admin_panel import MyAdminIndexView, SecureModelView
@@ -63,22 +64,6 @@ def load_user(user_id):
     return AdminUser.query.get(int(user_id))
 
 
-@app.route("/dashboard")
-@app.route("/dashboard/")
-def dashboard_redirect():
-    return redirect("/admin", code=301)
-
-
-@app.route("/dashboard/project/")
-def dashboard_project_redirect():
-    return redirect("/admin/project/", code=301)
-
-
-@app.route("/dashboard/certificate/")
-def dashboard_certificate_redirect():
-    return redirect("/admin/certificate/", code=301)
-
-
 # Flask-Limiter
 limiter = Limiter(
     get_remote_address,
@@ -121,6 +106,7 @@ app.register_blueprint(projects_bp)
 app.register_blueprint(certificates_bp)
 app.register_blueprint(contact_bp)
 app.register_blueprint(admin_auth_bp)
+app.register_blueprint(admin_manage_bp)
 
 # Optional: create db if needed
 with app.app_context():

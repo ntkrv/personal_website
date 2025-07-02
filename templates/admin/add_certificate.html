@@ -1,0 +1,25 @@
+{% extends "admin/base.html" %}
+{% block title %}Add Certificate{% endblock %}
+
+{% block content %}
+<div class="container mx-auto py-8 max-w-xl">
+  <h2 class="text-2xl font-bold mb-4">Add New Certificate</h2>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    {% for field in form %}
+      <div class="mb-4">
+        {{ field.label(class="block font-semibold mb-1") }}
+        {{ field(class="w-full p-2 border rounded text-black") }}
+        {% if field.errors %}
+          <ul class="text-red-500 text-sm mt-1">
+            {% for error in field.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save</button>
+  </form>
+</div>
+{% endblock %}
