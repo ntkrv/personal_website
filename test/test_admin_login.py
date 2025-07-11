@@ -1,9 +1,10 @@
 import os
 import pytest
 from dotenv import load_dotenv
-from app import app, db
-from models import AdminUser
 
+from app import create_app
+from extensions import db
+from models import AdminUser
 
 load_dotenv()
 
@@ -13,18 +14,19 @@ ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 
 @pytest.fixture
 def client():
-    app.config["TESTING"] = True
-    app.config["WTF_CSRF_ENABLED"] = False  # отключаем CSRF для теста
+    app = create_app("config.TestingConfig")
+    app.config["WTF_CSRF_ENABLED"] = False
+
     with app.test_client() as client:
         with app.app_context():
             db.drop_all()
             db.create_all()
 
-            # Добавляем тестового админа из .env
             admin = AdminUser(username=ADMIN_USERNAME)
             admin.set_password(ADMIN_PASSWORD)
             db.session.add(admin)
             db.session.commit()
+
         yield client
 
 

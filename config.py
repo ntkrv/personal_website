@@ -1,32 +1,28 @@
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
 
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
+    SECRET_KEY = os.getenv("SECRET_KEY", "dev")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = os.getenv("SECRET_KEY", "fallback-secret")  # Fallback for secret key
+
+    MAIL_SERVER = os.getenv("MAIL_SERVER")
+    MAIL_PORT = int(os.getenv("MAIL_PORT", 587))
+    MAIL_USE_TLS = os.getenv("MAIL_USE_TLS", "True") == "True"
+    MAIL_USERNAME = os.getenv("MAIL_USERNAME")
+    MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
+    MAIL_DEFAULT_SENDER = os.getenv("MAIL_DEFAULT_SENDER")
 
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    ENV = "development"
+    SQLALCHEMY_DATABASE_URI = os.getenv("DEV_DATABASE_URL")
 
 
 class ProductionConfig(Config):
     DEBUG = False
-    TESTING = False
-    SECRET_KEY = os.environ.get("SECRET_KEY")
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
-    SESSION_COOKIE_SECURE = True
-    REMEMBER_COOKIE_SECURE = True
-    WTF_CSRF_ENABLED = True
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
 
 
 class TestingConfig(Config):
     TESTING = True
-    DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get("TEST_DATABASE_URL")
-    WTF_CSRF_ENABLED = False
+    SQLALCHEMY_DATABASE_URI = os.getenv("TEST_DATABASE_URL")
