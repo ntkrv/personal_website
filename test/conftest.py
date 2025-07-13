@@ -1,16 +1,16 @@
 import pytest
-from app import app as flask_app
-from models import db
+from app import create_app
+from extensions import db
 from config import TestingConfig
 
 
 @pytest.fixture
 def app():
-    flask_app.config.from_object(TestingConfig)
+    app = create_app(TestingConfig)
 
-    with flask_app.app_context():
+    with app.app_context():
         db.create_all()
-        yield flask_app
+        yield app
         db.session.remove()
         db.drop_all()
 

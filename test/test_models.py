@@ -13,7 +13,7 @@ def test_project_model(app):
     )
 
     with app.app_context():
-        from models import db
+        from extensions import db
 
         db.session.add(project)
         db.session.commit()
@@ -28,7 +28,7 @@ def test_certificate_model(app):
     )
 
     with app.app_context():
-        from models import db
+        from extensions import db
 
         db.session.add(cert)
         db.session.commit()
@@ -41,7 +41,7 @@ def test_contact_message_model(app):
     msg = ContactMessage(name="Alice", email="alice@example.com", message="Hello!")
 
     with app.app_context():
-        from models import db
+        from extensions import db
 
         db.session.add(msg)
         db.session.commit()
@@ -56,7 +56,7 @@ def test_admin_user_password_hashing(app):
     user.set_password("secure123")
 
     with app.app_context():
-        from models import db
+        from extensions import db
 
         db.session.add(user)
         db.session.commit()
