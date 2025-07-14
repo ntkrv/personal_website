@@ -19,21 +19,27 @@
     {% for project in projects %}
     <div class="flex flex-col gap-3 rounded-xl shadow-md p-4 bg-white dark:bg-[#2c2c2c] transition-colors">
       <!-- Image -->
-      <div class="w-full h-48 sm:h-40 rounded-md overflow-hidden">
-        <img src="{{ project.image }}"
-             alt="{{ project.title }}"
-             class="w-full h-full object-cover" />
-      </div>
+      <a href="{{ url_for('projects.project_detail', project_id=project.id) }}">
+        <div class="w-full h-48 sm:h-40 rounded-md overflow-hidden">
+          <img src="{{ project.image_path or 'https://via.placeholder.com/600x400?text=No+Image' }}"
+               alt="{{ project.title }}"
+               class="w-full h-full object-cover" />
+        </div>
+      </a>
 
       <!-- Text content -->
-      <h2 class="text-lg font-semibold text-black dark:text-white">{{ project.title }}</h2>
-      <p class="text-sm text-gray-600 dark:text-gray-300">{{ project.description }}</p>
+      <h2 class="text-lg font-semibold text-black dark:text-white">
+        <a href="{{ url_for('projects.project_detail', project_id=project.id) }}">
+          {{ project.title }}
+        </a>
+      </h2>
+      <p class="text-sm text-gray-600 dark:text-gray-300">{{ project.short_description }}</p>
 
-      {% if project.link %}
-      <a href="{{ project.link }}"
+      {% if project.git_link %}
+      <a href="{{ project.git_link }}"
          class="text-brand text-sm font-medium hover:underline"
          target="_blank">
-        View Project
+        View on GitHub
       </a>
       {% endif %}
     </div>

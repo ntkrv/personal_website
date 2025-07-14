@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, PasswordField, SubmitField
-from wtforms.validators import DataRequired, Email, Length, Optional, URL
+from wtforms.validators import DataRequired, Email, Length, Optional, URL, EqualTo
 
 
 class ContactForm(FlaskForm):
@@ -36,3 +36,11 @@ class CertificateForm(FlaskForm):
     link = StringField(
         "Certificate Link", validators=[Optional(), URL(), Length(max=255)]
     )
+
+
+class ResetPasswordForm(FlaskForm):
+    new_password = PasswordField("New Password", validators=[DataRequired()])
+    confirm_password = PasswordField(
+        "Confirm Password", validators=[DataRequired(), EqualTo("new_password")]
+    )
+    submit = SubmitField("Reset Password")
