@@ -18,30 +18,26 @@
   <h1 class="text-3xl font-bold text-black dark:text-white mb-4 break-words">{{ project.title }}</h1>
 
   <!-- Image -->
-  {% if project.image %}
-  <div class="w-full aspect-video bg-cover bg-center rounded-lg mb-6" style="background-image: url('{{ project.image }}');"></div>
+  {% if project.image_path %}
+  <div class="w-full aspect-video bg-cover bg-center rounded-lg mb-6"
+       style="background-image: url('{{ project.image_path }}');"></div>
   {% endif %}
 
   <!-- Description -->
-  <p class="text-base text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">{{ project.description }}</p>
+  <p class="text-base text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">{{ project.full_description }}</p>
 
-  <!-- Technologies -->
-  {% if project.technologies %}
-    <h2 class="text-xl font-semibold text-black dark:text-white mb-2">Technologies Used</h2>
-    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 mb-6 space-y-1">
-      {% for tech in project.technologies %}
-      <li>{{ tech }}</li>
-      {% endfor %}
-    </ul>
+  <!-- Stack -->
+  {% if project.stack %}
+    <h2 class="text-xl font-semibold text-black dark:text-white mb-2">Tech Stack</h2>
+    <p class="text-gray-600 dark:text-gray-400 mb-6">{{ project.stack }}</p>
   {% endif %}
 
   <!-- External Link -->
-  {% if project.link %}
-    <a href="{{ project.link }}" target="_blank"
+  {% if project.git_link %}
+    <a href="{{ project.github_link }}" target="_blank"
        class="inline-block bg-brand text-white px-6 py-2 rounded-full font-semibold text-sm hover:bg-[#2b5a8c] transition-colors duration-200">
-      Visit Project
+      View on GitHub
     </a>
   {% endif %}
-
 </section>
 {% endblock %}
