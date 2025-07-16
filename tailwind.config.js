@@ -1,16 +1,28 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class', // enable dark mode via 'dark' class
+  darkMode: 'class',
   content: [
-    "./templates/**/*.html",  // Jinja2 templates
-    "./static/**/*.js",       // JavaScript files
-    "./**/*.py",              // Python files with Tailwind classes
+    "./templates/**/*.html",
+    "./static/**/*.js",
+    "./**/*.py",
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+      },
       colors: {
-        brand: "#326aa3",       // custom brand color
-        darkBg: "#212121",      // material black
+        brand: "#326aa3",
+        darkBg: "#212121",
+        softWhite: "#f7f9fc",
+        softBlue: "#cfe8ff",
+        gray: {
+          50: "#f9fafb",
+          100: "#f3f4f6",
+          200: "#e5e7eb",
+          500: "#6b7280",
+          800: "#1f2937"
+        }
       },
       keyframes: {
         'slide-in': {
@@ -22,8 +34,8 @@ module.exports = {
           '100%': { opacity: '1' },
         },
         'slide-in-right': {
-          '0%': { opacity: '0', transform: 'translateX(100%)' },
-          '100%': { opacity: '1', transform: 'translateX(0)' },
+          '0%': { transform: 'translateX(-20%)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
         },
         'toast-progress': {
           '0%': { width: '100%' },
@@ -33,7 +45,7 @@ module.exports = {
       animation: {
         'slide-in': 'slide-in 0.3s ease-out',
         'fade-in': 'fade-in 0.3s ease-in',
-        'slide-in-right': 'slide-in-right 0.4s ease-out forwards',
+        'slide-in-right': 'slide-in-right 0.4s ease-out',
         'toast-progress': 'toast-progress 4s linear forwards',
       },
     },

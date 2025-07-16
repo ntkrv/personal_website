@@ -1,17 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Auto-hide standard flash messages
-  setTimeout(() => {
-    const flash = document.getElementById("flash-message-wrapper");
-    if (flash) {
-      flash.classList.remove("opacity-100");
-      flash.classList.add("opacity-0");
-      setTimeout(() => flash.remove(), 500);
-    }
-  }, 3000);
-
-  // Custom toast-style flash messages
   const container = document.getElementById("toast-container");
-  const flashMessages = JSON.parse(document.body.dataset.flashes || "[]");
+
+  if (!container) return;
+
+  const flashData = document.body.dataset.flashes;
+  let flashMessages = [];
+
+  try {
+    flashMessages = JSON.parse(flashData || "[]");
+  } catch (err) {
+    console.error("Invalid flash messages JSON:", err);
+    return;
+  }
 
   flashMessages.forEach(([category, message]) => {
     const toast = document.createElement("div");
@@ -31,14 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }[category] || "notifications";
 
     toast.innerHTML = `
-      <span class="material-icons text-white text-lg mt-0.5">${iconName}</span>
-      <span class="flex-1">${message}</span>
-      <button class="text-white font-bold leading-none focus:outline-none" onclick="this.parentElement.remove()">×</button>
-    `;
+    <span class="material-symbols-outlined text-white text-lg self-center">${iconName}</span>
+    <span class="flex-1 self-center">${message}</span>
+    <button class="text-white font-bold leading-none focus:outline-none self-center" onclick="this.parentElement.remove()">×</button>
+  `;
 
     container.appendChild(toast);
 
-    // Auto-remove toast after timeout
     setTimeout(() => {
       toast.classList.add("opacity-0");
       setTimeout(() => toast.remove(), 300);
