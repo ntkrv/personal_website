@@ -1,3 +1,4 @@
+{% set flashes = get_flashed_messages(with_categories=true) %}
 <!DOCTYPE html>
 <html lang="en" class="{{ 'dark' if theme == 'dark' else '' }}">
 <head>
@@ -9,7 +10,12 @@
   <link rel="stylesheet" as="style" onload="this.rel='stylesheet'" href="{{ url_for('static', filename='css/styles.css') }}" />
 </head>
 
-<body class="bg-white text-black dark:bg-[#212121] dark:text-white transition-colors duration-300">
+<body class="bg-white text-black dark:bg-[#212121] dark:text-white transition-colors duration-300"
+      data-flashes='{{ flashes | tojson | safe }}'>
+
+  <!-- TOAST Flash Messages Container -->
+  <div id="toast-container"
+       class="fixed top-20 left-6 z-[1000] space-y-3 max-w-sm w-full"></div>
 
   <!-- Header -->
   <header class="flex flex-wrap items-center justify-between border-b border-gray-200 dark:border-gray-800 px-4 sm:px-6 lg:px-10 py-3 sticky top-0 z-50 bg-white dark:bg-[#212121] transition-colors duration-300">
@@ -77,10 +83,11 @@
     <span id="moon-icon" class="material-symbols-outlined text-white hidden dark:inline text-xl">dark_mode</span>
   </button>
 
-  <!-- Toast Notifications -->
-  <div id="toast-container" class="fixed top-6 right-6 z-[100] space-y-3"></div>
-
-  <!-- JS -->
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/gsap.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/ScrollTrigger.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/scroll_animation.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/flash_message.js') }}"></script>
   <script src="{{ url_for('static', filename='js/theme_toggle.js') }}"></script>
 </body>
 </html>
