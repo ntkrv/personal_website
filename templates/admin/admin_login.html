@@ -48,6 +48,14 @@
       </div>
     </form>
 
+    <!-- Forgot Password Link -->
+<div class="mt-4 text-center">
+  <a href="{{ url_for('admin_auth.forgot_password') }}"
+     class="text-sm text-brand hover:underline">
+    Forgot your password?
+  </a>
+</div>
+
     <!-- Flash messages -->
     {% with messages = get_flashed_messages() %}
       {% if messages %}
