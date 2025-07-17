@@ -3,6 +3,7 @@ from forms import ContactForm
 from models import db, ContactMessage
 from utils.email_utils import send_contact_email
 
+
 contact_bp = Blueprint("contact", __name__)
 
 
@@ -27,6 +28,6 @@ def contact():
         else:
             flash("Failed to send email. Please try again later.", "danger")
 
-        return redirect(url_for("contact.contact"))
+        return redirect(url_for("main.index"))
 
     return render_template("index.html", form=form)
