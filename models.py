@@ -11,6 +11,7 @@ class Project(db.Model):
     long_description = db.Column(db.Text)
     image_path = db.Column(db.String(120))
     stack = db.Column(db.String(200))
+    link_type = db.Column(db.String(20))  # "github" or "gdrive"
     git_link = db.Column(db.String(255))
 
 

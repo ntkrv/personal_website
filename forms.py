@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, PasswordField, SubmitField
+from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Email, Length, Optional, URL, EqualTo
 
 
@@ -24,8 +24,17 @@ class ProjectForm(FlaskForm):
     long_description = TextAreaField("Full Description", validators=[DataRequired()])
     image_path = StringField("Image Path", validators=[Optional(), Length(max=120)])
     stack = StringField("Stack", validators=[Optional(), Length(max=200)])
+
     git_link = StringField(
-        "GitHub Link", validators=[Optional(), URL(), Length(max=255)]
+        "Link", validators=[Optional(), URL(), Length(max=255)]
+    )
+    link_type = SelectField(
+        "Link Type",
+        choices=[
+            ("github", "GitHub"),
+            ("gdrive", "Google Drive")
+        ],
+        validators=[DataRequired()]
     )
 
 

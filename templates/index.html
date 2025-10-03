@@ -6,32 +6,72 @@
 <section class="px-4 max-w-5xl mx-auto">
 
   <!-- Hero -->
-  <div class="text-center py-12 animate-on-scroll opacity-0 translate-y-6">
-    <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 dark:text-white mb-2">Hi, I'm Nicolas</h1>
-    <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300">
-      A passionate software developer with a focus on creating innovative solutions. Explore my projects, skills, and get in touch!
-    </p>
-  </div>
+<div class="text-center py-12 animate-on-scroll opacity-0 translate-y-6">
+  <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 dark:text-white mb-4">
+    Hi, I'm Nicolas
+  </h1>
+  <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+    A <span class="font-semibold text-gray-900 dark:text-white">Data Analyst</span> and 
+    <span class="font-semibold text-gray-900 dark:text-white">Software Engineer</span> 
+    passionate about transforming data and building innovative solutions. 
+    Explore my projects, skills, and get in touch!
+  </p>
+</div>
+
 
   <!-- About -->
-  <div class="pb-8 animate-on-scroll opacity-0 translate-y-6">
-    <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3">About Me</h2>
-    <p class="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
-      Software engineer with a solid foundation in designing and developing scalable web applications and data-centric systems. Experienced in both front-end (JavaScript, React) and back-end (Python with Flask, FastAPI, Django) development, with a strong focus on RESTful API design and integration. Proficient in working with relational databases (PostgreSQL, SQL) and containerized environments using Docker. Skilled in implementing CI/CD pipelines to streamline deployment and ensure code reliability across staging and production environments. Well-versed in cloud infrastructure, leveraging platforms such as AWS for hosting and automation. Adept at translating complex data into actionable insights using tools like Power BI, Tableau, and Excel for advanced analytics and visualization.
-    </p>
-  </div>
+  <div class="pb-8 animate-on-scroll opacity-0 translate-y-6 max-w-3xl mx-auto">
+  <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4">
+  About Me
+</h2>
+  <p class="text-gray-700 dark:text-gray-300 text-base leading-relaxed mb-4">
+    Data Analyst passionate about turning raw data into insights. Skilled in
+    <span class="font-semibold text-gray-900 dark:text-white">Python, SQL, and BI tools</span>, 
+    I’ve worked across demand planning, logistics, and business reporting.
+    The tools and stacks you see on this site represent my real, hands-on experience —
+    from building dashboards in Power BI and Tableau to developing solutions with
+    Python, APIs, and Docker.
+  </p>
+  <p class="text-gray-800 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 px-4 py-3 rounded-lg shadow-sm text-sm italic">
+    📄 Want to know more? You can <span class="font-semibold">request my CV</span> anytime through the contact form below.
+  </p>
+</div>
 
   <!-- Skills -->
-  <div class="pb-10 animate-on-scroll opacity-0 translate-y-6">
-    <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4">Skills</h2>
-    <div class="flex flex-wrap gap-3">
-      {% for skill in ["Python", "Power BI", "Tableau", "Excel", "Front-end Development", "Back-end Development", "CI/CD","Data Analysis", "Statistics", "Docker", "Data Visualization", "SQL", "PostgreSQL", "Cloud Services", "API"] %}
-        <span class="bg-gray-200 dark:bg-gray-700 text-sm px-4 py-1 rounded-full text-gray-800 dark:text-white">
-          {{ skill }}
-        </span>
-      {% endfor %}
-    </div>
+<div class="pb-10 animate-on-scroll opacity-0 translate-y-6">
+  <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4">Skills</h2>
+  <div class="flex flex-wrap gap-3">
+    {% for skill in [
+      "Python", "SQL", "PostgreSQL",
+      "Data Analysis", "Statistics", "Data Visualization", "Pandas", "NumPy",
+      "Power BI", "Tableau", "Excel",
+      "Front-end Development", "Back-end Development", "API",
+      "Docker", "CI/CD", "Cloud Services"
+    ] %}
+      <span class="bg-gray-200 dark:bg-gray-700 text-sm px-4 py-1 rounded-full text-gray-800 dark:text-white">
+        {{ skill }}
+      </span>
+    {% endfor %}
   </div>
+</div>
+  <!-- Technologies Icons -->
+
+<!-- Technologies Icons -->
+<div class="flex flex-wrap justify-between gap-y-8 py-12 max-w-4xl mx-auto duration-200 animate-on-scroll opacity-0 translate-y-6">
+  {% for icon in ["python.svg", "js.svg", "html.svg", "css.svg", "sql.svg", "postgresql.svg", "git.svg", "docker.svg", "powerbi.svg", "tableau.svg", "excel.svg"] %}
+    <div>
+      <img src="{{ url_for('static', filename='icons/' ~ icon) }}"
+           alt="{{ icon }}"
+           class="icon" />
+    </div>
+  {% endfor %}
+</div>
+
+
+
+
+
+
 
   <!-- Projects -->
   <div class="pb-10 animate-on-scroll opacity-0 translate-y-6">

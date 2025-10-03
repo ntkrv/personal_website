@@ -48,6 +48,12 @@ module.exports = {
         'slide-in-right': 'slide-in-right 0.4s ease-out',
         'toast-progress': 'toast-progress 4s linear forwards',
       },
+      width: {
+        icon: "64px",
+      },
+      height: {
+        icon: "64px",
+      },
     },
   },
   plugins: [],

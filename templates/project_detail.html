@@ -24,7 +24,6 @@
   </div>
   {% endif %}
   
-
   <!-- Long Description -->
   {% if project.long_description %}
   <div class="text-base text-gray-700 dark:text-gray-300 mb-6 leading-relaxed whitespace-pre-line">
@@ -40,13 +39,23 @@
   </div>
   {% endif %}
 
-  <!-- GitHub Link -->
+  <!-- Link Button -->
   {% if project.git_link %}
-  <a href="{{ project.git_link }}" target="_blank"
-     class="inline-block bg-brand text-white px-6 py-2 rounded-full font-semibold text-sm hover:bg-[#2b5a8c] transition-colors duration-200">
-    View on GitHub
-  </a>
+    {% if project.link_type == "github" %}
+      <a href="{{ project.git_link }}" target="_blank"
+         class="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-semibold text-sm hover:bg-blue-700 transition">
+        View on GitHub
+      </a>
+    {% elif project.link_type == "gdrive" %}
+      <a href="{{ project.git_link }}" target="_blank"
+         class="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold text-sm hover:bg-green-700 transition">
+        View on Google Drive
+      </a>
+    {% endif %}
   {% endif %}
 
 </section>
 {% endblock %}
+{# 
+  Note: The project detail page now includes a button that changes based on the "Link Type" selected (GitHub or Google Drive).
+  Ensure that the backend logic correctly sets the `link_type` field when creating or editing a project.
