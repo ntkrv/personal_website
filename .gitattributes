@@ -1,4 +1,7 @@
 *.css text eol=lf
-*.svg text eol=lf
+*.svg binary
+*.png binary
+*.jpg binary
+*.ico binary
 *.html text eol=lf
 *.js text eol=lf
