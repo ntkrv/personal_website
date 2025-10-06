@@ -12,20 +12,32 @@ admin_auth_bp = Blueprint("admin_auth", __name__, url_prefix="/admin-auth")
 
 @admin_auth_bp.route("/login", methods=["GET", "POST"])
 def login():
+    """Login route for admin panel"""
     if current_user.is_authenticated:
         return redirect("/admin")
 
     if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        if not username or not password:
+            flash("Please enter both username and password.", "warning")
+            return redirect(url_for("admin_auth.login"))
 
         user = AdminUser.query.filter_by(username=username).first()
-        if user and user.check_password(password):
-            login_user(user)
-            next_page = request.args.get("next")
-            return redirect(next_page or "/admin")
+
+        if user:
+            # Debug line (optional) — helps verify login logic
+            # print(f"Found user: {user.username}, Hash: {user.password_hash}")
+            if user.check_password(password):
+                login_user(user)
+                next_page = request.args.get("next")
+                flash("Login successful!", "success")
+                return redirect(next_page or "/admin")
+            else:
+                flash("Invalid password.", "danger")
         else:
-            flash("Invalid username or password")
+            flash("Invalid username.", "danger")
 
     return render_template("admin/admin_login.html")
 
@@ -33,17 +45,19 @@ def login():
 @admin_auth_bp.route("/logout")
 def logout():
     logout_user()
+    flash("You have been logged out.", "info")
     return redirect(url_for("admin_auth.login"))
 
 
 @admin_auth_bp.route("/forgot-password", methods=["GET", "POST"])
 def forgot_password():
+    """Password reset email sender"""
     if request.method == "POST":
         submitted_email = request.form.get("email")
         valid_email = os.getenv("MAIL_USERNAME")
 
         if submitted_email != valid_email:
-            flash("Invalid email address", "danger")
+            flash("Invalid email address.", "danger")
             return redirect(url_for("admin_auth.forgot_password"))
 
         token = generate_reset_token(submitted_email)
@@ -56,9 +70,10 @@ def forgot_password():
 
 @admin_auth_bp.route("/reset-password/<token>", methods=["GET", "POST"])
 def reset_password(token):
+    """Handles password reset form"""
     email = verify_reset_token(token)
     if not email:
-        flash("Invalid or expired token", "danger")
+        flash("Invalid or expired token.", "danger")
         return redirect(url_for("admin_auth.forgot_password"))
 
     form = ResetPasswordForm()
@@ -67,7 +82,7 @@ def reset_password(token):
         if user:
             user.set_password(form.new_password.data)
             db.session.commit()
-            flash("Password has been updated.", "success")
+            flash("Password has been updated successfully.", "success")
             return redirect(url_for("admin_auth.login"))
 
     return render_template("admin/reset_password.html", form=form)

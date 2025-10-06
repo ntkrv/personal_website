@@ -21,7 +21,7 @@ try:
     server = smtplib.SMTP(smtp_server, smtp_port)
     server.starttls()
 
-    server.login(sender, password)  
+    server.login(sender, password)
     server.sendmail(sender, receiver, msg.as_string())
     server.quit()
     print("Test email sent successfully!")

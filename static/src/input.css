@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.icon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
+}

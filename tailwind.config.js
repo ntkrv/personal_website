@@ -4,7 +4,11 @@ module.exports = {
   content: [
     "./templates/**/*.html",
     "./static/**/*.js",
+    "./static/icons/**/*.{svg,png,jpg}",
     "./**/*.py",
+  ],
+  safelist: [
+    'icon', // Ensure the icon class is always included
   ],
   theme: {
     extend: {

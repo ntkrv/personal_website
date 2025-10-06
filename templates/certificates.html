@@ -17,33 +17,29 @@
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {% for cert in certificates %}
-    <div class="bg-white dark:bg-[#2c2c2c] rounded-xl p-6 shadow-md border border-gray-200 dark:border-gray-700 transition">
-      <h2 class="text-lg font-semibold text-black dark:text-white">{{ cert.title }}</h2>
-      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">{{ cert.organization }}</p>
-      <p class="text-sm text-gray-600 dark:text-gray-400">{{ cert.period }}</p>
+    <div class="group flex flex-col justify-between rounded-xl shadow-md bg-white dark:bg-[#2c2c2c] hover:shadow-lg transition-shadow duration-300 p-6 border border-gray-200 dark:border-gray-700">
+      <div>
+        <h2 class="text-lg font-semibold text-black dark:text-white mb-1">{{ cert.title }}</h2>
+        <p class="text-sm text-gray-400 dark:text-gray-500 mb-2">{{ cert.issuer }}</p>
 
-      {% if cert.technologies %}
-      <div class="flex flex-wrap gap-2 mt-3">
-        {% for tech in cert.technologies %}
-        <span class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs font-medium px-3 py-1 rounded-full">
-          {{ tech }}
-        </span>
-        {% endfor %}
+        {% if cert.skills %}
+        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+          <span class="font-semibold">Skills:</span> {{ cert.skills }}
+        </p>
+        {% endif %}
       </div>
-      {% endif %}
 
       {% if cert.link %}
-      <div class="mt-4">
-        <a href="{{ cert.link }}"
-           class="text-sm text-brand font-medium hover:underline"
-           target="_blank">
-          View Certificate
-        </a>
-      </div>
+      <a href="{{ cert.link }}" target="_blank"
+         class="mt-auto inline-block text-center py-2 px-4 bg-brand text-white font-semibold rounded-lg hover:bg-[#2b5a8c] transition-colors duration-200">
+        View Certificate
+      </a>
       {% endif %}
     </div>
     {% else %}
-    <p class="text-gray-500 dark:text-gray-400 text-sm col-span-full">No certificates available at the moment.</p>
+    <p class="text-gray-500 dark:text-gray-400 text-sm col-span-full">
+      No certificates available at the moment.
+    </p>
     {% endfor %}
   </div>
 </section>

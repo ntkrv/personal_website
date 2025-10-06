@@ -19,11 +19,9 @@
 </div>
 
 
-  <!-- About -->
-  <div class="pb-8 animate-on-scroll opacity-0 translate-y-6 max-w-3xl mx-auto">
-  <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4">
-  About Me
-</h2>
+<!-- About -->
+<div class="pb-8 animate-on-scroll opacity-0 translate-y-6 max-w-5xl mx-auto">
+  <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4">About Me</h2>
   <p class="text-gray-700 dark:text-gray-300 text-base leading-relaxed mb-4">
     Data Analyst passionate about turning raw data into insights. Skilled in
     <span class="font-semibold text-gray-900 dark:text-white">Python, SQL, and BI tools</span>, 
@@ -36,6 +34,7 @@
     📄 Want to know more? You can <span class="font-semibold">request my CV</span> anytime through the contact form below.
   </p>
 </div>
+
 
   <!-- Skills -->
 <div class="pb-10 animate-on-scroll opacity-0 translate-y-6">
@@ -54,7 +53,7 @@
     {% endfor %}
   </div>
 </div>
-  <!-- Technologies Icons -->
+
 
 <!-- Technologies Icons -->
 <div class="flex flex-wrap justify-between gap-y-8 py-12 max-w-4xl mx-auto duration-200 animate-on-scroll opacity-0 translate-y-6">
@@ -66,19 +65,13 @@
     </div>
   {% endfor %}
 </div>
-
-
-
-
-
-
-
-  <!-- Projects -->
-  <div class="pb-10 animate-on-scroll opacity-0 translate-y-6">
+  
+<!-- Projects -->
+  <div class="animate-on-scroll opacity-0 translate-y-6">
     <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4">Projects</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
       {% for project in projects %}
-        <a href="{{ url_for('projects.project_detail', project_id=project.id) }}"
+        <a href="{{ url_for('projects.project_detail', slug=project.slug) }}"
            class="group block bg-white dark:bg-[#2c2c2c] rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
           {% if project.image_path %}
             <img src="{{ project.image_path }}"

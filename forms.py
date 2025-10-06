@@ -25,16 +25,11 @@ class ProjectForm(FlaskForm):
     image_path = StringField("Image Path", validators=[Optional(), Length(max=120)])
     stack = StringField("Stack", validators=[Optional(), Length(max=200)])
 
-    git_link = StringField(
-        "Link", validators=[Optional(), URL(), Length(max=255)]
-    )
+    git_link = StringField("Link", validators=[Optional(), URL(), Length(max=255)])
     link_type = SelectField(
         "Link Type",
-        choices=[
-            ("github", "GitHub"),
-            ("gdrive", "Google Drive")
-        ],
-        validators=[DataRequired()]
+        choices=[("github", "GitHub"), ("gdrive", "Google Drive")],
+        validators=[DataRequired()],
     )
 
 

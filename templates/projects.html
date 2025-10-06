@@ -32,7 +32,7 @@
         <p class="text-sm text-gray-600 dark:text-gray-300 flex-grow">{{ project.short_description }}</p>
 
         <!-- View Button -->
-        <a href="{{ url_for('projects.project_detail', project_id=project.id) }}"
+        <a href="{{ url_for('projects.project_detail', slug=project.slug) }}"
            class="inline-block text-center bg-brand text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-[#2b5a8c] transition-colors duration-200">
           View Project
         </a>

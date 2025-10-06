@@ -1,5 +1,5 @@
 [flake8]
-exclude = venv, migrations, __pycache__, .git, .pytest_cache
+exclude = venv, migrations, __pycache__, .git, .pytest_cache, static/icons
 ignore = E203, E266, E501, W503, F401, F405, F403
 max-line-length = 120
 extend-ignore = E402

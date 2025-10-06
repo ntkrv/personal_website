@@ -48,7 +48,7 @@
       </a>
     {% elif project.link_type == "gdrive" %}
       <a href="{{ project.git_link }}" target="_blank"
-         class="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold text-sm hover:bg-green-700 transition">
+         class="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-semibold text-sm hover:bg-green-700 transition">
         View on Google Drive
       </a>
     {% endif %}
@@ -56,6 +56,3 @@
 
 </section>
 {% endblock %}
-{# 
-  Note: The project detail page now includes a button that changes based on the "Link Type" selected (GitHub or Google Drive).
-  Ensure that the backend logic correctly sets the `link_type` field when creating or editing a project.
