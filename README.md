@@ -72,4 +72,57 @@ The project includes a PowerShell automation script (`run_dev.ps1`) to streamlin
 - Runs code formatters (`black`) and linters (`flake8`)  
 - Applies database migrations  
 - Builds Tailwind CSS  
-- Starts the Flask server  
+- Starts the Flask server
+
+---
+
+🎨 Design & UX
+
+Built with Tailwind CSS for consistent design and smooth user experience.
+
+✨ Key Design Features:
+
+Fully responsive across desktop, tablet, and mobile
+
+Clean typography and color palette
+
+Rounded cards, soft shadows, and minimal layout
+
+Subtle animations (animate-on-scroll) for engagement
+
+♿ SEO & Accessibility
+
+Semantic HTML5 markup
+
+Descriptive meta tags and Open Graph data
+
+Dark mode support
+
+Optimized CSS build for better performance
+
+🔮 Future Enhancements
+
+🔍 Add project search & filter functionality
+
+📈 Include visitor analytics dashboard
+
+🌐 Internationalization (i18n) support
+
+🤖 Integrate AI-powered chatbot for portfolio Q&A
+
+👨‍💻 Author
+
+Nicolas Tokariev
+📍 Data Analyst & Software Engineer
+🌐 https://ntkrv.dev
+
+🐙 GitHub
+
+💼 LinkedIn
+
+🪪 License
+
+This project is released under the MIT License.
+You’re free to use, modify, and distribute it with attribution.
+
+© 2025 Nicolas Tokariev — Built with Flask, Tailwind CSS, and ☕
