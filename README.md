@@ -82,45 +82,45 @@ Built with Tailwind CSS for consistent design and smooth user experience.
 
 ✨ Key Design Features:
 
-Fully responsive across desktop, tablet, and mobile
+- Fully responsive across desktop, tablet, and mobile
 
-Clean typography and color palette
+- Clean typography and color palette
 
-Rounded cards, soft shadows, and minimal layout
+- Rounded cards, soft shadows, and minimal layout
 
-Subtle animations (animate-on-scroll) for engagement
+- Subtle animations (animate-on-scroll) for engagement
 
 ## ♿ SEO & Accessibility
 
-Semantic HTML5 markup
+- Semantic HTML5 markup
 
-Descriptive meta tags and Open Graph data
+- Descriptive meta tags and Open Graph data
 
-Dark mode support
+- Dark mode support
 
-Optimized CSS build for better performance
+- Optimized CSS build for better performance
 
-## 🔮 Future Enhancements
+### 🔮 Future Enhancements
 
-## 🔍 Add project search & filter functionality
+### 🔍 Add project search & filter functionality
 
-## 📈 Include visitor analytics dashboard
+### 📈 Include visitor analytics dashboard
 
-## 🌐 Internationalization (i18n) support
+### 🌐 Internationalization (i18n) support
 
-## 🤖 Integrate AI-powered chatbot for portfolio Q&A
+### 🤖 Integrate AI-powered chatbot for portfolio Q&A
 
-## 👨‍💻 Author
+### 👨‍💻 Author
 
-Nicolas Tokariev
-## 📍 Data Analyst & Software Engineer
-## 🌐 https://ntkrv.dev
+- Nicolas Tokariev
+### 📍 Data Analyst & Software Engineer
+### 🌐 https://ntkrv.dev
 
-## 🐙 GitHub
+### 🐙 GitHub
 
-## 💼 LinkedIn
+### 💼 LinkedIn
 
-## 🪪 License
+### 🪪 License
 
 This project is released under the MIT License.
 You’re free to use, modify, and distribute it with attribution.
