@@ -1,7 +1,54 @@
+#   Base normalization rules
+
+
+# Automatically normalize line endings for text files
+* text eol=lf
+
+
+#   Python / Flask files
+
+*.py text eol=lf
+*.html text eol=lf
+*.jinja text eol=lf
+*.jinja2 text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.env text eol=lf
+*.cfg text eol=lf
+*.ini text eol=lf
+*.toml text eol=lf
+
+#   Frontend (JS, CSS, etc.)
 *.css text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.vue text eol=lf
+
+#   Binary / Non-text files
 *.svg binary
 *.png binary
 *.jpg binary
+*.jpeg binary
 *.ico binary
-*.html text eol=lf
-*.js text eol=lf
+*.gif binary
+*.webp binary
+*.db binary
+*.sqlite3 binary
+*.ttf binary
+*.woff binary
+*.woff2 binary
+
+
+#   Ignore platform-specific files
+# Windows / macOS
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+.DS_Store binary
+Thumbs.db binary
+
+
+#   Git special
+.gitattributes text eol=lf
+.gitignore text eol=lf
