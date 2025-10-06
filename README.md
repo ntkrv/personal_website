@@ -124,4 +124,4 @@ You are free to use, modify, and distribute it with attribution.
 
 ---
 
-> © 2025 Nicolas Tokariev — Built with Flask, Tailwind CSS, and ☕
+> © 2025 Nicolas Tokariev — Built with Flask, Tailwind CSS, JS
