@@ -97,15 +97,6 @@ Built with **Tailwind CSS** for consistent design and a smooth user experience.
 
 ---
 
-## 🔮 Future Enhancements
-
-- 🔍 Add **project search and filtering**
-- 📈 Add **visitor analytics dashboard**
-- 🌐 Enable **internationalization (i18n) support**
-- 🤖 Integrate **AI-powered chatbot** for portfolio Q&A  
-
----
-
 ## 👨‍💻 Author
 
 **Nicolas Tokariev**  
