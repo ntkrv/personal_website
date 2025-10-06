@@ -76,10 +76,6 @@ personal_website/
 │ └── run_dev.ps1
 │
 └── requirements.txt # Python dependencies
-
-markdown
-Копировать код
-
 ---
 
 ## 🧠 Core Functionality
