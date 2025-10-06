@@ -78,51 +78,50 @@ The project includes a PowerShell automation script (`run_dev.ps1`) to streamlin
 
 ## 🎨 Design & UX
 
-Built with Tailwind CSS for consistent design and smooth user experience.
+Built with **Tailwind CSS** for consistent design and a smooth user experience.
 
-✨ Key Design Features:
+✨ **Key Design Features:**
+- Fully responsive across desktop, tablet, and mobile  
+- Clean typography and modern color palette  
+- Rounded cards, soft shadows, and minimal layout  
+- Subtle animations (`animate-on-scroll`) for smooth transitions  
 
-- Fully responsive across desktop, tablet, and mobile
-
-- Clean typography and color palette
-
-- Rounded cards, soft shadows, and minimal layout
-
-- Subtle animations (animate-on-scroll) for engagement
+---
 
 ## ♿ SEO & Accessibility
 
-- Semantic HTML5 markup
+- Semantic **HTML5** structure  
+- Optimized **meta tags** and **Open Graph** data  
+- Automatic **dark/light mode** adaptation  
+- Minified Tailwind build for fast loading performance  
 
-- Descriptive meta tags and Open Graph data
+---
 
-- Dark mode support
+## 🔮 Future Enhancements
 
-- Optimized CSS build for better performance
+- 🔍 Add **project search and filtering**
+- 📈 Add **visitor analytics dashboard**
+- 🌐 Enable **internationalization (i18n) support**
+- 🤖 Integrate **AI-powered chatbot** for portfolio Q&A  
 
-### 🔮 Future Enhancements
+---
 
-### 🔍 Add project search & filter functionality
+## 👨‍💻 Author
 
-### 📈 Include visitor analytics dashboard
+**Nicolas Tokariev**  
+📍 *Data Analyst & Software Engineer*  
 
-### 🌐 Internationalization (i18n) support
+🌐 [ntkrv.dev](https://ntkrv.dev)  
+🐙 [GitHub](https://github.com/ntkrv)  
+💼 [LinkedIn](https://linkedin.com/in/ntkrv)
 
-### 🤖 Integrate AI-powered chatbot for portfolio Q&A
+---
 
-### 👨‍💻 Author
+## 🪪 License
 
-- Nicolas Tokariev
-### 📍 Data Analyst & Software Engineer
-### 🌐 https://ntkrv.dev
+This project is released under the **MIT License**.  
+You are free to use, modify, and distribute it with attribution.
 
-### 🐙 GitHub
+---
 
-### 💼 LinkedIn
-
-### 🪪 License
-
-This project is released under the MIT License.
-You’re free to use, modify, and distribute it with attribution.
-
-© 2025 Nicolas Tokariev — Built with Flask, Tailwind CSS, and ☕
+> © 2025 Nicolas Tokariev — Built with Flask, Tailwind CSS, and ☕
