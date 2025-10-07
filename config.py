@@ -19,8 +19,12 @@ class DevelopmentConfig(Config):
 
 
 class ProductionConfig(Config):
+    SQLALCHEMY_DATABASE_URI = "sqlite:///instance/ntkrv.db"
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
+    ENV = "production"
+    TEMPLATES_AUTO_RELOAD = False
+    SEND_FILE_MAX_AGE_DEFAULT = 31536000
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class TestingConfig(Config):
