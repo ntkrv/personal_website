@@ -2,11 +2,20 @@
 
 {% block title %}{{ project.title }}{% endblock %}
 
+{% block meta %}
+  <meta name="description" content="{{ project.short_description }}">
+  <meta property="og:title" content="{{ project.title }} — Nicolas Tokariev">
+  <meta property="og:description" content="{{ project.short_description }}">
+  <meta property="og:image" content="{{ project.image_path }}">
+  <meta property="og:url" content="https://ntkrv.dev{{ url_for('projects.project_detail', slug=project.slug) }}">
+  <meta name="twitter:card" content="summary_large_image">
+{% endblock %}
+
 {% block content %}
 <section class="px-4 py-8 w-full max-w-screen-md mx-auto">
-
+  <!-- Back -->
   <a href="{{ url_for('projects.projects') }}"
-     class="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-brand dark:hover:text-brand mb-4 transition-colors">
+     class="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-brand dark:hover:text-brand mb-6 transition-colors">
     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
     </svg>
@@ -15,44 +24,38 @@
 
   <h1 class="text-3xl font-bold text-black dark:text-white mb-4 break-words">{{ project.title }}</h1>
 
-  <!-- Image -->
   {% if project.image_path %}
   <div class="w-full aspect-video rounded-lg mb-6 overflow-hidden">
-    <img src="{{ project.image_path }}"
-         alt="{{ project.title }}"
+    <img src="{{ project.image_path }}" alt="{{ project.title }}" loading="lazy"
          class="w-full h-full object-cover" />
   </div>
   {% endif %}
-  
-  <!-- Long Description -->
+
   {% if project.long_description %}
-  <div class="text-base text-gray-700 dark:text-gray-300 mb-6 leading-relaxed whitespace-pre-line">
+  <article class="text-base text-gray-700 dark:text-gray-300 mb-6 leading-relaxed whitespace-pre-line">
     {{ project.long_description }}
-  </div>
+  </article>
   {% endif %}
 
-  <!-- Stack -->
   {% if project.stack %}
-  <div class="mb-6">
+  <section class="mb-6">
     <h2 class="text-xl font-semibold text-black dark:text-white mb-2">Tech Stack</h2>
     <p class="text-gray-600 dark:text-gray-400">{{ project.stack }}</p>
-  </div>
+  </section>
   {% endif %}
 
-  <!-- Link Button -->
   {% if project.git_link %}
     {% if project.link_type == "github" %}
-      <a href="{{ project.git_link }}" target="_blank"
-         class="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-semibold text-sm hover:bg-blue-700 transition">
+      <a href="{{ project.git_link }}" target="_blank" rel="noopener noreferrer"
+         class="inline-block bg-brand text-white px-6 py-2 rounded-full font-semibold text-sm hover:bg-[#2b5a8c] transition">
         View on GitHub
       </a>
     {% elif project.link_type == "gdrive" %}
-      <a href="{{ project.git_link }}" target="_blank"
-         class="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-semibold text-sm hover:bg-green-700 transition">
+      <a href="{{ project.git_link }}" target="_blank" rel="noopener noreferrer"
+         class="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold text-sm hover:bg-green-700 transition">
         View on Google Drive
       </a>
     {% endif %}
   {% endif %}
-
 </section>
 {% endblock %}

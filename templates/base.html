@@ -4,17 +4,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Title & Description -->
   <title>{% block title %}Nicolas Tokariev — Data Analyst & Software Engineer{% endblock %}</title>
   <meta name="description" content="Explore Nicolas Tokariev's portfolio — Data Analyst & Software Engineer specializing in Python, SQL, BI tools, and DevOps automation.">
-  <meta name="keywords" content="Nicolas Tokariev, ntkrv, Data Analyst, Software Engineer, Python, SQL, Power BI, Tableau, DevOps, Automation, Flask, Tailwind CSS, Git, Docker, Portfolio, Data Visualization, CI/CD, Analytics">
+  <meta name="keywords" content="Nicolas Tokariev, ntkrv, Data Analyst, Software Engineer, Python, SQL, Power BI, Tableau, DevOps, Automation, Flask, Tailwind CSS, Git, Docker, Portfolio, Data Visualization, CI/CD, Analytics, Excel, Pandas, NumPy">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://ntkrv.dev/">
+
+  <!-- Open Graph (Facebook, LinkedIn, etc.) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ntkrv.dev/">
+  <meta property="og:title" content="Nicolas Tokariev — Data Analyst & Software Engineer">
+  <meta property="og:description" content="Portfolio of Nicolas Tokariev showcasing projects in Data Analytics, Software Engineering, and DevOps automation.">
+  <meta property="og:image" content="https://ntkrv.dev/static/img/og-image.jpg">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://ntkrv.dev/">
+  <meta name="twitter:title" content="Nicolas Tokariev — Data Analyst & Software Engineer">
+  <meta name="twitter:description" content="Explore projects and analytics by Nicolas Tokariev — Python, SQL, BI, DevOps.">
+  <meta name="twitter:image" content="https://ntkrv.dev/static/img/og-image.jpg">
+
+  <!-- Favicon & App Icons -->
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icons/favicon.ico') }}">
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='icons/favicon.svg') }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='icons/apple-touch-icon.png') }}">
+  <link rel="icon" sizes="96x96" href="{{ url_for('static', filename='icons/favicon-96x96.png') }}">
+  <link rel="manifest" href="{{ url_for('static', filename='icons/site.webmanifest') }}">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- Fonts & Styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="stylesheet" as="style" onload="this.rel='stylesheet'" href="{{ url_for('static', filename='css/styles.css') }}" />
+
+  <!-- Structured Data (JSON-LD Schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Nicolas Tokariev",
+    "url": "https://ntkrv.dev/",
+    "jobTitle": "Data Analyst & Software Engineer",
+    "sameAs": [
+      "https://github.com/ntkrv",
+      "https://linkedin.com/in/ntkrv"
+    ],
+    "description": "Portfolio of Nicolas Tokariev — Data Analyst & Software Engineer specializing in Python, SQL, and DevOps automation."
+  }
+  </script>
 </head>
+
 
 <body class="bg-white text-black dark:bg-[#212121] dark:text-white transition-colors duration-300"
       data-flashes='{{ flashes | tojson | safe }}'>
@@ -78,7 +121,9 @@
         </svg>
       </a>
     </div>
-    <p class="text-gray-500 dark:text-gray-400 text-sm">2025 Nicolas Tokariev. All rights reserved.</p>
+    <div class="mt-10 text-sm text-gray-400 dark:text-gray-500">
+    <span>© {{ current_year or 2025 }} Nicolas Tokariev</span> — Built with Flask & Tailwind CSS
+  </div>
   </footer>
 
   <!-- Theme Toggle -->

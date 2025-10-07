@@ -44,7 +44,6 @@ def add_project():
             link_type=form.link_type.data,  # "github" or "gdrive"
             git_link=form.git_link.data,
         )
-        # slug генерируется автоматически перед вставкой
         db.session.add(project)
         db.session.commit()
         flash("Project added successfully!", "success")
@@ -59,7 +58,6 @@ def edit_project(project_id):
     form = ProjectForm(obj=project)
     if form.validate_on_submit():
         form.populate_obj(project)
-        # slug тоже обновится автоматически, если изменится title
         db.session.commit()
         flash("Project updated successfully!", "success")
         return redirect(url_for("admin.index"))
@@ -94,7 +92,9 @@ def add_certificate():
     return render_template("admin/add_certificate.html", form=form)
 
 
-@admin_manage_bp.route("/edit_certificate/<int:certificate_id>", methods=["GET", "POST"])
+@admin_manage_bp.route(
+    "/edit_certificate/<int:certificate_id>", methods=["GET", "POST"]
+)
 @login_required
 def edit_certificate(certificate_id):
     certificate = Certificate.query.get_or_404(certificate_id)

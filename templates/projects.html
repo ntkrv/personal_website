@@ -2,8 +2,18 @@
 
 {% block title %}Projects{% endblock %}
 
+{% block meta %}
+  <meta name="description" content="Explore data analytics, engineering, and DevOps projects by Nicolas Tokariev — built with Python, Flask, SQL, Tailwind CSS, and modern technologies.">
+  <meta property="og:title" content="Projects — Nicolas Tokariev">
+  <meta property="og:description" content="Portfolio projects by Nicolas Tokariev: data analytics, automation, and software engineering solutions.">
+  <meta property="og:image" content="https://ntkrv.dev/static/img/og-image.jpg">
+  <meta property="og:url" content="https://ntkrv.dev/projects">
+  <meta name="twitter:card" content="summary_large_image">
+{% endblock %}
+
 {% block content %}
 <section class="px-4 sm:px-6 lg:px-8 py-8 max-w-7xl mx-auto">
+  <!-- Back to Home -->
   <a href="{{ url_for('main.index') }}"
      class="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-brand dark:hover:text-brand mb-6 transition-colors">
     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -12,34 +22,34 @@
     Back to Home
   </a>
 
-  <h1 class="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-6">My Projects</h1>
+  <header class="mb-8">
+    <h1 class="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-2">Projects</h1>
+    <p class="text-gray-600 dark:text-gray-400 text-sm max-w-2xl">
+      A collection of professional and personal projects by <strong>Nicolas Tokariev</strong> — focused on data analytics, automation, and modern software development.
+    </p>
+  </header>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {% for project in projects %}
-    <div class="group flex flex-col rounded-xl shadow-md bg-white dark:bg-[#2c2c2c] hover:shadow-lg transition-shadow duration-300">
-      <!-- Image -->
+    <article class="group flex flex-col rounded-xl shadow-md bg-white dark:bg-[#2c2c2c] hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700">
       {% if project.image_path %}
       <div class="w-full h-48 sm:h-40 rounded-t-xl overflow-hidden">
-        <img src="{{ project.image_path }}"
-             alt="{{ project.title }}"
+        <img src="{{ project.image_path }}" alt="{{ project.title }}" loading="lazy"
              class="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-105" />
       </div>
       {% endif %}
-
-      <!-- Text Content -->
-      <div class="flex flex-col flex-grow p-4 gap-3">
+      <div class="flex flex-col flex-grow p-5 gap-3">
         <h2 class="text-lg font-semibold text-black dark:text-white">{{ project.title }}</h2>
         <p class="text-sm text-gray-600 dark:text-gray-300 flex-grow">{{ project.short_description }}</p>
 
-        <!-- View Button -->
         <a href="{{ url_for('projects.project_detail', slug=project.slug) }}"
            class="inline-block text-center bg-brand text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-[#2b5a8c] transition-colors duration-200">
           View Project
         </a>
       </div>
-    </div>
+    </article>
     {% else %}
-    <p class="text-gray-500 dark:text-gray-400 text-sm col-span-full">No projects available at the moment.</p>
+    <p class="text-gray-500 dark:text-gray-400 text-sm col-span-full text-center">No projects available at the moment.</p>
     {% endfor %}
   </div>
 </section>
