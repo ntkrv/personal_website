@@ -24,6 +24,9 @@ instance/
 # Environment variables
 .env
 
+# Claude Code
+.claude/
+
 # Pytest / test caches
 .pytest_cache/
 .tox/
