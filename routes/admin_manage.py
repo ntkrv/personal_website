@@ -83,12 +83,13 @@ def add_certificate():
         certificate = Certificate(
             title=form.title.data,
             issuer=form.issuer.data,
+            skills=form.skills.data,
             link=form.link.data,
         )
         db.session.add(certificate)
         db.session.commit()
         flash("Certificate added successfully.", "success")
-        return redirect("/admin")
+        return redirect(url_for("admin.index"))
     return render_template("admin/add_certificate.html", form=form)
 
 

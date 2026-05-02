@@ -8,7 +8,7 @@ def test_project_model(app):
         short_description="Short desc",
         long_description="Long desc",
         image_path="image.png",
-        skills="Python, Flask",
+        stack="Python, Flask",
         git_link="https://github.com/test",
     )
 
