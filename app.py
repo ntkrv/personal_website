@@ -43,18 +43,30 @@ def create_app(config_class=None):
 
             app.config.from_object(DevelopmentConfig)
 
+    if not app.config.get("SECRET_KEY") and not app.config.get("TESTING"):
+        raise RuntimeError(
+            "SECRET_KEY environment variable must be set."
+        )
+
     db.init_app(app)
     mail.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
     limiter.init_app(app)
-    talisman.init_app(app, content_security_policy=csp)
+
+    force_https = app.config.get("ENV") == "production"
+    talisman.init_app(
+        app,
+        content_security_policy=csp,
+        force_https=force_https,
+        session_cookie_secure=force_https,
+    )
 
     login_manager.login_view = "admin_auth.login"
 
     @login_manager.user_loader
     def load_user(user_id):
-        return AdminUser.query.get(int(user_id))
+        return db.session.get(AdminUser, int(user_id))
 
     @app.errorhandler(429)
     def ratelimit_handler(e):
