@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 from forms import ContactForm
-from models import db, ContactMessage
+from extensions import db
+from models import ContactMessage
 from utils.email_utils import send_contact_email
 
 

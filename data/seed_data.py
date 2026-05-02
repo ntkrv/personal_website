@@ -1,13 +1,4 @@
-import os
-import sys
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
-from app import create_app
-from extensions import db
-from models import Project, Certificate
-
-app = create_app()
+"""Seed data for `flask seed` command."""
 
 PROJECTS = [
     {
@@ -67,24 +58,3 @@ CERTIFICATES = [
         "link": "https://udemy.com/certificate/data-visualization",
     },
 ]
-
-
-def seed():
-    with app.app_context():
-        print("Seeding database...")
-
-        Project.query.delete()
-        Certificate.query.delete()
-
-        for p in PROJECTS:
-            db.session.add(Project(**p))
-
-        for c in CERTIFICATES:
-            db.session.add(Certificate(**c))
-
-        db.session.commit()
-        print("Database seeded successfully!")
-
-
-if __name__ == "__main__":
-    seed()

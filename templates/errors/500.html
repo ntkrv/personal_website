@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}500 — Server Error{% endblock %}
+
+{% block meta %}
+  <meta name="robots" content="noindex, nofollow">
+{% endblock %}
+
+{% block content %}
+<section class="min-h-screen flex flex-col items-center justify-center px-6 py-16 text-center">
+  <h1 class="text-[5rem] sm:text-[7rem] font-extrabold text-brand tracking-tight mb-4">500</h1>
+  <h2 class="text-2xl sm:text-3xl font-bold text-black dark:text-white mb-3">Something went wrong</h2>
+  <p class="text-gray-600 dark:text-gray-400 max-w-md mx-auto mb-8 leading-relaxed">
+    The server encountered an error. The team has been notified — please try again in a moment.
+  </p>
+  <a href="{{ url_for('main.index') }}"
+     class="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-brand text-white rounded-full font-semibold hover:bg-[#2b5a8c] transition-colors duration-200">
+    Back to Home
+  </a>
+</section>
+{% endblock %}

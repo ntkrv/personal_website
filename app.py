@@ -1,20 +1,15 @@
 import os
-from flask import Flask, jsonify, request
+
+from flask import Flask, request
 from dotenv import load_dotenv
+
 from extensions import db, mail, migrate, login_manager, limiter, talisman
-from flask_admin import Admin
-from admin_panel import MyAdminIndexView, SecureModelView
-from models import Project, Certificate, ContactMessage, AdminUser
-from routes.main import main_bp
-from routes.projects import projects_bp
-from routes.certificates import certificates_bp
-from routes.contact import contact_bp
-from routes.admin_auth import admin_auth_bp
-from routes.admin_manage import admin_manage_bp
+from models import AdminUser
+from utils.logging_config import configure_logging
 
 load_dotenv()
 
-csp = {
+CSP = {
     "default-src": "'self'",
     "style-src": ["'self'", "https://fonts.googleapis.com"],
     "font-src": ["'self'", "https://fonts.gstatic.com"],
@@ -26,28 +21,43 @@ csp = {
 def create_app(config_class=None):
     app = Flask(__name__, instance_relative_config=True)
 
+    _load_config(app, config_class)
+    _validate_config(app)
+    configure_logging(app)
+    _register_extensions(app)
+    _register_blueprints(app)
+    _register_request_hooks(app)
+    _register_cli(app)
+
+    return app
+
+
+def _load_config(app, config_class) -> None:
     if config_class:
         app.config.from_object(config_class)
+        return
+
+    env = os.getenv("FLASK_ENV", "development").lower()
+    if env == "production":
+        from config import ProductionConfig
+
+        app.config.from_object(ProductionConfig)
+    elif env == "testing":
+        from config import TestingConfig
+
+        app.config.from_object(TestingConfig)
     else:
-        env = os.getenv("FLASK_ENV", "development").lower()
-        if env == "production":
-            from config import ProductionConfig
+        from config import DevelopmentConfig
 
-            app.config.from_object(ProductionConfig)
-        elif env == "testing":
-            from config import TestingConfig
+        app.config.from_object(DevelopmentConfig)
 
-            app.config.from_object(TestingConfig)
-        else:
-            from config import DevelopmentConfig
 
-            app.config.from_object(DevelopmentConfig)
-
+def _validate_config(app) -> None:
     if not app.config.get("SECRET_KEY") and not app.config.get("TESTING"):
-        raise RuntimeError(
-            "SECRET_KEY environment variable must be set."
-        )
+        raise RuntimeError("SECRET_KEY environment variable must be set.")
 
+
+def _register_extensions(app) -> None:
     db.init_app(app)
     mail.init_app(app)
     migrate.init_app(app, db)
@@ -57,7 +67,7 @@ def create_app(config_class=None):
     force_https = app.config.get("ENV") == "production"
     talisman.init_app(
         app,
-        content_security_policy=csp,
+        content_security_policy=CSP,
         force_https=force_https,
         session_cookie_secure=force_https,
     )
@@ -68,27 +78,15 @@ def create_app(config_class=None):
     def load_user(user_id):
         return db.session.get(AdminUser, int(user_id))
 
-    @app.errorhandler(429)
-    def ratelimit_handler(e):
-        return jsonify(error="Too many requests. Please try again later."), 429
 
-    @app.before_request
-    def log_ip():
-        if request.endpoint == "contact.contact":
-            ip = request.remote_addr
-            app.logger.info(f"Contact form accessed by IP: {ip}")
-
-    admin = Admin(
-        name="Admin Panel",
-        url="/admin",
-        template_mode="bootstrap4",
-        index_view=MyAdminIndexView(),
-    )
-    admin.init_app(app)
-
-    admin.add_view(SecureModelView(Project, db.session))
-    admin.add_view(SecureModelView(Certificate, db.session))
-    admin.add_view(SecureModelView(ContactMessage, db.session))
+def _register_blueprints(app) -> None:
+    from routes.main import main_bp
+    from routes.projects import projects_bp
+    from routes.certificates import certificates_bp
+    from routes.contact import contact_bp
+    from routes.admin_auth import admin_auth_bp
+    from routes.admin_manage import admin_manage_bp
+    from routes.errors import errors_bp
 
     app.register_blueprint(main_bp)
     app.register_blueprint(projects_bp)
@@ -96,8 +94,20 @@ def create_app(config_class=None):
     app.register_blueprint(contact_bp)
     app.register_blueprint(admin_auth_bp)
     app.register_blueprint(admin_manage_bp)
+    app.register_blueprint(errors_bp)
 
-    return app
+
+def _register_request_hooks(app) -> None:
+    @app.before_request
+    def log_contact_access():
+        if request.endpoint == "contact.contact":
+            app.logger.info("Contact form accessed by IP: %s", request.remote_addr)
+
+
+def _register_cli(app) -> None:
+    from cli import register_cli
+
+    register_cli(app)
 
 
 if __name__ == "__main__":

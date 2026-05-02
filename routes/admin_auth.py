@@ -23,7 +23,7 @@ def _is_safe_redirect(target):
 def login():
     """Login route for admin panel"""
     if current_user.is_authenticated:
-        return redirect(url_for("admin.index"))
+        return redirect(url_for("admin_manage.dashboard"))
 
     if request.method == "POST":
         username = request.form.get("username")
@@ -41,7 +41,7 @@ def login():
             flash("Login successful!", "success")
             if not _is_safe_redirect(next_page):
                 next_page = None
-            return redirect(next_page or url_for("admin.index"))
+            return redirect(next_page or url_for("admin_manage.dashboard"))
 
         flash("Invalid username or password.", "danger")
 
