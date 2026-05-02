@@ -37,10 +37,10 @@ flask db upgrade
 
 Write-Output "Checking and creating admin user if necessary..."
 try {
-    python utils/create_admin.py
+    flask create-admin
     Write-Host "Admin verification and creation completed successfully." -ForegroundColor Green
 } catch {
-    Write-Host "Could not verify or create admin user. Check utils/create_admin.py for issues." -ForegroundColor Yellow
+    Write-Host "Could not verify or create admin user. Check `flask create-admin` for issues." -ForegroundColor Yellow
 }
 
 Write-Output "Building Tailwind CSS..."

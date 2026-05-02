@@ -27,7 +27,7 @@ flask db upgrade
 flask db migrate -m "Auto migration"
 
 echo Creating admin user...
-python utils\create_admin.py
+flask create-admin
 
 echo Building Tailwind CSS...
 start cmd /k "npm run build:css"

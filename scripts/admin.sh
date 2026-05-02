@@ -8,7 +8,8 @@ set -e
 
 # Run the Python script to create admin user
 echo "Creating admin user..."
-python3 create_admin.py
+export FLASK_APP=app.py
+flask create-admin
 
 # Done
 echo "Done."

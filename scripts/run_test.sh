@@ -26,7 +26,7 @@ flask db migrate -m "Test migration"
 flask db upgrade
 
 echo "✅ Creating admin user..."
-python3 create_admin.py
+flask create-admin
 
 echo "🧪 Running tests with coverage..."
 coverage run -m pytest

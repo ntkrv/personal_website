@@ -34,7 +34,7 @@ try {
 }
 
 Write-Host "Creating admin user (if not exists)..."
-python utils/create_admin.py
+flask create-admin
 
 Write-Host "Building Tailwind CSS (watch mode)..."
 Start-Process powershell -ArgumentList "npm run build:css"

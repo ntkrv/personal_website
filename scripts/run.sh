@@ -8,9 +8,6 @@ export $(grep -v '^#' .env | xargs)
 echo "⬆️  Updating pip..."
 python3 -m pip install --upgrade pip
 
-echo "🔁 Updating requirements.txt..."
-pip freeze > requirements.txt
-
 echo "🎨 Running black formatter..."
 black .
 
@@ -25,7 +22,7 @@ flask db upgrade
 flask db migrate -m "Auto migration" || echo "No changes detected."
 
 echo "👤 Creating admin user (if not exists)..."
-python3 utils/create_admin.py
+flask create-admin
 
 echo "🎨 Building Tailwind CSS..."
 npm run build:css &

@@ -46,7 +46,7 @@ ADMIN_PASSWORD=
 # Initialize database using Flask shell
 Write-Host "Initializing database..."
 $env:FLASK_APP = "app.py"
-flask shell -c "from models import db; db.create_all()"
+flask shell -c "from extensions import db; db.create_all()"
 
 Write-Host "Setup complete. You can now run the application with: python app.py"
 Set-ExecutionPolicy RemoteSigned -Scope Process

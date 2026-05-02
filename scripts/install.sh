@@ -51,8 +51,8 @@ fi
 echo "🗄  Initializing database with db.create_all()..."
 export FLASK_APP=app.py
 flask shell <<EOF
-from models import db
+from extensions import db
 db.create_all()
 EOF
 
-echo "🎉 Setup complete. Create ADMIN_USERNAME & ADMIN_PASSWORD in .env file, create admin using python create_admin.py and after you can run the app"
+echo "🎉 Setup complete. Set ADMIN_USERNAME & ADMIN_PASSWORD in .env, run 'flask create-admin', then start the app."
