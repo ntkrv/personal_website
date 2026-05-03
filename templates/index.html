@@ -217,7 +217,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {% for project in projects %}
           <a href="{{ url_for('projects.project_detail', slug=project.slug) }}"
-             class="tilt card-surface rounded-xl overflow-hidden group block">
+             class="card-surface rounded-xl overflow-hidden group block">
             {% if project.image_path %}
               <div class="aspect-video w-full overflow-hidden bg-white/5 [.light_&]:bg-ink-900/5">
                 <img src="{{ project.image_path }}" alt="{{ project.title }}" loading="lazy"
