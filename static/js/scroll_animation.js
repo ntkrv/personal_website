@@ -61,5 +61,31 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       }
     );
+
+    // Stat counters: count up from 0 to data-stat-end on first reveal.
+    gsap.utils.toArray("[data-stat-end]").forEach((el) => {
+      const end = parseFloat(el.getAttribute("data-stat-end"));
+      const suffix = el.getAttribute("data-stat-suffix") || "";
+      if (Number.isNaN(end)) return;
+
+      const obj = { val: 0 };
+      el.textContent = "0" + suffix;
+
+      ScrollTrigger.create({
+        trigger: el,
+        start: "top 85%",
+        once: true,
+        onEnter: () => {
+          gsap.to(obj, {
+            val: end,
+            duration: 1.4,
+            ease: "power2.out",
+            onUpdate: () => {
+              el.textContent = Math.round(obj.val) + suffix;
+            },
+          });
+        },
+      });
+    });
   });
   

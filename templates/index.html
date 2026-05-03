@@ -14,7 +14,7 @@
       <span class="text-gradient">decisions that ship</span>.
     </h1>
     <p class="max-w-2xl mx-auto text-base sm:text-lg text-white/70 [.light_&]:text-ink-600 leading-relaxed mb-9">
-      Data Analyst &amp; Software Engineer building Power&nbsp;BI dashboards, Python automations, and end-to-end Flask apps —
+      Data Analyst &amp; Software Engineer building Power&nbsp;BI dashboards, Python automations, and end-to-end Full-Stack apps —
       from messy CSVs to production deploys.
     </p>
 
@@ -38,13 +38,6 @@
       </a>
     </div>
 
-    <div class="text-xs text-white/40 [.light_&]:text-ink-500 inline-flex items-center gap-3">
-      <a href="https://github.com/ntkrv" target="_blank" rel="noopener" class="hover:text-white [.light_&]:hover:text-ink-900 transition">GitHub</a>
-      <span class="w-1 h-1 rounded-full bg-white/20 [.light_&]:bg-ink-300"></span>
-      <a href="https://www.linkedin.com/in/ntokariev/" target="_blank" rel="noopener" class="hover:text-white [.light_&]:hover:text-ink-900 transition">LinkedIn</a>
-      <span class="w-1 h-1 rounded-full bg-white/20 [.light_&]:bg-ink-300"></span>
-      <a href="mailto:contact@ntkrv.dev" class="hover:text-white [.light_&]:hover:text-ink-900 transition">contact@ntkrv.dev</a>
-    </div>
   </div>
 
   <div class="hairline max-w-6xl mx-auto"></div>
@@ -58,14 +51,16 @@
   <div class="max-w-6xl mx-auto px-5 sm:px-8 py-12">
     <dl class="grid grid-cols-2 md:grid-cols-4 gap-px rounded-xl overflow-hidden bg-white/5 [.light_&]:bg-ink-900/10 border border-white/10 [.light_&]:border-ink-900/10">
       {% set stats = [
-        ('5+',  'Years in data'),
-        ('20+', 'Dashboards delivered'),
-        ('60%', 'Avg. reporting time saved'),
-        ('3',   'Industries served'),
+        (years_in_data, '+', 'Years in data'),
+        (100,           '+', 'Dashboards delivered'),
+        (60,            '%', 'Avg. reporting time saved'),
+        (3,             '',  'Industries served'),
       ] %}
-      {% for value, label in stats %}
+      {% for value, suffix, label in stats %}
         <div class="bg-ink-900 [.light_&]:bg-white p-6 sm:p-8 text-center">
-          <dd class="text-3xl sm:text-4xl font-extrabold tracking-tight bg-gradient-to-br from-brand-300 to-violet-400 bg-clip-text text-transparent">{{ value }}</dd>
+          <dd class="text-3xl sm:text-4xl font-extrabold tracking-tight bg-gradient-to-br from-brand-300 to-violet-400 bg-clip-text text-transparent"
+              data-stat-end="{{ value }}"
+              data-stat-suffix="{{ suffix }}">{{ value }}{{ suffix }}</dd>
           <dt class="mt-2 text-[11px] uppercase tracking-widest text-white/50 [.light_&]:text-ink-500">{{ label }}</dt>
         </div>
       {% endfor %}
@@ -93,7 +88,7 @@
     {% set services = [
       ('bar_chart',     'BI Dashboards',         'Power BI / Tableau dashboards built around the questions your team actually asks. From data model to handover.', '1–3 weeks'),
       ('bolt',          'Python Automation',     'Reports, ETL pipelines, and scheduled scripts that replace recurring manual work. Pandas, APIs, schedulers.', '3–10 days'),
-      ('code',          'Flask Web Apps',        'Internal tools, admin panels, and customer-facing apps with Flask + Tailwind. Deployed and documented.', '2–6 weeks'),
+      ('code',          'Web Apps',              'Full-Stack internal tools, admin panels, and customer-facing apps. Deployed and documented.', '2–6 weeks'),
       ('hub',           'Data Pipelines & APIs', 'Stitch SQL sources, third-party APIs, and downstream BI together. Dockerised, monitored, version-controlled.', '1–4 weeks'),
     ] %}
 

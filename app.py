@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 from flask import Flask, request
 from dotenv import load_dotenv
@@ -16,6 +17,11 @@ CSP = {
     "script-src": ["'self'"],
     "img-src": ["'self'", "data:", "https://images.unsplash.com"],
 }
+
+# Anchor for the auto-incrementing "Years in data" stat on the hero.
+# years_in_data = current_year - CAREER_START_YEAR  →  rolls forward
+# automatically each January 1.
+CAREER_START_YEAR = 2021
 
 
 def create_app(config_class=None):
@@ -107,6 +113,14 @@ def _register_request_hooks(app) -> None:
     def log_contact_access():
         if request.endpoint == "contact.contact":
             app.logger.info("Contact form accessed by IP: %s", request.remote_addr)
+
+    @app.context_processor
+    def inject_globals():
+        year = datetime.now().year
+        return {
+            "current_year": year,
+            "years_in_data": max(year - CAREER_START_YEAR, 1),
+        }
 
 
 def _register_cli(app) -> None:
