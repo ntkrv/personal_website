@@ -73,10 +73,21 @@
         <path d="M8.578 8.578a23.9 23.9 0 0 0 0 33.843L24 24 8.578 8.578Z" />
       </svg>
       <h2 class="text-lg font-bold">ntkrv</h2>
+      <span class="hidden sm:inline-flex items-center gap-1.5 ml-2 text-[11px] font-medium px-2 py-0.5 rounded-full
+                   bg-emerald-50 text-emerald-700 border border-emerald-200
+                   dark:bg-emerald-900/20 dark:text-emerald-300 dark:border-emerald-800"
+            title="Open to freelance and full-time engagements">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+        Available
+      </span>
     </a>
-    <nav class="flex gap-6 text-sm font-medium mt-2 sm:mt-0">
+    <nav class="flex gap-6 text-sm font-medium mt-2 sm:mt-0 items-center">
       <a href="{{ url_for('projects.projects') }}" class="hover:text-brand transition-colors">Projects</a>
       <a href="{{ url_for('certificates.certificates') }}" class="hover:text-brand transition-colors">Certificates</a>
+      <a href="{{ url_for('main.index') }}#contact"
+         class="hidden sm:inline-flex items-center bg-brand text-white px-3.5 py-1.5 rounded-full hover:bg-[#2b5a8c] transition-colors">
+        Hire me
+      </a>
     </nav>
   </header>
 
