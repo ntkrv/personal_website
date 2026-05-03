@@ -53,7 +53,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v={{ asset_version or '6' }}" />
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -71,7 +71,7 @@
 
 <body class="relative min-h-screen antialiased
              bg-ink-900 text-white
-             [&.light]:bg-softWhite [&.light]:text-ink-900
+             [.light_&]:bg-softWhite [.light_&]:text-ink-900
              selection:bg-brand-500/30 transition-colors duration-300"
       data-flashes='{{ flashes | tojson | safe }}'>
 
