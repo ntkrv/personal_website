@@ -6,7 +6,7 @@ from flask import Flask, request
 from markupsafe import Markup, escape
 from dotenv import load_dotenv
 
-from extensions import db, mail, migrate, login_manager, limiter, talisman
+from extensions import db, mail, migrate, login_manager, limiter, talisman, csrf
 from models import AdminUser
 from utils.logging_config import configure_logging
 
@@ -73,6 +73,7 @@ def _register_extensions(app) -> None:
     migrate.init_app(app, db)
     login_manager.init_app(app)
     limiter.init_app(app)
+    csrf.init_app(app)
 
     force_https = (
         os.getenv("FLASK_ENV", "").lower() == "production"

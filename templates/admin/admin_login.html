@@ -14,6 +14,7 @@
 
     <div class="card-surface rounded-xl p-6 sm:p-8">
       <form method="POST" class="space-y-5">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div>
           <label for="username" class="block text-sm font-medium mb-1.5 text-white/80 [.light_&]:text-ink-800">Username</label>
           <input id="username" name="username" type="text" required placeholder="Enter your username"
