@@ -35,6 +35,38 @@
   <link rel="manifest" href="{{ url_for('static', filename='icons/site.webmanifest') }}">
   <meta name="theme-color" content="#0a0a14">
 
+  {% if ga_measurement_id %}
+  <!-- Google Analytics 4 with Consent Mode v2 (GDPR-compliant: default-denied) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied',
+      'functionality_storage': 'granted',
+      'security_storage': 'granted',
+      'wait_for_update': 500
+    });
+    try {
+      if (localStorage.getItem('cookie-consent') === 'granted') {
+        gtag('consent', 'update', {
+          'ad_storage': 'granted',
+          'ad_user_data': 'granted',
+          'ad_personalization': 'granted',
+          'analytics_storage': 'granted'
+        });
+      }
+    } catch (e) {}
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_measurement_id }}"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', '{{ ga_measurement_id }}', { anonymize_ip: true });
+  </script>
+  {% endif %}
+
   <!-- Apply theme before paint to avoid flash -->
   <script>
     (function () {
@@ -161,6 +193,7 @@
             <li><a href="{{ url_for('certificates.certificates') }}" class="text-white/70 hover:text-white [.light_&]:text-ink-700 [.light_&]:hover:text-ink-900 transition">Certificates</a></li>
             <li><a href="{{ url_for('agencies.agencies') }}"   class="text-white/70 hover:text-white [.light_&]:text-ink-700 [.light_&]:hover:text-ink-900 transition">For agencies</a></li>
             <li><a href="{{ url_for('main.index') }}#contact"  class="text-white/70 hover:text-white [.light_&]:text-ink-700 [.light_&]:hover:text-ink-900 transition">Hire me</a></li>
+            <li><a href="{{ url_for('main.privacy') }}" class="text-white/70 hover:text-white [.light_&]:text-ink-700 [.light_&]:hover:text-ink-900 transition">Privacy</a></li>
           </ul>
         </div>
 
@@ -220,6 +253,33 @@
     </div>
   </footer>
 
+  <!-- Cookie consent banner (GDPR — gates GA4 ad/analytics storage) -->
+  <div id="cookie-consent"
+       role="dialog"
+       aria-live="polite"
+       aria-label="Cookie consent"
+       class="hidden fixed bottom-4 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-md z-[60]
+              card-surface rounded-xl p-5 shadow-2xl">
+    <p class="text-sm text-white/80 [.light_&]:text-ink-800 leading-relaxed mb-4">
+      We use cookies to understand traffic and improve the site. Analytics cookies are off until you accept.
+      See our <a href="{{ url_for('main.privacy') }}" class="text-brand-300 [.light_&]:text-brand-700 underline hover:no-underline">Privacy Policy</a>.
+    </p>
+    <div class="flex items-center gap-2">
+      <button type="button" data-consent="granted"
+              class="cta-hover-gradient flex-1 px-3 py-2 rounded-md text-xs font-semibold
+                     bg-white text-ink-900 [.light_&]:bg-ink-900 [.light_&]:text-white">
+        Accept
+      </button>
+      <button type="button" data-consent="denied"
+              class="flex-1 px-3 py-2 rounded-md text-xs font-semibold
+                     bg-white/5 border border-white/10 text-white hover:bg-white/10
+                     [.light_&]:bg-ink-900/5 [.light_&]:border-ink-900/10 [.light_&]:text-ink-900 [.light_&]:hover:bg-ink-900/10
+                     transition">
+        Reject
+      </button>
+    </div>
+  </div>
+
   <!-- Theme Toggle -->
   <button id="theme-toggle"
           class="fixed bottom-6 right-6 z-40 grid place-items-center w-11 h-11 rounded-full
@@ -239,5 +299,6 @@
   <script src="{{ url_for('static', filename='js/flash_message.js') }}"></script>
   <script src="{{ url_for('static', filename='js/theme_toggle.js') }}"></script>
   <script src="{{ url_for('static', filename='js/password_redirect.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/cookie_consent.js') }}?v={{ asset_version or '15' }}"></script>
 </body>
 </html>

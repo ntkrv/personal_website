@@ -1,15 +1,12 @@
 {% extends "base.html" %}
 
 {% block title %}404 — Page Not Found{% endblock %}
-
-{% block meta %}
-  <meta name="robots" content="noindex, follow">
-  <meta name="description" content="The page you’re looking for doesn’t exist or has been moved. Return to Nicolas Tokariev’s portfolio homepage.">
-  <meta property="og:title" content="404 — Page Not Found | Nicolas Tokariev">
-  <meta property="og:description" content="The page you’re looking for doesn’t exist or has been moved. Go back to the homepage.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://ntkrv.dev/static/img/og-image.jpg">
-{% endblock %}
+{% block meta_description %}The page you're looking for doesn't exist or has been moved. Return to Nicolas Tokariev's portfolio homepage.{% endblock %}
+{% block og_title %}404 — Page Not Found | Nicolas Tokariev{% endblock %}
+{% block og_description %}The page you're looking for doesn't exist or has been moved.{% endblock %}
+{% block twitter_title %}404 — Page Not Found{% endblock %}
+{% block twitter_description %}Page not found.{% endblock %}
+{% block extra_head %}<meta name="robots" content="noindex, follow">{% endblock %}
 
 {% block content %}
 <section class="min-h-screen flex flex-col items-center justify-center px-6 py-16 text-center">

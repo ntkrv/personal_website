@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy — Nicolas Tokariev{% endblock %}
+{% block meta_description %}Privacy policy for ntkrv.dev — what data is collected, how it's used, your rights under GDPR, and how to contact me.{% endblock %}
+{% block canonical %}https://ntkrv.dev/privacy{% endblock %}
+{% block og_url %}https://ntkrv.dev/privacy{% endblock %}
+{% block og_title %}Privacy Policy — Nicolas Tokariev{% endblock %}
+{% block og_description %}What data ntkrv.dev collects, how it's used, and your rights under GDPR.{% endblock %}
+{% block twitter_url %}https://ntkrv.dev/privacy{% endblock %}
+{% block twitter_title %}Privacy Policy — Nicolas Tokariev{% endblock %}
+{% block twitter_description %}Privacy policy and GDPR rights.{% endblock %}
+
+{% block content %}
+<section class="relative">
+  <div class="max-w-3xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
+
+    <a href="{{ url_for('main.index') }}"
+       class="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest text-white/50 [.light_&]:text-ink-500 hover:text-white [.light_&]:hover:text-ink-900 mb-10 transition">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      Back to Home
+    </a>
+
+    <header class="mb-10">
+      <span class="eyebrow">Legal</span>
+      <h1 class="mt-3 text-3xl sm:text-5xl font-bold tracking-tight mb-4">Privacy Policy.</h1>
+      <p class="text-white/60 [.light_&]:text-ink-600 text-sm">
+        Last updated: {{ current_year }}-01-01
+      </p>
+    </header>
+
+    <div class="card-surface rounded-xl p-6 sm:p-8 space-y-8 text-white/80 [.light_&]:text-ink-800 leading-relaxed">
+
+      <section>
+        <h2 class="text-xl font-semibold mb-3">Who runs this site</h2>
+        <p>This site (ntkrv.dev) is operated by Nicolas Tokariev as a personal portfolio.
+          For privacy questions, write to
+          <a href="mailto:{{ privacy_contact_email }}" class="text-brand-300 [.light_&]:text-brand-700 underline hover:no-underline">{{ privacy_contact_email }}</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold mb-3">What data is collected</h2>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong>Contact form submissions.</strong> Your name, email, and message are stored
+            to reply to you and may be forwarded to my work inbox. Legal basis: your consent /
+            legitimate interest in answering an inbound enquiry (GDPR Art. 6(1)(a) / (f)).</li>
+          <li><strong>Server logs.</strong> Standard request logs (IP, user-agent, timestamps) kept
+            for security, abuse prevention, and debugging. Legal basis: legitimate interest
+            (GDPR Art. 6(1)(f)). Retention: up to 90 days.</li>
+          <li><strong>Analytics (Google Analytics 4).</strong> Loaded only after you accept the
+            cookie banner. Collects pseudonymous traffic data (page views, device type, country)
+            with IP anonymisation. Legal basis: consent (GDPR Art. 6(1)(a)). You can withdraw
+            consent at any time by clearing cookies for this site.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold mb-3">Cookies</h2>
+        <p>Strictly necessary cookies (session, CSRF protection, theme preference) are always set —
+          the site cannot function without them. Analytics cookies are off by default and only
+          load after you press <em>Accept</em> in the consent banner.</p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold mb-3">Who your data is shared with</h2>
+        <p>Contact-form messages are processed by my email provider (currently Gmail / Google Workspace).
+          Analytics data is processed by Google Ireland Ltd (data controller for EEA) under their
+          standard data processing terms.</p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold mb-3">Your rights under GDPR</h2>
+        <p class="mb-3">You have the right to:</p>
+        <ul class="list-disc pl-5 space-y-2">
+          <li>Access the data I hold about you.</li>
+          <li>Request correction or deletion.</li>
+          <li>Withdraw consent (analytics, marketing) at any time.</li>
+          <li>Restrict or object to processing.</li>
+          <li>Receive your data in a portable format.</li>
+          <li>Lodge a complaint with your national data protection authority.</li>
+        </ul>
+        <p class="mt-3">To exercise any of these rights, email
+          <a href="mailto:{{ privacy_contact_email }}" class="text-brand-300 [.light_&]:text-brand-700 underline hover:no-underline">{{ privacy_contact_email }}</a>
+          and I'll respond within 30 days.</p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold mb-3">Changes to this policy</h2>
+        <p>If this policy changes, the "Last updated" date above changes too. Material changes
+          will be highlighted on the homepage.</p>
+      </section>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

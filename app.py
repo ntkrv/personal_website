@@ -14,10 +14,26 @@ load_dotenv()
 
 CSP = {
     "default-src": "'self'",
-    "style-src": ["'self'", "https://fonts.googleapis.com"],
+    "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
     "font-src": ["'self'", "https://fonts.gstatic.com"],
-    "script-src": ["'self'"],
-    "img-src": ["'self'", "data:", "https://images.unsplash.com"],
+    "script-src": [
+        "'self'",
+        "'unsafe-inline'",
+        "https://www.googletagmanager.com",
+    ],
+    "connect-src": [
+        "'self'",
+        "https://www.google-analytics.com",
+        "https://*.analytics.google.com",
+        "https://*.googletagmanager.com",
+    ],
+    "img-src": [
+        "'self'",
+        "data:",
+        "https://images.unsplash.com",
+        "https://www.google-analytics.com",
+        "https://*.googletagmanager.com",
+    ],
 }
 
 # Anchor for the auto-incrementing "Years in data" stat on the hero.
@@ -125,6 +141,10 @@ def _register_request_hooks(app) -> None:
         return {
             "current_year": year,
             "years_in_data": max(year - CAREER_START_YEAR, 1),
+            "ga_measurement_id": os.getenv("GA_MEASUREMENT_ID", "").strip(),
+            "privacy_contact_email": os.getenv(
+                "PRIVACY_CONTACT_EMAIL", "contact@ntkrv.dev"
+            ),
         }
 
     app.jinja_env.filters["case_format"] = _case_format

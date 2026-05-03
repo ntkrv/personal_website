@@ -7,6 +7,10 @@ class ContactForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired(), Length(max=50)])
     email = StringField("Email", validators=[DataRequired(), Email()])
     message = TextAreaField("Message", validators=[DataRequired()])
+    # Honeypot: hidden field a real user never sees or fills.
+    # If a bot submits with anything in it, the route silently drops the
+    # request (no flash, no DB write, no email).
+    website = StringField("Website", validators=[Optional(), Length(max=200)])
     submit = SubmitField("Send")
 
 

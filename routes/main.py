@@ -13,6 +13,11 @@ def index():
     return render_template("index.html", form=form, projects=projects)
 
 
+@main_bp.route("/privacy")
+def privacy():
+    return render_template("privacy.html")
+
+
 @main_bp.route("/robots.txt")
 def robots():
     body = (
