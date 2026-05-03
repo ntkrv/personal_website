@@ -18,35 +18,37 @@
       Back to Home
     </a>
 
-    <span class="eyebrow">For agencies &amp; consultancies</span>
-    <h1 class="text-balance mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-5">
-      A <span class="text-gradient">fractional data engineer</span><br class="hidden sm:block" />
-      on your bench.
-    </h1>
-    <p class="max-w-2xl text-base sm:text-lg text-white/70 [.light_&]:text-ink-700 leading-relaxed mb-8">
-      You sell strategy, design, or growth. Sometimes the deliverable also needs a Power&nbsp;BI dashboard,
-      a Python ETL, or a Flask admin tool — and standing one up in-house isn't worth the headcount.
-      That's where I plug in: white-label, NDA, behind your AM.
-    </p>
+    <header>
+      <span class="eyebrow">For agencies &amp; consultancies</span>
+      <h1 class="text-balance mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-5">
+        A <span class="text-gradient">fractional data engineer</span><br class="hidden sm:block" />
+        on your bench.
+      </h1>
+      <p class="max-w-2xl text-base sm:text-lg text-white/70 [.light_&]:text-ink-700 leading-relaxed mb-8">
+        You sell strategy, design, or growth. Sometimes the deliverable also needs a Power&nbsp;BI dashboard,
+        a Python ETL, or a Flask admin tool — and standing one up in-house isn't worth the headcount.
+        That's where I plug in: white-label, NDA, behind your AM.
+      </p>
 
-    <div class="flex flex-col sm:flex-row gap-3">
-      <a href="{{ url_for('main.index') }}#contact"
-         class="cta-hover-gradient inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg
-                bg-white text-ink-900 [.light_&]:bg-ink-900 [.light_&]:text-white
-                font-semibold text-sm shadow-[0_8px_30px_-8px_rgba(255,255,255,0.4)]">
-        Start a conversation
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 5l7 7-7 7"/>
-        </svg>
-      </a>
-      <a href="mailto:contact@ntkrv.dev?subject=Agency%20engagement"
-         class="cta-hover-gradient inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg
-                bg-white/5 border border-white/10 text-white
-                [.light_&]:bg-ink-900/5 [.light_&]:border-ink-900/10 [.light_&]:text-ink-900
-                font-semibold text-sm">
-        Email direct
-      </a>
-    </div>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a href="#contact"
+           class="cta-hover-gradient inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg
+                  bg-white text-ink-900 [.light_&]:bg-ink-900 [.light_&]:text-white
+                  font-semibold text-sm shadow-[0_8px_30px_-8px_rgba(255,255,255,0.4)]">
+          Start a conversation
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="mailto:contact@ntkrv.dev?subject=Agency%20engagement"
+           class="cta-hover-gradient inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg
+                  bg-white/5 border border-white/10 text-white
+                  [.light_&]:bg-ink-900/5 [.light_&]:border-ink-900/10 [.light_&]:text-ink-900
+                  font-semibold text-sm">
+          Email direct
+        </a>
+      </div>
+    </header>
 
   </div>
   <div class="hairline max-w-6xl mx-auto"></div>
@@ -54,7 +56,7 @@
 
 
 <!-- ============================================================
-     WHAT I DO WHITE-LABEL
+     WHAT I PLUG INTO
 ============================================================ -->
 <section class="relative">
   <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
@@ -77,7 +79,7 @@
        'Inheriting a fragile pipeline, a brittle Excel-based reporting flow, or a half-built warehouse? I stabilise, document, and migrate — no-drama Pandas + SQL, with a runbook at the end.'),
       ('terminal',
        'Internal tools & admin panels',
-       'Flask + Tailwind apps where a spreadsheet has outgrown itself. Auth, audit log, deploys, and CI included. Typically 2–6 weeks from kickoff to live.'),
+       'Full-Stack apps where a spreadsheet has outgrown itself. Auth, audit log, deploys, and CI included. Typically 2–6 weeks from kickoff to live.'),
       ('schedule',
        'Fractional retainer',
        '4–16 hours a week, scoped against a backlog. Useful when you have a steady stream of small data work but no FTE-sized problem yet.'),
@@ -141,11 +143,11 @@
 
 
 <!-- ============================================================
-     STACK SHORTCUT
+     STACK MARQUEE
 ============================================================ -->
 <section class="relative">
   <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
-    <div class="max-w-2xl mb-8">
+    <div class="max-w-2xl mb-10">
       <span class="eyebrow">Stack</span>
       <h2 class="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">Tools I bring in.</h2>
       <p class="mt-4 text-white/60 [.light_&]:text-ink-600 text-base">
@@ -153,16 +155,17 @@
       </p>
     </div>
 
-    <div class="card-surface rounded-xl p-5">
-      <div class="flex flex-wrap gap-2">
-        {% for skill in ['Python', 'SQL', 'PostgreSQL', 'Pandas', 'NumPy',
-                          'Power BI', 'Tableau', 'DAX', 'Excel',
-                          'Flask', 'SQLAlchemy', 'Docker', 'CI/CD', 'APIs'] %}
-          <span class="text-xs px-2.5 py-1 rounded-md font-medium
-                       bg-brand-500/15 text-brand-200 border border-brand-500/30
-                       [.light_&]:bg-brand-500/10 [.light_&]:text-brand-700 [.light_&]:border-brand-500/20">
-            {{ skill }}
-          </span>
+    {% set tool_icons = ["python.svg", "js.svg", "html.svg", "css.svg", "sql.svg", "postgresql.svg", "git.svg", "docker.svg", "powerbi.svg", "tableau.svg", "excel.svg"] %}
+    <div class="marquee opacity-90">
+      <div class="marquee-track">
+        {% for _ in range(2) %}
+          <div class="flex items-center gap-x-10 px-5 shrink-0" aria-hidden="{{ 'true' if loop.index > 1 else 'false' }}">
+            {% for icon in tool_icons %}
+              <img src="{{ url_for('static', filename='icons/' ~ icon) }}"
+                   alt="{{ icon | replace('.svg', '') }}"
+                   class="icon grayscale hover:grayscale-0 transition" loading="lazy" />
+            {% endfor %}
+          </div>
         {% endfor %}
       </div>
     </div>
@@ -171,35 +174,12 @@
 
 
 <!-- ============================================================
-     CTA
+     CONTACT FORM (duplicated for in-page CTAs)
 ============================================================ -->
-<section class="relative">
-  <div class="max-w-3xl mx-auto px-5 sm:px-8 py-16 sm:py-24 text-center">
-    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-      Got a brief that needs <span class="text-gradient">data work</span>?
-    </h2>
-    <p class="text-white/70 [.light_&]:text-ink-700 text-base sm:text-lg leading-relaxed mb-8">
-      Send the scope. I&apos;ll come back within a day with what&apos;s feasible, the timeline, and a price model.
-    </p>
-    <div class="flex flex-col sm:flex-row gap-3 justify-center">
-      <a href="{{ url_for('main.index') }}#contact"
-         class="cta-hover-gradient inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg
-                bg-white text-ink-900 [.light_&]:bg-ink-900 [.light_&]:text-white
-                font-semibold text-sm shadow-[0_8px_30px_-8px_rgba(255,255,255,0.4)]">
-        Use the contact form
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 5l7 7-7 7"/>
-        </svg>
-      </a>
-      <a href="mailto:contact@ntkrv.dev?subject=Agency%20engagement"
-         class="cta-hover-gradient inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg
-                bg-white/5 border border-white/10 text-white
-                [.light_&]:bg-ink-900/5 [.light_&]:border-ink-900/10 [.light_&]:text-ink-900
-                font-semibold text-sm">
-        contact@ntkrv.dev
-      </a>
-    </div>
-  </div>
-</section>
+{% set intro = {
+  'headline': 'Got a brief that needs data work?',
+  'lead': "Send the scope. I'll come back within a day with what's feasible, the timeline, and a price model."
+} %}
+{% include "_contact_form.html" %}
 
 {% endblock %}
