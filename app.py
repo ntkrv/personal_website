@@ -21,6 +21,8 @@ CSP = {
 def create_app(config_class=None):
     app = Flask(__name__, instance_relative_config=True)
 
+    os.makedirs(app.instance_path, exist_ok=True)
+
     _load_config(app, config_class)
     _validate_config(app)
     configure_logging(app)
