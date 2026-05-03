@@ -3,179 +3,182 @@
 {% block title %}Nicolas Tokariev — Data Analyst & Software Engineer{% endblock %}
 
 {% block content %}
-<section class="px-4 max-w-6xl mx-auto">
 
-  <!-- ============================ HERO ============================ -->
-  <div class="relative pt-10 pb-12 sm:pt-16 sm:pb-20 animate-on-scroll opacity-0 translate-y-6">
-    <!-- Availability badge -->
-    <div class="flex justify-center mb-6">
-      <span class="inline-flex items-center gap-2 text-xs sm:text-sm font-medium px-3 py-1 rounded-full
-                   bg-emerald-50 text-emerald-700 border border-emerald-200
-                   dark:bg-emerald-900/20 dark:text-emerald-300 dark:border-emerald-800">
-        <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-        </span>
-        Available for freelance work
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="relative overflow-hidden">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 pt-16 pb-20 sm:pt-24 sm:pb-28 text-center relative">
+    <span class="inline-flex items-center gap-2 text-xs font-medium px-3 py-1 rounded-full
+                 bg-white/5 border border-white/10 text-white/80
+                 [.light_&]:bg-ink-900/5 [.light_&]:border-ink-900/10 [.light_&]:text-ink-700 mb-6">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
       </span>
-    </div>
+      Available for new projects · Q2 2026
+    </span>
 
-    <h1 class="text-center text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-5">
+    <h1 class="text-balance text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
       I turn messy data into
-      <span class="text-brand">decisions that save time and money</span>.
+      <span class="text-gradient">decisions that ship</span>.
     </h1>
-    <p class="text-center max-w-2xl mx-auto text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
-      Data Analyst & Software Engineer building <strong class="font-semibold text-gray-900 dark:text-white">Power BI dashboards</strong>,
-      <strong class="font-semibold text-gray-900 dark:text-white">Python automations</strong>, and
-      <strong class="font-semibold text-gray-900 dark:text-white">end-to-end web apps</strong>
-      that turn business questions into shipped answers.
+    <p class="max-w-2xl mx-auto text-base sm:text-lg text-white/70 [.light_&]:text-ink-600 leading-relaxed mb-9">
+      Data Analyst &amp; Software Engineer building Power&nbsp;BI dashboards, Python automations, and end-to-end Flask apps —
+      from messy CSVs to production deploys.
     </p>
 
-    <!-- Primary + secondary CTAs -->
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
       <a href="#contact"
-         class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand text-white px-6 py-3 rounded-full font-semibold hover:bg-[#2b5a8c] transition-colors duration-200">
+         class="w-full sm:w-auto inline-flex items-center justify-center gap-2
+                bg-white text-ink-900 hover:bg-white/90
+                [.light_&]:bg-ink-900 [.light_&]:text-white [.light_&]:hover:bg-ink-700
+                px-5 py-3 rounded-lg font-semibold text-sm shadow-[0_8px_30px_-8px_rgba(255,255,255,0.4)] transition">
         Book a call
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 5l7 7-7 7"/>
         </svg>
       </a>
       <a href="#projects"
-         class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold
-                text-gray-800 dark:text-white border border-gray-300 dark:border-gray-700
-                hover:border-brand dark:hover:border-brand hover:text-brand dark:hover:text-brand transition-colors duration-200">
+         class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg
+                bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20
+                [.light_&]:bg-ink-900/5 [.light_&]:hover:bg-ink-900/10 [.light_&]:border-ink-900/10
+                font-semibold text-sm transition">
         See case studies
       </a>
     </div>
 
-    <!-- Quick social links -->
-    <div class="mt-8 flex items-center justify-center gap-5 text-gray-500 dark:text-gray-400 text-sm">
-      <a href="https://github.com/ntkrv" target="_blank" rel="noopener" class="hover:text-brand transition-colors">GitHub</a>
-      <span aria-hidden="true">·</span>
-      <a href="https://www.linkedin.com/in/ntokariev/" target="_blank" rel="noopener" class="hover:text-brand transition-colors">LinkedIn</a>
-      <span aria-hidden="true">·</span>
-      <a href="mailto:hello@ntkrv.dev" class="hover:text-brand transition-colors">Email</a>
+    <div class="text-xs text-white/40 [.light_&]:text-ink-500 inline-flex items-center gap-3">
+      <a href="https://github.com/ntkrv" target="_blank" rel="noopener" class="hover:text-white [.light_&]:hover:text-ink-900 transition">GitHub</a>
+      <span class="w-1 h-1 rounded-full bg-white/20 [.light_&]:bg-ink-300"></span>
+      <a href="https://www.linkedin.com/in/ntokariev/" target="_blank" rel="noopener" class="hover:text-white [.light_&]:hover:text-ink-900 transition">LinkedIn</a>
+      <span class="w-1 h-1 rounded-full bg-white/20 [.light_&]:bg-ink-300"></span>
+      <a href="mailto:hello@ntkrv.dev" class="hover:text-white [.light_&]:hover:text-ink-900 transition">hello@ntkrv.dev</a>
     </div>
   </div>
 
-  <!-- ============================ STATS ============================ -->
-  <div class="py-8 border-y border-gray-200 dark:border-gray-800 animate-on-scroll opacity-0 translate-y-6">
-    <dl class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-      <div>
-        <dt class="text-xs sm:text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400">Years in Data</dt>
-        <dd class="mt-1 text-3xl sm:text-4xl font-extrabold text-brand">5+</dd>
-      </div>
-      <div>
-        <dt class="text-xs sm:text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400">Dashboards delivered</dt>
-        <dd class="mt-1 text-3xl sm:text-4xl font-extrabold text-brand">20+</dd>
-      </div>
-      <div>
-        <dt class="text-xs sm:text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400">Avg. reporting time saved</dt>
-        <dd class="mt-1 text-3xl sm:text-4xl font-extrabold text-brand">60%</dd>
-      </div>
-      <div>
-        <dt class="text-xs sm:text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400">Industries served</dt>
-        <dd class="mt-1 text-3xl sm:text-4xl font-extrabold text-brand">3</dd>
-      </div>
+  <div class="hairline max-w-6xl mx-auto"></div>
+</section>
+
+
+<!-- ============================================================
+     STATS
+============================================================ -->
+<section class="relative">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-12">
+    <dl class="grid grid-cols-2 md:grid-cols-4 gap-px rounded-xl overflow-hidden bg-white/5 [.light_&]:bg-ink-900/10 border border-white/10 [.light_&]:border-ink-900/10">
+      {% set stats = [
+        ('5+',  'Years in data'),
+        ('20+', 'Dashboards delivered'),
+        ('60%', 'Avg. reporting time saved'),
+        ('3',   'Industries served'),
+      ] %}
+      {% for value, label in stats %}
+        <div class="bg-ink-900 [.light_&]:bg-white p-6 sm:p-8 text-center">
+          <dd class="text-3xl sm:text-4xl font-extrabold tracking-tight bg-gradient-to-br from-brand-300 to-violet-400 bg-clip-text text-transparent">{{ value }}</dd>
+          <dt class="mt-2 text-[11px] uppercase tracking-widest text-white/50 [.light_&]:text-ink-500">{{ label }}</dt>
+        </div>
+      {% endfor %}
     </dl>
   </div>
+</section>
 
-  <!-- ============================ SERVICES ============================ -->
-  <div id="services" class="py-14 animate-on-scroll opacity-0 translate-y-6">
-    <p class="text-xs uppercase tracking-widest text-brand font-semibold mb-2">What I do</p>
-    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-3">Services I deliver</h2>
-    <p class="text-gray-600 dark:text-gray-400 max-w-2xl mb-10">
-      Pick the outcome — I'll handle the stack, the timeline, and the handover.
-    </p>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      <!-- BI Dashboards -->
-      <div class="group p-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#2c2c2c] hover:border-brand dark:hover:border-brand hover:shadow-md transition-all duration-200">
-        <div class="w-11 h-11 mb-4 rounded-lg bg-brand/10 text-brand flex items-center justify-center">
-          <span class="material-symbols-outlined">bar_chart</span>
-        </div>
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">BI Dashboards</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
-          Power BI / Tableau dashboards built around the questions your team actually asks. From data model to handover.
-        </p>
-        <p class="text-xs text-gray-500 dark:text-gray-500"><span class="font-medium">Typical:</span> 1–3 weeks</p>
-      </div>
-
-      <!-- Python Automation -->
-      <div class="group p-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#2c2c2c] hover:border-brand dark:hover:border-brand hover:shadow-md transition-all duration-200">
-        <div class="w-11 h-11 mb-4 rounded-lg bg-brand/10 text-brand flex items-center justify-center">
-          <span class="material-symbols-outlined">bolt</span>
-        </div>
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Python Automation</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
-          Reports, ETL pipelines, and scheduled scripts that replace recurring manual work — Pandas, APIs, schedulers.
-        </p>
-        <p class="text-xs text-gray-500 dark:text-gray-500"><span class="font-medium">Typical:</span> 3–10 days</p>
-      </div>
-
-      <!-- Web Apps -->
-      <div class="group p-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#2c2c2c] hover:border-brand dark:hover:border-brand hover:shadow-md transition-all duration-200">
-        <div class="w-11 h-11 mb-4 rounded-lg bg-brand/10 text-brand flex items-center justify-center">
-          <span class="material-symbols-outlined">code</span>
-        </div>
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Web Apps</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
-          Flask + Tailwind apps for portfolios, internal admin panels, and lightweight customer-facing tools. Deployed and documented.
-        </p>
-        <p class="text-xs text-gray-500 dark:text-gray-500"><span class="font-medium">Typical:</span> 2–6 weeks</p>
-      </div>
-
-      <!-- Data Pipelines & APIs -->
-      <div class="group p-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#2c2c2c] hover:border-brand dark:hover:border-brand hover:shadow-md transition-all duration-200">
-        <div class="w-11 h-11 mb-4 rounded-lg bg-brand/10 text-brand flex items-center justify-center">
-          <span class="material-symbols-outlined">hub</span>
-        </div>
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Data Pipelines & APIs</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
-          Stitch SQL sources, third-party APIs, and downstream BI together. Dockerised, monitored, version-controlled.
-        </p>
-        <p class="text-xs text-gray-500 dark:text-gray-500"><span class="font-medium">Typical:</span> 1–4 weeks</p>
-      </div>
+<!-- ============================================================
+     SERVICES
+============================================================ -->
+<section id="services" class="relative">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-28">
+    <div class="max-w-2xl mb-12">
+      <span class="eyebrow">What I do</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">
+        Services I deliver,
+        <span class="text-white/60 [.light_&]:text-ink-500">end-to-end.</span>
+      </h2>
+      <p class="mt-4 text-white/60 [.light_&]:text-ink-600 text-base">
+        Pick the outcome — I'll handle the stack, timeline, and handover. No agency overhead.
+      </p>
     </div>
-  </div>
 
-  <!-- ============================ ABOUT ============================ -->
-  <div id="about" class="py-12 animate-on-scroll opacity-0 translate-y-6 max-w-3xl mx-auto">
-    <p class="text-xs uppercase tracking-widest text-brand font-semibold mb-2">About</p>
-    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">Hands-on across the data lifecycle</h2>
-    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-      I'm a Data Analyst who codes. I've worked across <strong>demand planning, logistics, and business reporting</strong> —
-      meaning I've sat with the people who actually use the dashboards, and built the pipelines that feed them.
-      The tools you see on this page aren't a wishlist; they're shipped, supported, and in production.
-    </p>
-    <p class="text-gray-800 dark:text-gray-200 bg-gray-100 dark:bg-gray-800/60 px-4 py-3 rounded-lg text-sm">
-      📄 Want to know more? You can <span class="font-semibold">request my CV</span> through the contact form below — or reach out directly if you have a collaboration or business proposal.
-    </p>
-  </div>
-
-  <!-- ============================ SKILLS (grouped) ============================ -->
-  <div class="py-12 animate-on-scroll opacity-0 translate-y-6">
-    <p class="text-xs uppercase tracking-widest text-brand font-semibold mb-2">Stack</p>
-    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-8">Skills, grouped by what they do</h2>
-
-    {% set skill_groups = [
-      ("Data & Analytics", ["Python", "SQL", "PostgreSQL", "Pandas", "NumPy", "Statistics"]),
-      ("BI & Visualization", ["Power BI", "Tableau", "Excel", "Data Visualization"]),
-      ("Engineering & Ops", ["Flask", "Docker", "CI/CD", "APIs", "Cloud Services", "Front-end"]),
+    {% set services = [
+      ('bar_chart',     'BI Dashboards',         'Power BI / Tableau dashboards built around the questions your team actually asks. From data model to handover.', '1–3 weeks'),
+      ('bolt',          'Python Automation',     'Reports, ETL pipelines, and scheduled scripts that replace recurring manual work. Pandas, APIs, schedulers.', '3–10 days'),
+      ('code',          'Flask Web Apps',        'Internal tools, admin panels, and customer-facing apps with Flask + Tailwind. Deployed and documented.', '2–6 weeks'),
+      ('hub',           'Data Pipelines & APIs', 'Stitch SQL sources, third-party APIs, and downstream BI together. Dockerised, monitored, version-controlled.', '1–4 weeks'),
     ] %}
 
-    <div class="space-y-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {% for icon, title, desc, timeline in services %}
+        <div class="card-surface rounded-xl p-6 group">
+          <div class="w-10 h-10 mb-5 rounded-lg grid place-items-center bg-brand-500/15 text-brand-300 [.light_&]:bg-brand-500/10 [.light_&]:text-brand-600">
+            <span class="material-symbols-outlined">{{ icon }}</span>
+          </div>
+          <h3 class="text-base font-semibold mb-2">{{ title }}</h3>
+          <p class="text-sm text-white/60 [.light_&]:text-ink-600 leading-relaxed mb-4">{{ desc }}</p>
+          <div class="flex items-center gap-2 text-xs text-white/40 [.light_&]:text-ink-500">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            Typical: {{ timeline }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     ABOUT
+============================================================ -->
+<section id="about" class="relative">
+  <div class="max-w-3xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
+    <span class="eyebrow">About</span>
+    <h2 class="mt-3 text-3xl sm:text-4xl font-bold tracking-tight mb-6">
+      Hands-on across the data lifecycle.
+    </h2>
+    <p class="text-white/70 [.light_&]:text-ink-700 text-base sm:text-lg leading-relaxed mb-5">
+      I'm a Data Analyst who codes. I've worked across <strong class="text-white [.light_&]:text-ink-900">demand planning, logistics, and business reporting</strong> —
+      meaning I've sat with the people who actually use the dashboards, and built the pipelines that feed them.
+    </p>
+    <p class="text-white/70 [.light_&]:text-ink-700 text-base leading-relaxed mb-8">
+      The tools you see on this page aren't a wishlist. They're shipped, supported, and in production.
+    </p>
+    <div class="rounded-lg border border-white/10 [.light_&]:border-ink-900/10 bg-white/5 [.light_&]:bg-ink-900/5 px-4 py-3 text-sm text-white/70 [.light_&]:text-ink-700">
+      📄&nbsp;&nbsp;Want to know more? You can <span class="font-semibold text-white [.light_&]:text-ink-900">request my CV</span> through the contact form below — or reach out directly if you have a collaboration or business proposal.
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SKILLS
+============================================================ -->
+<section class="relative">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
+    <div class="max-w-2xl mb-10">
+      <span class="eyebrow">Stack</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">Skills, grouped by what they do.</h2>
+    </div>
+
+    {% set skill_groups = [
+      ('Data & Analytics',    ['Python', 'SQL', 'PostgreSQL', 'Pandas', 'NumPy', 'Statistics']),
+      ('BI & Visualization',  ['Power BI', 'Tableau', 'Excel', 'Data Visualization']),
+      ('Engineering & Ops',   ['Flask', 'Docker', 'CI/CD', 'APIs', 'Cloud Services', 'Front-end']),
+    ] %}
+
+    <div class="grid md:grid-cols-3 gap-6">
       {% for group_name, skills in skill_groups %}
-        <div>
-          <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3 uppercase tracking-wider">{{ group_name }}</h3>
+        <div class="card-surface rounded-xl p-5">
+          <h3 class="text-[11px] uppercase tracking-widest text-white/50 [.light_&]:text-ink-500 font-semibold mb-4">{{ group_name }}</h3>
           <div class="flex flex-wrap gap-2">
             {% for skill in skills %}
-              {% set is_primary = loop.index <= 2 %}
-              <span class="text-sm px-3 py-1 rounded-full transition-colors
-                          {% if is_primary %}
-                            bg-brand text-white
+              {% set primary = loop.index <= 2 %}
+              <span class="text-xs px-2.5 py-1 rounded-md font-medium
+                          {% if primary %}
+                            bg-brand-500/15 text-brand-200 border border-brand-500/30
+                            [.light_&]:bg-brand-500/10 [.light_&]:text-brand-700 [.light_&]:border-brand-500/20
                           {% else %}
-                            bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300
+                            bg-white/5 text-white/70 border border-white/10
+                            [.light_&]:bg-ink-900/5 [.light_&]:text-ink-700 [.light_&]:border-ink-900/10
                           {% endif %}">
                 {{ skill }}
               </span>
@@ -184,180 +187,186 @@
         </div>
       {% endfor %}
     </div>
-  </div>
 
-  <!-- ============================ TECH ICONS ============================ -->
-  <div class="py-10 animate-on-scroll opacity-0 translate-y-6">
-    <p class="text-xs uppercase tracking-widest text-brand font-semibold mb-2 text-center">Day-to-day tools</p>
-    <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 max-w-4xl mx-auto opacity-90">
-      {% for icon in ["python.svg", "js.svg", "html.svg", "css.svg", "sql.svg", "postgresql.svg", "git.svg", "docker.svg", "powerbi.svg", "tableau.svg", "excel.svg"] %}
-        <div class="grayscale hover:grayscale-0 transition duration-200">
+    <!-- Day-to-day tools row -->
+    <div class="mt-12">
+      <p class="text-center text-[11px] uppercase tracking-widest text-white/40 [.light_&]:text-ink-500 mb-6">Day-to-day tools</p>
+      <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 opacity-90">
+        {% for icon in ["python.svg", "js.svg", "html.svg", "css.svg", "sql.svg", "postgresql.svg", "git.svg", "docker.svg", "powerbi.svg", "tableau.svg", "excel.svg"] %}
           <img src="{{ url_for('static', filename='icons/' ~ icon) }}"
                alt="{{ icon | replace('.svg', '') }}"
-               class="icon" loading="lazy" />
-        </div>
-      {% endfor %}
+               class="icon grayscale hover:grayscale-0 transition" loading="lazy" />
+        {% endfor %}
+      </div>
     </div>
   </div>
+</section>
 
-  <!-- ============================ PROJECTS / CASE STUDIES ============================ -->
-  <div id="projects" class="py-14 animate-on-scroll opacity-0 translate-y-6">
-    <div class="flex items-end justify-between mb-8 flex-wrap gap-3">
-      <div>
-        <p class="text-xs uppercase tracking-widest text-brand font-semibold mb-2">Selected work</p>
-        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Case studies</h2>
+
+<!-- ============================================================
+     PROJECTS / CASE STUDIES
+============================================================ -->
+<section id="projects" class="relative">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
+    <div class="flex items-end justify-between gap-4 mb-10 flex-wrap">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Selected work</span>
+        <h2 class="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">Case studies.</h2>
       </div>
       <a href="{{ url_for('projects.projects') }}"
-         class="text-sm font-semibold text-brand hover:underline">View all →</a>
+         class="text-sm font-semibold text-brand-300 [.light_&]:text-brand-700 hover:text-white [.light_&]:hover:text-ink-900 transition inline-flex items-center gap-1.5">
+        View all
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </a>
     </div>
 
     {% if projects %}
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {% for project in projects %}
           <a href="{{ url_for('projects.project_detail', slug=project.slug) }}"
-             class="group block bg-white dark:bg-[#2c2c2c] rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-brand dark:hover:border-brand hover:shadow-lg transition-all duration-300">
+             class="card-surface rounded-xl overflow-hidden group block">
             {% if project.image_path %}
-              <div class="aspect-video w-full overflow-hidden">
-                <img src="{{ project.image_path }}"
-                     alt="{{ project.title }}" loading="lazy"
-                     class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+              <div class="aspect-video w-full overflow-hidden bg-white/5 [.light_&]:bg-ink-900/5">
+                <img src="{{ project.image_path }}" alt="{{ project.title }}" loading="lazy"
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
               </div>
             {% endif %}
             <div class="p-5">
               {% if project.stack %}
                 <div class="flex flex-wrap gap-1.5 mb-3">
                   {% for tech in project.stack.split(',')[:4] %}
-                    <span class="text-[11px] uppercase tracking-wide font-medium px-2 py-0.5 rounded
-                                bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+                    <span class="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded
+                                bg-white/5 text-white/60 border border-white/10
+                                [.light_&]:bg-ink-900/5 [.light_&]:text-ink-600 [.light_&]:border-ink-900/10">
                       {{ tech.strip() }}
                     </span>
                   {% endfor %}
                 </div>
               {% endif %}
-              <h3 class="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-brand transition-colors mb-1.5">
-                {{ project.title }}
-              </h3>
-              <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-3">
-                {{ project.short_description or "TBA" }}
-              </p>
-              <p class="mt-4 text-sm font-semibold text-brand inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+              <h3 class="text-lg font-semibold mb-1.5 group-hover:text-brand-300 [.light_&]:group-hover:text-brand-700 transition">{{ project.title }}</h3>
+              <p class="text-sm text-white/60 [.light_&]:text-ink-600 leading-relaxed">{{ project.short_description or "TBA" }}</p>
+              <div class="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-brand-300 [.light_&]:text-brand-700 group-hover:gap-2 transition-all">
                 Read case study
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-                </svg>
-              </p>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+              </div>
             </div>
           </a>
         {% endfor %}
       </div>
     {% else %}
-      <div class="text-center py-12 border border-dashed border-gray-300 dark:border-gray-700 rounded-2xl">
-        <p class="text-gray-500 dark:text-gray-400">Case studies coming soon — drop me a note if you'd like specifics on a past engagement.</p>
+      <div class="card-surface rounded-xl py-14 text-center">
+        <p class="text-sm text-white/60 [.light_&]:text-ink-600">Case studies coming soon — drop me a note if you'd like specifics on a past engagement.</p>
       </div>
     {% endif %}
   </div>
+</section>
 
-  <!-- ============================ TESTIMONIALS ============================ -->
-  <div class="py-14 animate-on-scroll opacity-0 translate-y-6">
-    <p class="text-xs uppercase tracking-widest text-brand font-semibold mb-2">Words from people I've worked with</p>
-    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-10">Testimonials</h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-      <figure class="p-6 rounded-2xl bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-700">
-        <svg class="w-7 h-7 text-brand/40 mb-3" fill="currentColor" viewBox="0 0 24 24"><path d="M9 7H5a2 2 0 00-2 2v4a2 2 0 002 2h2v2a2 2 0 01-2 2H4v2h1a4 4 0 004-4V7zm10 0h-4a2 2 0 00-2 2v4a2 2 0 002 2h2v2a2 2 0 01-2 2h-1v2h1a4 4 0 004-4V7z"/></svg>
-        <blockquote class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-          “Nicolas rebuilt our weekly demand-planning report end-to-end. What used to take a full Monday now lands in the inbox at 7am, fully refreshed. No drama, no follow-ups.”
-        </blockquote>
-        <figcaption class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-xs font-semibold text-gray-600 dark:text-gray-300">EM</div>
-          <div>
-            <div class="text-sm font-semibold text-gray-900 dark:text-white">Elena M.</div>
-            <div class="text-xs text-gray-500 dark:text-gray-400">Demand Planning Lead</div>
-          </div>
-        </figcaption>
-      </figure>
-
-      <figure class="p-6 rounded-2xl bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-700">
-        <svg class="w-7 h-7 text-brand/40 mb-3" fill="currentColor" viewBox="0 0 24 24"><path d="M9 7H5a2 2 0 00-2 2v4a2 2 0 002 2h2v2a2 2 0 01-2 2H4v2h1a4 4 0 004-4V7zm10 0h-4a2 2 0 00-2 2v4a2 2 0 002 2h2v2a2 2 0 01-2 2h-1v2h1a4 4 0 004-4V7z"/></svg>
-        <blockquote class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-          “Pragmatic, fast, and actually delivers. Brought clarity to our logistics KPIs and a Power BI workspace the whole team uses daily.”
-        </blockquote>
-        <figcaption class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-xs font-semibold text-gray-600 dark:text-gray-300">DK</div>
-          <div>
-            <div class="text-sm font-semibold text-gray-900 dark:text-white">Dmytro K.</div>
-            <div class="text-xs text-gray-500 dark:text-gray-400">Operations Manager</div>
-          </div>
-        </figcaption>
-      </figure>
-
-      <figure class="p-6 rounded-2xl bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-700">
-        <svg class="w-7 h-7 text-brand/40 mb-3" fill="currentColor" viewBox="0 0 24 24"><path d="M9 7H5a2 2 0 00-2 2v4a2 2 0 002 2h2v2a2 2 0 01-2 2H4v2h1a4 4 0 004-4V7zm10 0h-4a2 2 0 00-2 2v4a2 2 0 002 2h2v2a2 2 0 01-2 2h-1v2h1a4 4 0 004-4V7z"/></svg>
-        <blockquote class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-          “Code I can read months later. Documentation I can share with juniors. That's the bar he sets — and it shows.”
-        </blockquote>
-        <figcaption class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-xs font-semibold text-gray-600 dark:text-gray-300">AS</div>
-          <div>
-            <div class="text-sm font-semibold text-gray-900 dark:text-white">Andrii S.</div>
-            <div class="text-xs text-gray-500 dark:text-gray-400">Senior Software Engineer</div>
-          </div>
-        </figcaption>
-      </figure>
+<!-- ============================================================
+     TESTIMONIALS
+============================================================ -->
+<section class="relative">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
+    <div class="max-w-2xl mb-12">
+      <span class="eyebrow">Words from collaborators</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">What people say.</h2>
     </div>
-    <p class="text-[11px] text-gray-400 dark:text-gray-600 mt-4 italic">
+
+    {% set testimonials = [
+      ('Nicolas rebuilt our weekly demand-planning report end-to-end. What used to take a full Monday now lands in the inbox at 7am, fully refreshed. No drama, no follow-ups.', 'Elena M.', 'Demand Planning Lead', 'EM'),
+      ('Pragmatic, fast, and actually delivers. Brought clarity to our logistics KPIs and a Power BI workspace the whole team uses daily.', 'Dmytro K.', 'Operations Manager', 'DK'),
+      ('Code I can read months later. Documentation I can share with juniors. That\'s the bar he sets — and it shows.', 'Andrii S.', 'Senior Software Engineer', 'AS'),
+    ] %}
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {% for quote, name, role, initials in testimonials %}
+        <figure class="card-surface rounded-xl p-6 flex flex-col">
+          <span class="material-symbols-outlined text-brand-400/40 [.light_&]:text-brand-500/50 mb-3 text-2xl">format_quote</span>
+          <blockquote class="text-sm text-white/80 [.light_&]:text-ink-700 leading-relaxed flex-grow">"{{ quote }}"</blockquote>
+          <figcaption class="mt-5 pt-5 border-t border-white/5 [.light_&]:border-ink-900/10 flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-400 to-violet-500 grid place-items-center text-[11px] font-bold text-white">{{ initials }}</div>
+            <div class="text-xs leading-snug">
+              <div class="font-semibold">{{ name }}</div>
+              <div class="text-white/50 [.light_&]:text-ink-500">{{ role }}</div>
+            </div>
+          </figcaption>
+        </figure>
+      {% endfor %}
+    </div>
+    <p class="text-[11px] text-white/30 [.light_&]:text-ink-500 italic mt-5">
       Initials and titles preserved per privacy. Full references available on request.
     </p>
   </div>
+</section>
 
-  <!-- ============================ CONTACT ============================ -->
-  <div id="contact" class="pb-16 pt-10 animate-on-scroll opacity-0 translate-y-6">
-    <div class="max-w-3xl mx-auto">
-      <p class="text-xs uppercase tracking-widest text-brand font-semibold mb-2">Get in touch</p>
-      <div class="flex items-end justify-between flex-wrap gap-3 mb-2">
-        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Tell me about your project</h2>
-        <span class="text-xs text-gray-500 dark:text-gray-400 inline-flex items-center gap-1.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-          Replies within 24h
-        </span>
+
+<!-- ============================================================
+     CONTACT
+============================================================ -->
+<section id="contact" class="relative">
+  <div class="max-w-3xl mx-auto px-5 sm:px-8 py-20 sm:py-28">
+    <div class="card-surface rounded-2xl p-7 sm:p-10 relative overflow-hidden">
+      <!-- soft inner glow -->
+      <div aria-hidden="true" class="glow-blob glow-blob-blue w-72 h-72 -top-20 -right-20 opacity-30"></div>
+
+      <div class="relative">
+        <span class="eyebrow">Get in touch</span>
+        <div class="mt-3 flex items-end justify-between gap-4 flex-wrap mb-2">
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Tell me about your project.</h2>
+          <span class="inline-flex items-center gap-1.5 text-xs text-white/60 [.light_&]:text-ink-500">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            Replies within 24h
+          </span>
+        </div>
+        <p class="text-sm text-white/60 [.light_&]:text-ink-600 mb-7">
+          Dashboards, automations, web apps, or just a sanity check — drop a line and I'll get back fast.
+        </p>
+
+        <form method="POST" action="{{ url_for('contact.contact') }}" class="space-y-4">
+          {{ form.hidden_tag() }}
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block mb-1.5 text-xs font-semibold text-white/70 [.light_&]:text-ink-700 uppercase tracking-wider">Name</label>
+              <input type="text" name="name" required placeholder="Your name"
+                     class="w-full rounded-lg px-3.5 py-2.5 text-sm
+                            bg-white/[0.03] border border-white/10 text-white placeholder-white/30
+                            [.light_&]:bg-ink-900/[0.03] [.light_&]:border-ink-900/10 [.light_&]:text-ink-900 [.light_&]:placeholder-ink-500
+                            focus:outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-500/20 transition" />
+            </div>
+            <div>
+              <label class="block mb-1.5 text-xs font-semibold text-white/70 [.light_&]:text-ink-700 uppercase tracking-wider">Email</label>
+              <input type="email" name="email" required placeholder="you@company.com"
+                     class="w-full rounded-lg px-3.5 py-2.5 text-sm
+                            bg-white/[0.03] border border-white/10 text-white placeholder-white/30
+                            [.light_&]:bg-ink-900/[0.03] [.light_&]:border-ink-900/10 [.light_&]:text-ink-900 [.light_&]:placeholder-ink-500
+                            focus:outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-500/20 transition" />
+            </div>
+          </div>
+          <div>
+            <label class="block mb-1.5 text-xs font-semibold text-white/70 [.light_&]:text-ink-700 uppercase tracking-wider">Message</label>
+            <textarea name="message" required rows="5" placeholder="What are you trying to solve? Rough timeline & budget if you have them."
+                      class="w-full rounded-lg px-3.5 py-2.5 text-sm
+                             bg-white/[0.03] border border-white/10 text-white placeholder-white/30
+                             [.light_&]:bg-ink-900/[0.03] [.light_&]:border-ink-900/10 [.light_&]:text-ink-900 [.light_&]:placeholder-ink-500
+                             focus:outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-500/20 transition"></textarea>
+          </div>
+          <div class="flex items-center justify-between gap-3 flex-wrap pt-2">
+            <p class="text-xs text-white/50 [.light_&]:text-ink-500">
+              Prefer email?&nbsp;
+              <a href="mailto:hello@ntkrv.dev" class="text-brand-300 [.light_&]:text-brand-700 hover:underline">hello@ntkrv.dev</a>
+            </p>
+            <button type="submit"
+                    class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg
+                           bg-white text-ink-900 hover:bg-white/90 [.light_&]:bg-ink-900 [.light_&]:text-white [.light_&]:hover:bg-ink-700
+                           text-sm font-semibold transition shadow-[0_8px_30px_-8px_rgba(255,255,255,0.4)]">
+              Send message
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </form>
       </div>
-      <p class="text-gray-600 dark:text-gray-400 text-sm mb-8">
-        Dashboards, automations, web apps, or just a sanity check — drop a line and I'll get back fast.
-      </p>
-
-      <form method="POST" action="{{ url_for('contact.contact') }}" class="space-y-5">
-        {{ form.hidden_tag() }}
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <div>
-            <label class="block mb-1.5 text-sm font-medium text-gray-700 dark:text-gray-200">Name</label>
-            <input type="text" name="name" required placeholder="Your name"
-                   class="w-full rounded-lg p-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent" />
-          </div>
-          <div>
-            <label class="block mb-1.5 text-sm font-medium text-gray-700 dark:text-gray-200">Email</label>
-            <input type="email" name="email" required placeholder="you@company.com"
-                   class="w-full rounded-lg p-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent" />
-          </div>
-        </div>
-        <div>
-          <label class="block mb-1.5 text-sm font-medium text-gray-700 dark:text-gray-200">Message</label>
-          <textarea name="message" required rows="5" placeholder="What are you trying to solve? Rough timeline & budget if you have them."
-                    class="w-full rounded-lg p-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent"></textarea>
-        </div>
-        <div class="flex items-center justify-between flex-wrap gap-3">
-          <p class="text-xs text-gray-500 dark:text-gray-400">
-            Prefer email? <a href="mailto:hello@ntkrv.dev" class="text-brand hover:underline">hello@ntkrv.dev</a>
-          </p>
-          <button type="submit"
-                  class="inline-flex items-center justify-center gap-2 bg-brand text-white px-6 py-3 rounded-full font-semibold hover:bg-[#2b5a8c] transition-colors duration-200">
-            Send message
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-            </svg>
-          </button>
-        </div>
-      </form>
     </div>
   </div>
 </section>
+
 {% endblock %}

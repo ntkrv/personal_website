@@ -2,10 +2,121 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { font-feature-settings: "ss01", "cv11"; }
+}
 
+@layer utilities {
+  /* Brand-tinted gradient text */
+  .text-gradient {
+    background: linear-gradient(120deg, #93c5fd 0%, #60a5fa 50%, #a78bfa 100%);
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+            color: transparent;
+  }
+
+  /* Subtle dot grid for hero / section backgrounds */
+  .bg-dot-grid {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  :is(.light) .bg-dot-grid {
+    background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+  }
+
+  /* Radial mask used to fade dot grid towards edges */
+  .mask-radial-fade {
+    -webkit-mask-image: radial-gradient(ellipse at center, black 35%, transparent 75%);
+            mask-image: radial-gradient(ellipse at center, black 35%, transparent 75%);
+  }
+
+  /* Soft glow blob — drop two of these in a section to get the SaaS hero feel */
+  .glow-blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .glow-blob-blue   { background: radial-gradient(circle at center, #3b82f6, transparent 60%); }
+  .glow-blob-violet { background: radial-gradient(circle at center, #8b5cf6, transparent 60%); }
+  .glow-blob-cyan   { background: radial-gradient(circle at center, #22d3ee, transparent 60%); }
+
+  /* Card with hover halo */
+  .card-surface {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .card-surface:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(96, 165, 250, 0.4);
+    box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.15), 0 30px 60px -30px rgba(59, 130, 246, 0.4);
+  }
+  :is(.light) .card-surface {
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.08);
+  }
+  :is(.light) .card-surface:hover {
+    background: #ffffff;
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.12), 0 20px 40px -20px rgba(15, 23, 42, 0.18);
+  }
+
+  /* Thin gradient hairline above sections / under hero */
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+  }
+  :is(.light) .hairline {
+    background: linear-gradient(90deg, transparent, rgba(15, 23, 42, 0.15), transparent);
+  }
+
+  /* Eyebrow used above section titles */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(147, 197, 253, 0.85);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 1.25rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.7));
+  }
+  :is(.light) .eyebrow { color: #2563eb; }
+  :is(.light) .eyebrow::before { background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.6)); }
+}
+
+/* Tech-icons row — keep crisp at intrinsic size */
 .icon {
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
   object-fit: contain;
   display: block;
 }
+
+/* Custom scrollbar — subtle on dark */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.16); background-clip: padding-box; }
+  :is(.light) ::-webkit-scrollbar-thumb { background: rgba(15, 23, 42, 0.15); background-clip: padding-box; }
+}
+
+/* Selection */
+::selection { background: rgba(59, 130, 246, 0.4); color: white; }
