@@ -3,7 +3,12 @@
 @tailwind utilities;
 
 @layer base {
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    /* Offset for the sticky header (~56px tall) so anchor links
+       like /#contact don't land hidden underneath it. */
+    scroll-padding-top: 5rem;
+  }
   body { font-feature-settings: "ss01", "cv11"; }
 
   /* Lock the page background to the active theme so the body
