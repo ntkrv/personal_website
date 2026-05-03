@@ -64,7 +64,10 @@ def _register_extensions(app) -> None:
     login_manager.init_app(app)
     limiter.init_app(app)
 
-    force_https = app.config.get("ENV") == "production"
+    force_https = (
+        os.getenv("FLASK_ENV", "").lower() == "production"
+        and not app.config.get("TESTING")
+    )
     talisman.init_app(
         app,
         content_security_policy=CSP,
