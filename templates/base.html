@@ -53,7 +53,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v={{ asset_version or '7' }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v={{ asset_version or '8' }}" />
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -107,7 +107,7 @@
           Certificates
         </a>
         <a href="{{ url_for('main.index') }}#contact"
-           class="inline-flex items-center bg-white text-ink-900 hover:bg-white/90 [.light_&]:bg-ink-900 [.light_&]:text-white [.light_&]:hover:bg-ink-700 px-3.5 py-1.5 rounded-md text-sm font-semibold transition">
+           class="cta-hover-gradient inline-flex items-center bg-white text-ink-900 [.light_&]:bg-ink-900 [.light_&]:text-white px-3.5 py-1.5 rounded-md text-sm font-semibold">
           Hire me
         </a>
       </nav>
