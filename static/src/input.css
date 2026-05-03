@@ -135,6 +135,95 @@
   display: block;
 }
 
+/* ----------------------------------------------------------------
+   Animated extras: tilt cards, marquee, magnetic CTAs, gradient
+   border. JS hooks live in scroll_animation.js / interactions.js.
+---------------------------------------------------------------- */
+
+/* Cards with subtle 3D tilt on cursor — JS sets --rx/--ry vars. */
+.tilt {
+  transform-style: preserve-3d;
+  transform: perspective(900px)
+             rotateX(var(--rx, 0deg))
+             rotateY(var(--ry, 0deg))
+             translateZ(0);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.tilt > * { transform: translateZ(0); }
+
+/* Marquee: seamless infinite scroll. Mark up two copies of the
+   children inside .marquee-track for a perfect loop. */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+          mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 40s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Magnetic CTA — JS sets --mx/--my translations in px. */
+.magnetic {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.magnetic.is-pulled {
+  transform: translate(var(--mx, 0), var(--my, 0));
+}
+
+/* Animated conic-gradient border — wraps a target with a pseudo
+   element that slowly rotates. Apply to a positioned container. */
+.gradient-border {
+  position: relative;
+  isolation: isolate;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--angle, 0deg),
+    rgba(96, 165, 250, 0.0)   0deg,
+    rgba(147, 197, 253, 0.85) 90deg,
+    rgba(167, 139, 250, 0.85) 180deg,
+    rgba(96, 165, 250, 0.0)   270deg,
+    rgba(96, 165, 250, 0.0)   360deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  animation: gradient-border-spin 8s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes gradient-border-spin {
+  to { --angle: 360deg; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .gradient-border::before { animation: none; }
+  .tilt,
+  .magnetic { transition: none; }
+}
+
 /* Custom scrollbar — subtle on dark */
 @media (min-width: 768px) {
   ::-webkit-scrollbar { width: 10px; height: 10px; }

@@ -23,7 +23,7 @@
     {% if projects %}
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {% for project in projects %}
-          <article class="card-surface rounded-xl overflow-hidden group flex flex-col">
+          <article class="tilt card-surface rounded-xl overflow-hidden group flex flex-col">
             {% if project.image_path %}
               <a href="{{ url_for('projects.project_detail', slug=project.slug) }}" class="block aspect-video overflow-hidden bg-white/5 [.light_&]:bg-ink-900/5">
                 <img src="{{ project.image_path }}" alt="{{ project.title }}" loading="lazy"

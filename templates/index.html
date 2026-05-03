@@ -20,7 +20,7 @@
 
     <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
       <a href="#contact"
-         class="cta-hover-gradient w-full sm:w-auto inline-flex items-center justify-center gap-2
+         class="magnetic cta-hover-gradient w-full sm:w-auto inline-flex items-center justify-center gap-2
                 bg-white text-ink-900
                 [.light_&]:bg-ink-900 [.light_&]:text-white
                 px-5 py-3 rounded-lg font-semibold text-sm shadow-[0_8px_30px_-8px_rgba(255,255,255,0.4)]">
@@ -30,7 +30,7 @@
         </svg>
       </a>
       <a href="#projects"
-         class="cta-hover-gradient w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg
+         class="magnetic cta-hover-gradient w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg
                 bg-white/5 border border-white/10 text-white
                 [.light_&]:bg-ink-900/5 [.light_&]:border-ink-900/10 [.light_&]:text-ink-900
                 font-semibold text-sm">
@@ -78,7 +78,7 @@
       <span class="eyebrow">What I do</span>
       <h2 class="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">
         Services I deliver,
-        <span class="text-white/60 [.light_&]:text-ink-500">end-to-end.</span>
+        <span class="text-gradient">end-to-end</span>.
       </h2>
       <p class="mt-4 text-white/60 [.light_&]:text-ink-600 text-base">
         Pick the outcome — I'll handle the stack, timeline, and handover. No agency overhead.
@@ -94,7 +94,7 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {% for icon, title, desc, timeline in services %}
-        <div class="card-surface rounded-xl p-6 group">
+        <div class="tilt card-surface rounded-xl p-6 group">
           <div class="w-10 h-10 mb-5 rounded-lg grid place-items-center bg-brand-500/15 text-brand-300 [.light_&]:bg-brand-500/10 [.light_&]:text-brand-600">
             <span class="material-symbols-outlined">{{ icon }}</span>
           </div>
@@ -173,15 +173,23 @@
       {% endfor %}
     </div>
 
-    <!-- Day-to-day tools row -->
+    <!-- Day-to-day tools — infinite marquee -->
     <div class="mt-12">
       <p class="text-center text-[11px] uppercase tracking-widest text-white/40 [.light_&]:text-ink-500 mb-6">Day-to-day tools</p>
-      <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 opacity-90">
-        {% for icon in ["python.svg", "js.svg", "html.svg", "css.svg", "sql.svg", "postgresql.svg", "git.svg", "docker.svg", "powerbi.svg", "tableau.svg", "excel.svg"] %}
-          <img src="{{ url_for('static', filename='icons/' ~ icon) }}"
-               alt="{{ icon | replace('.svg', '') }}"
-               class="icon grayscale hover:grayscale-0 transition" loading="lazy" />
-        {% endfor %}
+      {% set tool_icons = ["python.svg", "js.svg", "html.svg", "css.svg", "sql.svg", "postgresql.svg", "git.svg", "docker.svg", "powerbi.svg", "tableau.svg", "excel.svg"] %}
+      <div class="marquee opacity-90">
+        <div class="marquee-track">
+          {# Two identical copies for a seamless -50% loop. #}
+          {% for _ in range(2) %}
+            <div class="flex items-center gap-x-10 px-5 shrink-0" aria-hidden="{{ 'true' if loop.index > 1 else 'false' }}">
+              {% for icon in tool_icons %}
+                <img src="{{ url_for('static', filename='icons/' ~ icon) }}"
+                     alt="{{ icon | replace('.svg', '') }}"
+                     class="icon grayscale hover:grayscale-0 transition" loading="lazy" />
+              {% endfor %}
+            </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
@@ -209,7 +217,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {% for project in projects %}
           <a href="{{ url_for('projects.project_detail', slug=project.slug) }}"
-             class="card-surface rounded-xl overflow-hidden group block">
+             class="tilt card-surface rounded-xl overflow-hidden group block">
             {% if project.image_path %}
               <div class="aspect-video w-full overflow-hidden bg-white/5 [.light_&]:bg-ink-900/5">
                 <img src="{{ project.image_path }}" alt="{{ project.title }}" loading="lazy"
@@ -290,7 +298,7 @@
 ============================================================ -->
 <section id="contact" class="relative">
   <div class="max-w-3xl mx-auto px-5 sm:px-8 py-20 sm:py-28">
-    <div class="card-surface rounded-2xl p-7 sm:p-10 relative overflow-hidden">
+    <div class="gradient-border card-surface rounded-2xl p-7 sm:p-10 relative overflow-hidden">
       <!-- soft inner glow -->
       <div aria-hidden="true" class="glow-blob glow-blob-blue w-72 h-72 -top-20 -right-20 opacity-30"></div>
 
@@ -341,7 +349,7 @@
               <a href="mailto:contact@ntkrv.dev" class="text-brand-300 [.light_&]:text-brand-700 hover:underline">contact@ntkrv.dev</a>
             </p>
             <button type="submit"
-                    class="cta-hover-gradient inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg
+                    class="magnetic cta-hover-gradient inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg
                            bg-white text-ink-900 [.light_&]:bg-ink-900 [.light_&]:text-white
                            text-sm font-semibold shadow-[0_8px_30px_-8px_rgba(255,255,255,0.4)]">
               Send message
