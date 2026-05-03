@@ -49,16 +49,16 @@
 ============================================================ -->
 <section class="relative">
   <div class="max-w-6xl mx-auto px-5 sm:px-8 py-12">
-    <dl class="grid grid-cols-2 md:grid-cols-4 gap-px rounded-xl overflow-hidden bg-white/5 [.light_&]:bg-ink-900/10 border border-white/10 [.light_&]:border-ink-900/10">
-      {% set stats = [
-        (years_in_data, '+', 'Years in data'),
-        (100,           '+', 'Dashboards delivered'),
-        (60,            '%', 'Avg. reporting time saved'),
-        (3,             '',  'Industries served'),
-      ] %}
+    {% set stats = [
+      (years_in_data, '+', 'Years in data'),
+      (100,           '+', 'Dashboards delivered'),
+      (60,            '%', 'Avg. reporting time saved'),
+      (3,             '',  'Industries served'),
+    ] %}
+    <dl class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
       {% for value, suffix, label in stats %}
-        <div class="bg-ink-900 [.light_&]:bg-white p-6 sm:p-8 text-center">
-          <dd class="text-3xl sm:text-4xl font-extrabold tracking-tight bg-gradient-to-br from-brand-300 to-violet-400 bg-clip-text text-transparent"
+        <div class="tilt card-surface rounded-xl p-6 sm:p-7 text-center">
+          <dd class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gradient"
               data-stat-end="{{ value }}"
               data-stat-suffix="{{ suffix }}">{{ value }}{{ suffix }}</dd>
           <dt class="mt-2 text-[11px] uppercase tracking-widest text-white/50 [.light_&]:text-ink-500">{{ label }}</dt>
