@@ -170,15 +170,6 @@
   to   { transform: translateX(-50%); }
 }
 
-/* Magnetic CTA — JS sets --mx/--my translations in px. */
-.magnetic {
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
-}
-.magnetic.is-pulled {
-  transform: translate(var(--mx, 0), var(--my, 0));
-}
-
 /* Animated conic-gradient border — wraps a target with a pseudo
    element that slowly rotates. Apply to a positioned container. */
 .gradient-border {
@@ -220,8 +211,7 @@
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
   .gradient-border::before { animation: none; }
-  .tilt,
-  .magnetic { transition: none; }
+  .tilt { transition: none; }
 }
 
 /* Custom scrollbar — subtle on dark */
