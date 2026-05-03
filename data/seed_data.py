@@ -1,43 +1,134 @@
-"""Seed data for `flask seed` command."""
+"""Seed data for `flask seed` command.
+
+Case studies are anonymized — they describe real engagements with
+identifying details stripped. The long_description format is:
+
+    **Section heading.**
+
+    Body paragraph...
+
+The `case_format` Jinja filter (registered in app.py) splits on
+blank lines and turns the leading `**bold.**` of each paragraph
+into a section eyebrow + heading.
+"""
 
 PROJECTS = [
     {
-        "title": "My Personal Website Portfolio",
-        "short_description": "Portfolio website built with Flask and Tailwind CSS to showcase projects and skills.",
-        "long_description": (
-            "This is my personal portfolio website designed to present my skills, experience, and projects in a professional way. "
-            "The website is built using Flask for the backend and Tailwind CSS + JavaScript for interactivity. "
-            "It features an admin panel for dynamic content management and incorporates DevOps automation to simplify deployment, updates, and monitoring."
+        "title": "Weekly demand-planning report, on autopilot",
+        "short_description": (
+            "8h → 0h every Monday. Refreshed Power BI report that lands in the "
+            "planner's inbox at 7am, before the kettle's even boiled."
         ),
-        "image_path": "https://images.unsplash.com/photo-1621839673705-6617adf9e890?q=80",
-        "stack": "Flask, HTML, Tailwind CSS, JavaScript, DevOps, SQLite, Git",
+        "long_description": (
+            "**Problem.** Every Monday a demand planner spent 6–8 hours "
+            "rebuilding the same weekly outlook by hand: pulling four ERP "
+            "exports, reconciling them against supplier shipment sheets, "
+            "fixing column drift, and re-templating slides. Mistakes were "
+            "easy to miss and the report was always late by lunch.\n\n"
+            "**Action.** I replaced the manual ritual end-to-end. Python ETL "
+            "pulls the four sources into a staging schema in SQL Server, "
+            "validates against last-week deltas, and surfaces anomalies. "
+            "Power BI sits on top of a star-schema model and refreshes via "
+            "the gateway at 6:45am. A small notifier emails the planner the "
+            "PDF + a link to the live report at 7:00.\n\n"
+            "**Outcome.** Monday recovered. Report has shipped on time every "
+            "single week since launch, anomalies are now caught before they "
+            "reach S&OP, and the planner ships strategy work she previously "
+            "didn't have time for. Documentation handed over so the team "
+            "can extend the model themselves."
+        ),
+        "image_path": "https://images.unsplash.com/photo-1666875753105-c63a6f3bdc86?q=80&w=1600&auto=format&fit=crop",
+        "stack": "Power BI, Python, SQL Server, Pandas, Scheduler",
+        "link_type": None,
+        "git_link": None,
+    },
+    {
+        "title": "Logistics KPI workspace, single source of truth",
+        "short_description": (
+            "6 sources → 1 daily-truth dashboard. TMS, WMS, freight invoices, "
+            "and ops sheets unified into a Power BI workspace the whole team "
+            "opens before standup."
+        ),
+        "long_description": (
+            "**Problem.** Logistics KPIs were scattered across a TMS, a WMS, "
+            "freight-invoice exports, and three operations spreadsheets that "
+            "different teams owned. Every metric — on-time delivery, cost-"
+            "per-shipment, dwell time — had a different number depending on "
+            "who you asked. Meetings burned half their time arguing whose "
+            "version was right.\n\n"
+            "**Action.** Built a unified data model in Power BI fed by six "
+            "ETL pipelines (Python + scheduled SQL jobs). Defined KPI "
+            "semantics with the ops lead, encoded them as DAX measures, "
+            "and split the workspace into role-specific reports — operator, "
+            "ops manager, finance, executive — with row-level security so "
+            "each role sees only what they should.\n\n"
+            "**Outcome.** One workspace, opened daily by the ops, finance, "
+            "and executive teams. Deliveries are now broken down per route "
+            "and per carrier in seconds. Disputes about \"whose number is "
+            "right\" stopped within the first sprint. The CEO uses the "
+            "executive page in the weekly business review."
+        ),
+        "image_path": "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?q=80&w=1600&auto=format&fit=crop",
+        "stack": "Power BI, DAX, Python, SQL, Row-level security",
+        "link_type": None,
+        "git_link": None,
+    },
+    {
+        "title": "Internal admin tool, replaced an Excel + Slack workflow",
+        "short_description": (
+            "Excel form → Flask admin in 4 weeks. Customer-change requests "
+            "with audit trail, role-based auth, and a 12-page README the "
+            "team's juniors actually use."
+        ),
+        "long_description": (
+            "**Problem.** A growing ops team filed customer-account changes "
+            "through a shared Excel form linked from a pinned Slack "
+            "message. Requests got lost, two people sometimes edited the "
+            "same row at once, and there was no audit trail for compliance. "
+            "Engineering didn't want to ship \"yet another internal app\" "
+            "from scratch.\n\n"
+            "**Action.** Designed and shipped a Flask + SQLAlchemy admin "
+            "panel in 4 weeks: typed forms, role-based auth (Flask-Login), "
+            "per-row audit log, soft-deletes, CSV export, and a Docker "
+            "deploy with CI. Documentation up front: a 12-page README "
+            "covering data model, how to extend it, and a runbook for "
+            "incidents.\n\n"
+            "**Outcome.** Zero \"lost change request\" tickets since launch. "
+            "Onboarding new ops staff dropped from a multi-day Slack "
+            "shadow-session to a 30-minute README walkthrough. Engineering "
+            "later forked the same template for two other internal tools — "
+            "the codebase is, in their words, \"code I can read months "
+            "later.\""
+        ),
+        "image_path": "https://images.unsplash.com/photo-1621839673705-6617adf9e890?q=80&w=1600&auto=format&fit=crop",
+        "stack": "Flask, SQLAlchemy, Tailwind CSS, Flask-Login, Docker, CI/CD",
+        "link_type": None,
+        "git_link": None,
+    },
+    {
+        "title": "ntkrv.dev — this very portfolio",
+        "short_description": (
+            "The Flask + Tailwind site you're reading right now. Admin "
+            "panel, CI deploys, dark/light theming, and a counter that "
+            "ticks up every January 1."
+        ),
+        "long_description": (
+            "**Problem.** I needed a portfolio that doubles as proof-of-"
+            "stack: clients should land on it and immediately see how I "
+            "build software, not just read a list of skills.\n\n"
+            "**Action.** Built it from scratch with Flask, SQLAlchemy, "
+            "Flask-Login, Flask-Migrate, Tailwind CSS, and a small admin "
+            "for managing projects/certificates. Dark-first theme with a "
+            "manual toggle, server-rendered counter for years-in-data, and "
+            "a hardened deploy pipeline (CSP, rate limits, force-https in "
+            "prod).\n\n"
+            "**Outcome.** Source is open on GitHub — clients have shipped "
+            "PRs to it during interviews."
+        ),
+        "image_path": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1600&auto=format&fit=crop",
+        "stack": "Flask, Tailwind CSS, SQLAlchemy, GSAP, Docker, CI/CD",
         "link_type": "github",
         "git_link": "https://github.com/ntkrv/personal_website",
-    },
-    {
-        "title": "Power BI Dashboards Portfolio",
-        "short_description": "A collection of interactive dashboards built in Power BI, showcasing business insights and trend analysis.",
-        "long_description": (
-            "This portfolio contains my BI dashboards designed in Power BI, covering demand planning, logistics, and business reporting. "
-            "The dashboards highlight my ability to transform raw data into actionable insights with clean, interactive visualizations."
-        ),
-        "image_path": "https://images.unsplash.com/photo-1666875753105-c63a6f3bdc86?q=80",
-        "stack": "Power BI, Excel, DAX, SQL",
-        "link_type": "gdrive",
-        "git_link": "https://drive.google.com/drive/folders/1xoM9KNpCi4QqlTmSNGTaHtbdsRVDbevV?usp=sharing",
-    },
-    {
-        "title": "Python Report Automation",
-        "short_description": "Automated reporting system to optimize data processing and save time.",
-        "long_description": (
-            "A Python-based project for optimizing report generation. "
-            "It includes automated data extraction, cleaning, and transformation pipelines, followed by report creation in Excel/CSV format. "
-            "This solution significantly reduced manual workload and improved reporting efficiency."
-        ),
-        "image_path": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "stack": "Python, Pandas, NumPy, Excel, SQL",
-        "link_type": "github",
-        "git_link": "https://github.com/ntkrv/report-automation",
     },
 ]
 

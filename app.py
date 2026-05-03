@@ -1,7 +1,9 @@
 import os
+import re
 from datetime import datetime
 
 from flask import Flask, request
+from markupsafe import Markup, escape
 from dotenv import load_dotenv
 
 from extensions import db, mail, migrate, login_manager, limiter, talisman
@@ -95,6 +97,7 @@ def _register_blueprints(app) -> None:
     from routes.projects import projects_bp
     from routes.certificates import certificates_bp
     from routes.contact import contact_bp
+    from routes.agencies import agencies_bp
     from routes.admin_auth import admin_auth_bp
     from routes.admin_manage import admin_manage_bp
     from routes.errors import errors_bp
@@ -103,6 +106,7 @@ def _register_blueprints(app) -> None:
     app.register_blueprint(projects_bp)
     app.register_blueprint(certificates_bp)
     app.register_blueprint(contact_bp)
+    app.register_blueprint(agencies_bp)
     app.register_blueprint(admin_auth_bp)
     app.register_blueprint(admin_manage_bp)
     app.register_blueprint(errors_bp)
@@ -121,6 +125,41 @@ def _register_request_hooks(app) -> None:
             "current_year": year,
             "years_in_data": max(year - CAREER_START_YEAR, 1),
         }
+
+    app.jinja_env.filters["case_format"] = _case_format
+
+
+# Renders a case-study long_description (plain text with `**bold.**`
+# section leads) into safe HTML: each blank-line-separated paragraph
+# becomes a <p>, and a leading `**...**` chunk becomes an h3 eyebrow
+# above the paragraph body. All non-marker content is escaped first,
+# so admin input can't smuggle in HTML.
+_BOLD_LEAD_RE = re.compile(r"^\s*\*\*(?P<heading>[^*]+?)\*\*\s*(?P<body>.*)", re.DOTALL)
+
+
+def _case_format(value):
+    if not value:
+        return Markup("")
+
+    blocks = []
+    for raw in re.split(r"\n\s*\n", str(value).strip()):
+        chunk = raw.strip()
+        if not chunk:
+            continue
+        match = _BOLD_LEAD_RE.match(chunk)
+        if match:
+            heading = escape(match.group("heading").strip().rstrip("."))
+            body = escape(match.group("body").strip()).replace("\n", "<br>")
+            blocks.append(
+                f'<div class="case-section">'
+                f'<h3 class="case-heading">{heading}</h3>'
+                f'<p class="case-body">{body}</p>'
+                f"</div>"
+            )
+        else:
+            body = escape(chunk).replace("\n", "<br>")
+            blocks.append(f'<p class="case-body">{body}</p>')
+    return Markup("".join(blocks))
 
 
 def _register_cli(app) -> None:

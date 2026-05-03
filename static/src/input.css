@@ -106,6 +106,24 @@
     background: linear-gradient(90deg, transparent, rgba(15, 23, 42, 0.15), transparent);
   }
 
+  /* Case study sections — output of the case_format Jinja filter. */
+  .case-section { margin-bottom: 1.5rem; }
+  .case-heading {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(147, 197, 253, 0.85);
+    margin-bottom: 0.75rem;
+  }
+  :is(.light) .case-heading { color: #2563eb; }
+  .case-body {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  :is(.light) .case-body { color: #1f2937; }
+
   /* Eyebrow used above section titles */
   .eyebrow {
     display: inline-flex;

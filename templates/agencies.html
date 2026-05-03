@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+
+{% block title %}For agencies & consultancies — Nicolas Tokariev{% endblock %}
+
+{% block content %}
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="relative overflow-hidden">
+  <div class="max-w-4xl mx-auto px-5 sm:px-8 pt-16 pb-12 sm:pt-20 sm:pb-16">
+
+    <a href="{{ url_for('main.index') }}"
+       class="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest text-white/50 [.light_&]:text-ink-500 hover:text-white [.light_&]:hover:text-ink-900 mb-10 transition">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+      </svg>
+      Back to Home
+    </a>
+
+    <span class="eyebrow">For agencies &amp; consultancies</span>
+    <h1 class="text-balance mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-5">
+      A <span class="text-gradient">fractional data engineer</span><br class="hidden sm:block" />
+      on your bench.
+    </h1>
+    <p class="max-w-2xl text-base sm:text-lg text-white/70 [.light_&]:text-ink-700 leading-relaxed mb-8">
+      You sell strategy, design, or growth. Sometimes the deliverable also needs a Power&nbsp;BI dashboard,
+      a Python ETL, or a Flask admin tool — and standing one up in-house isn't worth the headcount.
+      That's where I plug in: white-label, NDA, behind your AM.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-3">
+      <a href="{{ url_for('main.index') }}#contact"
+         class="cta-hover-gradient inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg
+                bg-white text-ink-900 [.light_&]:bg-ink-900 [.light_&]:text-white
+                font-semibold text-sm shadow-[0_8px_30px_-8px_rgba(255,255,255,0.4)]">
+        Start a conversation
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="mailto:contact@ntkrv.dev?subject=Agency%20engagement"
+         class="cta-hover-gradient inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg
+                bg-white/5 border border-white/10 text-white
+                [.light_&]:bg-ink-900/5 [.light_&]:border-ink-900/10 [.light_&]:text-ink-900
+                font-semibold text-sm">
+        Email direct
+      </a>
+    </div>
+
+  </div>
+  <div class="hairline max-w-6xl mx-auto"></div>
+</section>
+
+
+<!-- ============================================================
+     WHAT I DO WHITE-LABEL
+============================================================ -->
+<section class="relative">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
+    <div class="max-w-2xl mb-10">
+      <span class="eyebrow">Engagement types</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">
+        What <span class="text-gradient">I plug into</span>.
+      </h2>
+      <p class="mt-4 text-white/60 [.light_&]:text-ink-600 text-base">
+        These are the shapes I see most often. If your scope sits between them, that's usually fine — drop a line.
+      </p>
+    </div>
+
+    {% set engagements = [
+      ('insights',
+       'Client BI dashboards',
+       'Power BI / Tableau builds delivered under your brand. Full data model, refresh schedule, role-based access, and a handover doc your client team can actually maintain.'),
+      ('cable',
+       'Pipeline rescue & migration',
+       'Inheriting a fragile pipeline, a brittle Excel-based reporting flow, or a half-built warehouse? I stabilise, document, and migrate — no-drama Pandas + SQL, with a runbook at the end.'),
+      ('terminal',
+       'Internal tools & admin panels',
+       'Flask + Tailwind apps where a spreadsheet has outgrown itself. Auth, audit log, deploys, and CI included. Typically 2–6 weeks from kickoff to live.'),
+      ('schedule',
+       'Fractional retainer',
+       '4–16 hours a week, scoped against a backlog. Useful when you have a steady stream of small data work but no FTE-sized problem yet.'),
+    ] %}
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {% for icon, title, desc in engagements %}
+        <div class="tilt card-surface rounded-xl p-6">
+          <div class="w-10 h-10 mb-5 rounded-lg grid place-items-center bg-brand-500/15 text-brand-300 [.light_&]:bg-brand-500/10 [.light_&]:text-brand-600">
+            <span class="material-symbols-outlined">{{ icon }}</span>
+          </div>
+          <h3 class="text-base font-semibold mb-2">{{ title }}</h3>
+          <p class="text-sm text-white/60 [.light_&]:text-ink-600 leading-relaxed">{{ desc }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     HOW IT WORKS
+============================================================ -->
+<section class="relative">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
+    <div class="max-w-2xl mb-10">
+      <span class="eyebrow">How it works</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">
+        Quiet, contractual, <span class="text-gradient">behind your account manager</span>.
+      </h2>
+    </div>
+
+    {% set steps = [
+      ('01', 'NDA-first',
+       'Mutual NDA before scope discussion. I default to assuming everything you share is confidential — including your client list.'),
+      ('02', 'Scoped against a brief',
+       'You send the brief (or the client&apos;s brief). I respond with a written scope, timeline, and pricing model — hourly, weekly, or fixed-bid.'),
+      ('03', 'White-label by default',
+       'No public attribution, no portfolio post-mortem. I build under your brand, in your repo, with your account manager as the single client touchpoint.'),
+      ('04', 'Direct touch on request',
+       'If you want me on client calls (technical scoping, demos, handover), that&apos;s available — under your brand or as a named subcontractor, your call.'),
+      ('05', 'Handover documented',
+       'Every engagement closes with a doc your team or the client can extend without me: data model, deploy steps, known unknowns.'),
+    ] %}
+
+    <div class="space-y-3">
+      {% for num, title, desc in steps %}
+        <div class="card-surface rounded-xl p-5 sm:p-6 flex gap-5 sm:gap-6 items-start">
+          <div class="text-2xl sm:text-3xl font-extrabold tracking-tight text-gradient leading-none shrink-0 w-12">
+            {{ num }}
+          </div>
+          <div>
+            <h3 class="text-base sm:text-lg font-semibold mb-1.5">{{ title }}</h3>
+            <p class="text-sm text-white/60 [.light_&]:text-ink-600 leading-relaxed">{{ desc | safe }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     STACK SHORTCUT
+============================================================ -->
+<section class="relative">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
+    <div class="max-w-2xl mb-8">
+      <span class="eyebrow">Stack</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">Tools I bring in.</h2>
+      <p class="mt-4 text-white/60 [.light_&]:text-ink-600 text-base">
+        Same stack as the case studies — Python, SQL, Power&nbsp;BI / Tableau, Flask, Docker. I don&apos;t do a different stack for agency work.
+      </p>
+    </div>
+
+    <div class="card-surface rounded-xl p-5">
+      <div class="flex flex-wrap gap-2">
+        {% for skill in ['Python', 'SQL', 'PostgreSQL', 'Pandas', 'NumPy',
+                          'Power BI', 'Tableau', 'DAX', 'Excel',
+                          'Flask', 'SQLAlchemy', 'Docker', 'CI/CD', 'APIs'] %}
+          <span class="text-xs px-2.5 py-1 rounded-md font-medium
+                       bg-brand-500/15 text-brand-200 border border-brand-500/30
+                       [.light_&]:bg-brand-500/10 [.light_&]:text-brand-700 [.light_&]:border-brand-500/20">
+            {{ skill }}
+          </span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CTA
+============================================================ -->
+<section class="relative">
+  <div class="max-w-3xl mx-auto px-5 sm:px-8 py-16 sm:py-24 text-center">
+    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+      Got a brief that needs <span class="text-gradient">data work</span>?
+    </h2>
+    <p class="text-white/70 [.light_&]:text-ink-700 text-base sm:text-lg leading-relaxed mb-8">
+      Send the scope. I&apos;ll come back within a day with what&apos;s feasible, the timeline, and a price model.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="{{ url_for('main.index') }}#contact"
+         class="cta-hover-gradient inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg
+                bg-white text-ink-900 [.light_&]:bg-ink-900 [.light_&]:text-white
+                font-semibold text-sm shadow-[0_8px_30px_-8px_rgba(255,255,255,0.4)]">
+        Use the contact form
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="mailto:contact@ntkrv.dev?subject=Agency%20engagement"
+         class="cta-hover-gradient inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg
+                bg-white/5 border border-white/10 text-white
+                [.light_&]:bg-ink-900/5 [.light_&]:border-ink-900/10 [.light_&]:text-ink-900
+                font-semibold text-sm">
+        contact@ntkrv.dev
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
