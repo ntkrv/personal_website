@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 
 {% block title %}For agencies & consultancies — Nicolas Tokariev{% endblock %}
+{% block meta_description %}White-label dashboards, full-stack web & mobile apps, database work, and reporting automation for agencies and consultancies — under your brand, on NDA, behind your account manager.{% endblock %}
+{% block canonical %}https://ntkrv.dev/agencies{% endblock %}
+{% block og_url %}https://ntkrv.dev/agencies{% endblock %}
+{% block og_title %}For agencies & consultancies — Nicolas Tokariev{% endblock %}
+{% block og_description %}A fractional engineer on your bench. Dashboards, full-stack apps, mobile, and reporting automation — white-label, NDA, behind your AM.{% endblock %}
+{% block twitter_url %}https://ntkrv.dev/agencies{% endblock %}
+{% block twitter_title %}For agencies & consultancies — Nicolas Tokariev{% endblock %}
+{% block twitter_description %}Fractional engineer for white-label dashboards, full-stack web & mobile, and reporting automation.{% endblock %}
 
 {% block content %}
 
@@ -21,13 +29,13 @@
     <header>
       <span class="eyebrow">For agencies &amp; consultancies</span>
       <h1 class="text-balance mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-5">
-        A <span class="text-gradient">fractional data engineer</span><br class="hidden sm:block" />
+        A <span class="text-gradient">fractional engineer</span><br class="hidden sm:block" />
         on your bench.
       </h1>
       <p class="max-w-2xl text-base sm:text-lg text-white/70 [.light_&]:text-ink-700 leading-relaxed mb-8">
-        You sell strategy, design, or growth. Sometimes the deliverable also needs a Power&nbsp;BI dashboard,
-        a Python ETL, or a Flask admin tool — and standing one up in-house isn't worth the headcount.
-        That's where I plug in: white-label, NDA, behind your AM.
+        You sell strategy, design, or growth. Sometimes the deliverable also needs a dashboard,
+        a full-stack web or mobile app, a database, or an automated reporting flow — and standing one up
+        in-house isn't worth the headcount. That's where I plug in: white-label, NDA, behind your AM.
       </p>
 
       <div class="flex flex-col sm:flex-row gap-3">
@@ -72,20 +80,23 @@
 
     {% set engagements = [
       ('insights',
-       'Client BI dashboards',
-       'Power BI / Tableau builds delivered under your brand. Full data model, refresh schedule, role-based access, and a handover doc your client team can actually maintain.'),
-      ('cable',
-       'Pipeline rescue & migration',
-       'Inheriting a fragile pipeline, a brittle Excel-based reporting flow, or a half-built warehouse? I stabilise, document, and migrate — no-drama Pandas + SQL, with a runbook at the end.'),
+       'Client dashboards (any complexity)',
+       'Power BI, Tableau, or custom web dashboards delivered under your brand. Data model, refresh, role-based access, and a handover doc your client team can actually maintain.'),
       ('terminal',
-       'Internal tools & admin panels',
-       'Full-Stack apps where a spreadsheet has outgrown itself. Auth, audit log, deploys, and CI included. Typically 2–6 weeks from kickoff to live.'),
+       'Full-stack web apps',
+       'Internal tools, admin panels, and customer-facing apps where a spreadsheet has outgrown itself. Auth, audit log, deploys, and CI included.'),
+      ('phone_iphone',
+       'Mobile apps',
+       'Cross-platform iOS / Android — for ops teams, customers, or field workers. Shared codebase, native feel, store-ready and instrumented.'),
+      ('database',
+       'Databases, big data & reporting automation',
+       'New schemas, ETL rescues, big-data pipelines, and scheduled reports. No-drama SQL + Python, dockerised, with a runbook at the end.'),
       ('schedule',
        'Fractional retainer',
-       '4–16 hours a week, scoped against a backlog. Useful when you have a steady stream of small data work but no FTE-sized problem yet.'),
+       '4–16 hours a week, scoped against a backlog. Useful when you have a steady stream of small work but no FTE-sized problem yet.'),
     ] %}
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {% for icon, title, desc in engagements %}
         <div class="tilt card-surface rounded-xl p-6">
           <div class="w-10 h-10 mb-5 rounded-lg grid place-items-center bg-brand-500/15 text-brand-300 [.light_&]:bg-brand-500/10 [.light_&]:text-brand-600">
@@ -151,7 +162,7 @@
       <span class="eyebrow">Stack</span>
       <h2 class="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">Tools I bring in.</h2>
       <p class="mt-4 text-white/60 [.light_&]:text-ink-600 text-base">
-        Same stack as the case studies — Python, SQL, Power&nbsp;BI / Tableau, Flask, Docker. I don&apos;t do a different stack for agency work.
+        Same stack as the case studies — Python, SQL, Power&nbsp;BI / Tableau, Flask, JavaScript / React, mobile, Docker. I don&apos;t do a different stack for agency work.
       </p>
     </div>
 
@@ -177,7 +188,7 @@
      CONTACT FORM (duplicated for in-page CTAs)
 ============================================================ -->
 {% set intro = {
-  'headline': 'Got a brief that needs data work?',
+  'headline': 'Got a brief that needs engineering or data work?',
   'lead': "Send the scope. I'll come back within a day with what's feasible, the timeline, and a price model."
 } %}
 {% include "_contact_form.html" %}

@@ -145,12 +145,21 @@
   :is(.light) .eyebrow::before { background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.6)); }
 }
 
-/* Tech-icons row — keep crisp at intrinsic size */
+/* Tech-icons row — scales down on small screens, crisp on larger. */
 .icon {
-  width: 56px;
-  height: 56px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
   display: block;
+}
+@media (min-width: 640px) {
+  .icon { width: 56px; height: 56px; }
+}
+
+/* Disable card tilt on touch devices: JS already skips it, but the
+   CSS transform from a stale --rx/--ry can flicker on iOS Safari. */
+@media (pointer: coarse) {
+  .tilt { transform: none !important; }
 }
 
 /* ----------------------------------------------------------------

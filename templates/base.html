@@ -6,25 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Title & Description -->
-  <title>{% block title %}Nicolas Tokariev — Data Analyst & Software Engineer{% endblock %}</title>
-  <meta name="description" content="Nicolas Tokariev — Data Analyst & Software Engineer. I ship Power BI dashboards, Python automations, and Flask web apps that turn business questions into shipped answers.">
-  <meta name="keywords" content="Nicolas Tokariev, ntkrv, Data Analyst, Software Engineer, Python, SQL, Power BI, Tableau, DevOps, Automation, Flask, Tailwind CSS, Git, Docker, Portfolio, Data Visualization, CI/CD, Analytics, Excel, Pandas, NumPy">
+  <title>{% block title %}Nicolas Tokariev — Software Engineer & Data Specialist{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Nicolas Tokariev — Software Engineer & Data Specialist. I build dashboards of any complexity, full-stack web and mobile apps, work with databases and big data, and automate reporting workflows for companies.{% endblock %}">
+  <meta name="keywords" content="Nicolas Tokariev, ntkrv, Software Engineer, Data Specialist, Dashboards, Power BI, Tableau, Web Dashboards, Full-Stack, Mobile Apps, Databases, SQL, Big Data, Reporting Automation, Python, Flask, React, ETL, PostgreSQL, Data Engineering">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://ntkrv.dev/">
+  <link rel="canonical" href="{% block canonical %}https://ntkrv.dev/{% endblock %}">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://ntkrv.dev/">
-  <meta property="og:title" content="Nicolas Tokariev — Data Analyst & Software Engineer">
-  <meta property="og:description" content="Portfolio of Nicolas Tokariev showcasing projects in Data Analytics, Software Engineering, and DevOps automation.">
-  <meta property="og:image" content="https://ntkrv.dev/static/img/og-image.jpg">
+  <meta property="og:url" content="{% block og_url %}https://ntkrv.dev/{% endblock %}">
+  <meta property="og:title" content="{% block og_title %}Nicolas Tokariev — Software Engineer & Data Specialist{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Dashboards, full-stack web & mobile apps, databases, big data, and reporting automation — built end-to-end for businesses that need decisions to ship.{% endblock %}">
+  <meta property="og:image" content="{% block og_image %}https://ntkrv.dev/static/img/og-image.jpg{% endblock %}">
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://ntkrv.dev/">
-  <meta name="twitter:title" content="Nicolas Tokariev — Data Analyst & Software Engineer">
-  <meta name="twitter:description" content="Explore projects and analytics by Nicolas Tokariev — Python, SQL, BI, DevOps.">
-  <meta name="twitter:image" content="https://ntkrv.dev/static/img/og-image.jpg">
+  <meta name="twitter:url" content="{% block twitter_url %}https://ntkrv.dev/{% endblock %}">
+  <meta name="twitter:title" content="{% block twitter_title %}Nicolas Tokariev — Software Engineer & Data Specialist{% endblock %}">
+  <meta name="twitter:description" content="{% block twitter_description %}Dashboards, full-stack web & mobile apps, databases, big data, and reporting automation.{% endblock %}">
+  <meta name="twitter:image" content="{% block twitter_image %}https://ntkrv.dev/static/img/og-image.jpg{% endblock %}">
+  {% block extra_head %}{% endblock %}
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icons/favicon.ico') }}">
@@ -62,9 +63,9 @@
     "@type": "Person",
     "name": "Nicolas Tokariev",
     "url": "https://ntkrv.dev/",
-    "jobTitle": "Data Analyst & Software Engineer",
+    "jobTitle": "Software Engineer & Data Specialist",
     "sameAs": ["https://github.com/ntkrv", "https://linkedin.com/in/ntkrv"],
-    "description": "Portfolio of Nicolas Tokariev — Data Analyst & Software Engineer specializing in Python, SQL, and DevOps automation."
+    "description": "Software Engineer & Data Specialist building dashboards of any complexity, full-stack web and mobile apps, database systems, big-data pipelines, and reporting automation for companies."
   }
   </script>
 </head>
@@ -78,8 +79,8 @@
   <!-- Decorative background: soft glows + dot grid -->
   <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
     <div class="absolute inset-0 bg-dot-grid mask-radial-fade opacity-60"></div>
-    <div class="glow-blob glow-blob-blue   w-[42rem] h-[42rem] -top-72 -left-40 animate-glow-pulse"></div>
-    <div class="glow-blob glow-blob-violet w-[36rem] h-[36rem] top-[40%] -right-40 opacity-40"></div>
+    <div class="glow-blob glow-blob-blue   w-[24rem] h-[24rem] sm:w-[42rem] sm:h-[42rem] -top-40 sm:-top-72 -left-20 sm:-left-40 animate-glow-pulse"></div>
+    <div class="glow-blob glow-blob-violet w-[20rem] h-[20rem] sm:w-[36rem] sm:h-[36rem] top-[40%] -right-20 sm:-right-40 opacity-40"></div>
   </div>
 
   <!-- Toast container -->
@@ -141,7 +142,7 @@
             <span class="text-base font-bold tracking-tight">ntkrv<span class="text-brand-400">.</span>dev</span>
           </a>
           <p class="text-sm text-white/55 [.light_&]:text-ink-600 leading-relaxed mb-4">
-            Data Analyst &amp; Software Engineer turning messy data into <span class="text-white/80 [.light_&]:text-ink-900">decisions that ship</span>.
+            Software Engineer &amp; Data Specialist building dashboards, full-stack apps, and pipelines that turn business questions into <span class="text-white/80 [.light_&]:text-ink-900">decisions that ship</span>.
           </p>
           <a href="mailto:contact@ntkrv.dev"
              class="inline-flex items-center gap-2 text-sm text-brand-300 [.light_&]:text-brand-700 hover:text-white [.light_&]:hover:text-ink-900 transition">

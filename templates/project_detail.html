@@ -1,14 +1,28 @@
 {% extends "base.html" %}
 
 {% block title %}{{ project.title }} — Nicolas Tokariev{% endblock %}
-
-{% block meta %}
-  <meta name="description" content="{{ project.short_description }}">
-  <meta property="og:title" content="{{ project.title }} — Nicolas Tokariev">
-  <meta property="og:description" content="{{ project.short_description }}">
-  <meta property="og:image" content="{{ project.image_path }}">
-  <meta property="og:url" content="https://ntkrv.dev{{ url_for('projects.project_detail', slug=project.slug) }}">
-  <meta name="twitter:card" content="summary_large_image">
+{% block meta_description %}{{ project.short_description }}{% endblock %}
+{% block canonical %}https://ntkrv.dev{{ url_for('projects.project_detail', slug=project.slug) }}{% endblock %}
+{% block og_url %}https://ntkrv.dev{{ url_for('projects.project_detail', slug=project.slug) }}{% endblock %}
+{% block og_title %}{{ project.title }} — Nicolas Tokariev{% endblock %}
+{% block og_description %}{{ project.short_description }}{% endblock %}
+{% block og_image %}{% if project.image_path and project.image_path.startswith('http') %}{{ project.image_path }}{% else %}https://ntkrv.dev{{ project.image_path or '/static/img/og-image.jpg' }}{% endif %}{% endblock %}
+{% block twitter_url %}https://ntkrv.dev{{ url_for('projects.project_detail', slug=project.slug) }}{% endblock %}
+{% block twitter_title %}{{ project.title }} — Nicolas Tokariev{% endblock %}
+{% block twitter_description %}{{ project.short_description }}{% endblock %}
+{% block twitter_image %}{% if project.image_path and project.image_path.startswith('http') %}{{ project.image_path }}{% else %}https://ntkrv.dev{{ project.image_path or '/static/img/og-image.jpg' }}{% endif %}{% endblock %}
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ntkrv.dev/"},
+    {"@type": "ListItem", "position": 2, "name": "Case studies", "item": "https://ntkrv.dev{{ url_for('projects.projects') }}"},
+    {"@type": "ListItem", "position": 3, "name": "{{ project.title|e }}", "item": "https://ntkrv.dev{{ url_for('projects.project_detail', slug=project.slug) }}"}
+  ]
+}
+</script>
 {% endblock %}
 
 {% block content %}

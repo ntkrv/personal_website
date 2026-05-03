@@ -3,7 +3,7 @@
      intro — optional dict with `headline` and `lead` overrides
 #}
 {% set headline = intro.headline if intro and intro.headline else 'Tell me about your project.' %}
-{% set lead = intro.lead if intro and intro.lead else "Dashboards, automations, web apps, or just a sanity check — drop a line and I'll get back fast." %}
+{% set lead = intro.lead if intro and intro.lead else "Dashboards, full-stack web or mobile apps, databases, big data, or reporting automation — drop a line and I'll get back fast." %}
 
 <section id="contact" class="relative">
   <div class="max-w-3xl mx-auto px-5 sm:px-8 py-20 sm:py-28">
@@ -27,7 +27,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label class="block mb-1.5 text-xs font-semibold text-white/70 [.light_&]:text-ink-700 uppercase tracking-wider">Name</label>
-              <input type="text" name="name" required placeholder="Your name"
+              <input type="text" name="name" required placeholder="Your name" autocomplete="name"
                      class="w-full rounded-lg px-3.5 py-2.5 text-sm
                             bg-white/[0.03] border border-white/10 text-white placeholder-white/30
                             [.light_&]:bg-ink-900/[0.03] [.light_&]:border-ink-900/10 [.light_&]:text-ink-900 [.light_&]:placeholder-ink-500
@@ -35,7 +35,7 @@
             </div>
             <div>
               <label class="block mb-1.5 text-xs font-semibold text-white/70 [.light_&]:text-ink-700 uppercase tracking-wider">Email</label>
-              <input type="email" name="email" required placeholder="you@company.com"
+              <input type="email" name="email" required placeholder="you@company.com" autocomplete="email" inputmode="email"
                      class="w-full rounded-lg px-3.5 py-2.5 text-sm
                             bg-white/[0.03] border border-white/10 text-white placeholder-white/30
                             [.light_&]:bg-ink-900/[0.03] [.light_&]:border-ink-900/10 [.light_&]:text-ink-900 [.light_&]:placeholder-ink-500
