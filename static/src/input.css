@@ -28,6 +28,26 @@
             color: transparent;
   }
 
+  /* Echoes the .text-gradient phrase on the hero — applied as a hover
+     state on buttons and link CTAs. The gradient takes over the bg,
+     text flips to ink, and any border bleeds into the gradient. */
+  .cta-hover-gradient {
+    transition: background-color 0.3s ease, background-image 0.3s ease,
+                color 0.3s ease, border-color 0.3s ease,
+                transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .cta-hover-gradient:hover {
+    background-image: linear-gradient(120deg, #93c5fd 0%, #60a5fa 50%, #a78bfa 100%);
+    background-color: transparent;
+    color: #0a0a14;
+    border-color: transparent;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 30px -12px rgba(96, 165, 250, 0.55);
+  }
+  :is(.light) .cta-hover-gradient:hover {
+    box-shadow: 0 12px 30px -14px rgba(59, 130, 246, 0.4);
+  }
+
   /* Subtle dot grid for hero / section backgrounds */
   .bg-dot-grid {
     background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
