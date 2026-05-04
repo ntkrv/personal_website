@@ -14,31 +14,19 @@ into a section eyebrow + heading.
 
 PROJECTS = [
     {
-        "title": "Weekly demand-planning report, on autopilot",
+        "title": "Power BI / BI analytics portfolio",
         "short_description": (
-            "8h → 0h every Monday. Refreshed Power BI report that lands in the "
-            "planner's inbox at 7am, before the kettle's even boiled."
+            "A short portfolio of my Power BI and BI analytics work — "
+            "follow the link to browse the dashboards."
         ),
         "long_description": (
-            "**Problem.** Every Monday a demand planner spent 6–8 hours "
-            "rebuilding the same weekly outlook by hand: pulling four ERP "
-            "exports, reconciling them against supplier shipment sheets, "
-            "fixing column drift, and re-templating slides. Mistakes were "
-            "easy to miss and the report was always late by lunch.\n\n"
-            "**Action.** I replaced the manual ritual end-to-end. Python ETL "
-            "pulls the four sources into a staging schema in SQL Server, "
-            "validates against last-week deltas, and surfaces anomalies. "
-            "Power BI sits on top of a star-schema model and refreshes via "
-            "the gateway at 6:45am. A small notifier emails the planner the "
-            "PDF + a link to the live report at 7:00.\n\n"
-            "**Outcome.** Monday recovered. Report has shipped on time every "
-            "single week since launch, anomalies are now caught before they "
-            "reach S&OP, and the planner ships strategy work she previously "
-            "didn't have time for. Documentation handed over so the team "
-            "can extend the model themselves."
+            "**Portfolio.** This entry points to a short portfolio of my "
+            "Power BI and BI analytics work. Follow the link below to "
+            "browse a brief showcase of my dashboard development — "
+            "semantic models, reports, and the SQL / ETL work behind them."
         ),
         "image_path": "https://images.unsplash.com/photo-1666875753105-c63a6f3bdc86?q=80&w=1600&auto=format&fit=crop",
-        "stack": "Power BI, Python, SQL Server, Pandas, Scheduler",
+        "stack": "Power BI, SQL Server, DAX, Power Query",
         "link_type": None,
         "git_link": None,
     },

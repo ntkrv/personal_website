@@ -249,12 +249,12 @@ def _compute_kpis(trips: pd.DataFrame) -> Dict[str, Dict[str, str]]:
 
 def _apply_layout(fig: go.Figure, height: int = 320, title: str = "") -> go.Figure:
     fig.update_layout(
-        title=dict(text=title, x=0.0, xanchor="left",
+        title=dict(text=title, x=0.0, xanchor="left", y=0.97, yanchor="top",
                    font=dict(size=14, color=COLORS["text"], family="Inter")),
         plot_bgcolor=COLORS["card"],
         paper_bgcolor=COLORS["card"],
         font=dict(family="Inter, sans-serif", color=COLORS["text"], size=12),
-        margin=dict(l=40, r=20, t=46 if title else 16, b=36),
+        margin=dict(l=40, r=20, t=72 if title else 16, b=36),
         height=height,
         legend=dict(
             orientation="h", yanchor="bottom", y=1.02,
