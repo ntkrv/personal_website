@@ -2,18 +2,19 @@
 "Logistics Cockpit" demo at /demo/logistics-kpi.
 
 Everything is deterministic (single numpy seed) so the demo looks the
-same on every page load. The whole result is `lru_cache`d so the figures
-are built exactly once per process.
+same on every page load. Heavy results are `lru_cache`d so the dataset
+is generated exactly once per process and figures only re-render when
+the period filter changes.
 
-The dataset is intentionally small but coherent: trucks → drivers →
-trips → planners → forwarders are all referentially consistent so the
-numbers in the Fleet, Planning, and Forwarders tabs reconcile.
+The dataset is intentionally small but coherent: trucks → trips →
+planners → forwarders are all referentially consistent so the numbers
+in the Fleet, Planning, and Forwarders tabs reconcile.
 """
 from __future__ import annotations
 
 from datetime import date, timedelta
 from functools import lru_cache
-from typing import Dict
+from typing import Dict, Optional
 
 import numpy as np
 import pandas as pd
@@ -29,6 +30,7 @@ COLORS = {
     "bg": "#0f172a",          # slate-900
     "card": "#1a2332",        # slate-800-ish
     "grid": "#1f2937",        # slate-800
+    "line": "#2c3a52",        # divider lines / country borders
     "text": "#e2e8f0",        # slate-200
     "muted": "#94a3b8",       # slate-400
     "amber": "#f59e0b",       # primary accent
@@ -93,6 +95,19 @@ def _haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
 # ---------------------------------------------------------------------------
 # Mock dataset
 # ---------------------------------------------------------------------------
+
+@lru_cache(maxsize=1)
+def _cached_dataset() -> Dict[str, pd.DataFrame]:
+    return _generate_dataset()
+
+
+def _filter_by_period(trips: pd.DataFrame, period_days: Optional[int]) -> pd.DataFrame:
+    """Return rows from the last `period_days` days, or all rows if None."""
+    if not period_days:
+        return trips
+    cutoff = trips["date"].max() - pd.Timedelta(days=period_days)
+    return trips[trips["date"] >= cutoff]
+
 
 def _generate_dataset(seed: int = 42) -> Dict[str, pd.DataFrame]:
     rng = np.random.default_rng(seed)
@@ -532,15 +547,229 @@ def _fig_spend_share(trips: pd.DataFrame) -> go.Figure:
 # Public entry point
 # ---------------------------------------------------------------------------
 
-@lru_cache(maxsize=1)
-def build_demo() -> Dict[str, object]:
+def trucks_summary(period_days: Optional[int] = None) -> list:
+    """Per-truck rollup used by the Fleet-tab table and the drill-down."""
+    trips = _filter_by_period(_cached_dataset()["trips"], period_days)
+
+    by_truck = trips.groupby(["truck_id", "model", "year"]).agg(
+        trips_count=("date", "size"),
+        total_km=("actual_km", "sum"),
+        revenue=("cost_eur", "sum"),
+        fuel_l=("fuel_l", "sum"),
+        co2_kg=("co2_kg", "sum"),
+        empty_km=("empty_km", "sum"),
+        idle_h=("idle_hours", "sum"),
+        on_time=("on_time", "sum"),
+        avg_cpk=("cost_per_km_eur", "mean"),
+        median_cpk=("cost_per_km_eur", "median"),
+        max_cpk=("cost_per_km_eur", "max"),
+        min_cpk=("cost_per_km_eur", "min"),
+        l100=("fuel_l_per_100km", "mean"),
+    ).reset_index()
+    by_truck["on_time_pct"] = by_truck["on_time"] / by_truck["trips_count"] * 100
+    by_truck["empty_pct"] = by_truck["empty_km"] / by_truck["total_km"] * 100
+    by_truck = by_truck.sort_values("revenue", ascending=False)
+
+    return [
+        {
+            "truck_id": r.truck_id,
+            "model": r.model,
+            "year": int(r.year),
+            "trips": int(r.trips_count),
+            "km": float(r.total_km),
+            "revenue_eur": float(r.revenue),
+            "fuel_l": float(r.fuel_l),
+            "co2_t": float(r.co2_kg / 1000),
+            "avg_cpk": float(r.avg_cpk),
+            "median_cpk": float(r.median_cpk),
+            "max_cpk": float(r.max_cpk),
+            "min_cpk": float(r.min_cpk),
+            "l100": float(r.l100),
+            "on_time_pct": float(r.on_time_pct),
+            "empty_pct": float(r.empty_pct),
+            "idle_h": float(r.idle_h),
+        }
+        for r in by_truck.itertuples()
+    ]
+
+
+# ---- Per-truck drill-down -------------------------------------------------
+
+def _fig_truck_revenue_monthly(truck_trips: pd.DataFrame) -> go.Figure:
+    monthly = truck_trips.copy()
+    monthly["month"] = monthly["date"].dt.to_period("M").dt.to_timestamp()
+    grouped = monthly.groupby("month").agg(
+        revenue=("cost_eur", "sum"),
+        km=("actual_km", "sum"),
+    ).reset_index()
+    grouped["cpk"] = grouped["revenue"] / grouped["km"]
+
+    fig = go.Figure()
+    fig.add_trace(go.Bar(
+        x=grouped["month"], y=grouped["revenue"], name="Revenue",
+        marker=dict(color=COLORS["amber"]),
+        hovertemplate="<b>%{x|%b %Y}</b><br>€ %{y:,.0f}<extra></extra>",
+    ))
+    fig.add_trace(go.Scatter(
+        x=grouped["month"], y=grouped["cpk"], name="€/km",
+        yaxis="y2", mode="lines+markers",
+        line=dict(color=COLORS["cyan"], width=2),
+        hovertemplate="€/km: %{y:.2f}<extra></extra>",
+    ))
+    fig.update_layout(
+        yaxis=dict(title="Revenue €"),
+        yaxis2=dict(title="€ / km", overlaying="y", side="right",
+                    showgrid=False, tickfont=dict(color=COLORS["cyan"])),
+    )
+    return _apply_layout(fig, height=260, title="Monthly revenue & cost-per-km")
+
+
+def _fig_truck_route_map(truck_trips: pd.DataFrame) -> go.Figure:
+    """EU map: lines between origin↔destination pairs, weighted by frequency.
+
+    Uses Scattergeo (no token required, ships with Plotly's basemap)."""
+    pair_counts = (truck_trips
+                   .groupby(["origin", "destination"])
+                   .size().reset_index(name="trips")
+                   .sort_values("trips", ascending=False))
+
+    fig = go.Figure()
+
+    # Lines per route, opacity scaled by frequency.
+    max_trips = max(pair_counts["trips"].max(), 1)
+    for _, row in pair_counts.iterrows():
+        o_lat, o_lon = EUROPEAN_HUBS[row["origin"]]
+        d_lat, d_lon = EUROPEAN_HUBS[row["destination"]]
+        fig.add_trace(go.Scattergeo(
+            lon=[o_lon, d_lon], lat=[o_lat, d_lat],
+            mode="lines",
+            line=dict(width=1 + 2.2 * (row["trips"] / max_trips),
+                      color=COLORS["amber"]),
+            opacity=0.45 + 0.5 * (row["trips"] / max_trips),
+            hoverinfo="skip",
+            showlegend=False,
+        ))
+
+    # Hub markers — sized by total visits (origin OR destination).
+    visits = pd.concat([
+        truck_trips["origin"].rename("city"),
+        truck_trips["destination"].rename("city"),
+    ]).value_counts().reset_index(name="visits")
+    visits.columns = ["city", "visits"]
+    visits["lat"] = visits["city"].map(lambda c: EUROPEAN_HUBS[c][0])
+    visits["lon"] = visits["city"].map(lambda c: EUROPEAN_HUBS[c][1])
+
+    fig.add_trace(go.Scattergeo(
+        lon=visits["lon"], lat=visits["lat"], text=visits["city"],
+        mode="markers+text",
+        marker=dict(
+            size=8 + (visits["visits"] / visits["visits"].max()) * 18,
+            color=COLORS["cyan"],
+            line=dict(color=COLORS["bg"], width=1.5),
+            opacity=0.9,
+        ),
+        textfont=dict(color=COLORS["text"], size=11),
+        textposition="top center",
+        hovertemplate="<b>%{text}</b><br>%{customdata} visits<extra></extra>",
+        customdata=visits["visits"],
+        showlegend=False,
+    ))
+
+    fig.update_geos(
+        scope="europe",
+        showland=True, landcolor=COLORS["card"],
+        showcountries=True, countrycolor=COLORS["line"] if "line" in COLORS else "#2c3a52",
+        showocean=True, oceancolor=COLORS["bg"],
+        showlakes=False, showrivers=False, showcoastlines=False,
+        projection_type="natural earth",
+        bgcolor=COLORS["card"],
+        lataxis=dict(range=[35, 60]),
+        lonaxis=dict(range=[-10, 25]),
+    )
+    fig.update_layout(
+        plot_bgcolor=COLORS["card"],
+        paper_bgcolor=COLORS["card"],
+        font=dict(family="Inter, sans-serif", color=COLORS["text"], size=12),
+        margin=dict(l=0, r=0, t=46, b=0),
+        height=380,
+        title=dict(text="Routes across Europe", x=0, xanchor="left",
+                   font=dict(size=14, color=COLORS["text"])),
+        hoverlabel=dict(bgcolor=COLORS["bg"], bordercolor=COLORS["amber"]),
+    )
+    return fig
+
+
+def truck_detail(truck_id: str, period_days: Optional[int] = None) -> Dict:
+    trips_all = _cached_dataset()["trips"]
+    truck_trips = _filter_by_period(trips_all, period_days)
+    truck_trips = truck_trips[truck_trips["truck_id"] == truck_id]
+
+    if truck_trips.empty:
+        return {"error": "No trips for this truck in the selected period."}
+
+    truck_meta = (_cached_dataset()["trucks"]
+                  .query("truck_id == @truck_id").iloc[0])
+
+    total_km = float(truck_trips["actual_km"].sum())
+    total_rev = float(truck_trips["cost_eur"].sum())
+
+    # Top 5 routes by trip count
+    top_routes = (truck_trips
+                  .groupby(["origin", "destination"])
+                  .agg(trips=("date", "size"),
+                       avg_cpk=("cost_per_km_eur", "mean"),
+                       total_km=("actual_km", "sum"))
+                  .reset_index()
+                  .sort_values("trips", ascending=False)
+                  .head(5))
+    top_routes_payload = [
+        {
+            "from": r.origin, "to": r.destination,
+            "trips": int(r.trips), "avg_cpk": float(r.avg_cpk),
+            "km": float(r.total_km),
+        }
+        for r in top_routes.itertuples()
+    ]
+
+    stats = {
+        "truck_id": truck_id,
+        "model": str(truck_meta["model"]),
+        "year": int(truck_meta["year"]),
+        "trips": int(len(truck_trips)),
+        "total_km": total_km,
+        "loaded_km": float(truck_trips["loaded_km"].sum()),
+        "empty_km": float(truck_trips["empty_km"].sum()),
+        "empty_pct": float(truck_trips["empty_km"].sum() / total_km * 100),
+        "fuel_l": float(truck_trips["fuel_l"].sum()),
+        "co2_t": float(truck_trips["co2_kg"].sum() / 1000),
+        "l100": float(truck_trips["fuel_l_per_100km"].mean()),
+        "revenue_eur": total_rev,
+        "avg_cpk": float(truck_trips["cost_per_km_eur"].mean()),
+        "median_cpk": float(truck_trips["cost_per_km_eur"].median()),
+        "max_cpk": float(truck_trips["cost_per_km_eur"].max()),
+        "min_cpk": float(truck_trips["cost_per_km_eur"].min()),
+        "on_time_pct": float(truck_trips["on_time"].mean() * 100),
+        "idle_h_total": float(truck_trips["idle_hours"].sum()),
+        "tonnes_hauled": float(truck_trips["tonnes"].sum()),
+    }
+
+    figures = {
+        "truck_revenue": pio.to_json(_fig_truck_revenue_monthly(truck_trips)),
+        "truck_map": pio.to_json(_fig_truck_route_map(truck_trips)),
+    }
+
+    return {"stats": stats, "top_routes": top_routes_payload, "figures": figures}
+
+
+@lru_cache(maxsize=8)
+def build_demo(period_days: Optional[int] = None) -> Dict[str, object]:
     """Return KPIs + figure-JSON dict for the cockpit template.
 
-    Cached for the lifetime of the process — mock data is deterministic
-    so we only ever need to build it once.
+    Cached per period_days. The first call generates mock data once and
+    re-uses it across periods (only re-aggregates).
     """
-    data = _generate_dataset()
-    trips = data["trips"]
+    trips_all = _cached_dataset()["trips"]
+    trips = _filter_by_period(trips_all, period_days)
 
     kpis = _compute_kpis(trips)
 
@@ -563,14 +792,20 @@ def build_demo() -> Dict[str, object]:
     }
     figures_json = {k: pio.to_json(v) for k, v in figures.items()}
 
-    period = (trips["date"].min().strftime("%d %b %Y")
-              + " — " + trips["date"].max().strftime("%d %b %Y"))
+    period_label = (trips["date"].min().strftime("%d %b %Y")
+                    + " — " + trips["date"].max().strftime("%d %b %Y"))
     meta = {
-        "period": period,
+        "period": period_label,
+        "period_days": period_days,
         "fleet_size": int(trips["truck_id"].nunique()),
         "total_trips": int(len(trips)),
         "planners": list(PLANNERS),
         "forwarders": list(FORWARDERS),
     }
 
-    return {"kpis": kpis, "figures": figures_json, "meta": meta}
+    return {
+        "kpis": kpis,
+        "figures": figures_json,
+        "meta": meta,
+        "trucks": trucks_summary(period_days),
+    }
