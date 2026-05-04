@@ -5,6 +5,10 @@ class Config:
     SECRET_KEY = os.getenv("SECRET_KEY")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    # Hard cap on uploaded body size (covers project image uploads).
+    # 4 MB is plenty for case-study cover images.
+    MAX_CONTENT_LENGTH = 4 * 1024 * 1024
+
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = "Lax"
     REMEMBER_COOKIE_HTTPONLY = True

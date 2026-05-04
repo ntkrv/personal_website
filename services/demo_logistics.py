@@ -623,8 +623,12 @@ def _fig_truck_revenue_weekly(truck_trips: pd.DataFrame) -> go.Figure:
     fig.update_layout(
         yaxis=dict(title="Revenue €"),
         yaxis2=dict(title="€ / km", overlaying="y", side="right",
-                    showgrid=False, tickfont=dict(color=COLORS["cyan"])),
+                    showgrid=False, tickfont=dict(color=COLORS["cyan"]),
+                    title_font=dict(color=COLORS["cyan"])),
         xaxis=dict(tickformat="%d %b"),
+        # Wider right gutter so the secondary "€ / km" axis label fits
+        # without clipping inside the drawer.
+        margin=dict(l=50, r=58, t=46, b=36),
     )
     return _apply_layout(fig, height=260, title="Weekly revenue & cost-per-km")
 
@@ -690,19 +694,20 @@ def _fig_truck_route_map(truck_trips: pd.DataFrame) -> go.Figure:
         plot_bgcolor=COLORS["bg"],
         paper_bgcolor=COLORS["card"],
         font=dict(family="Inter, sans-serif", color=COLORS["text"], size=12),
-        margin=dict(l=10, r=10, t=10, b=10),
-        height=360,
+        margin=dict(l=20, r=20, t=20, b=20),
+        height=400,
         hoverlabel=dict(bgcolor=COLORS["bg"], bordercolor=COLORS["amber"],
                         font=dict(color=COLORS["text"])),
         xaxis=dict(
             visible=False,
-            range=[-8, 25],
+            range=[-9, 26],
             constrain="domain",
         ),
         yaxis=dict(
             visible=False,
-            range=[36, 56],
-            scaleanchor="x", scaleratio=1.3,  # ~Mercator-ish aspect for EU
+            range=[34, 57],     # padded south so Madrid label has headroom
+            scaleanchor="x",
+            scaleratio=1.3,     # ~Mercator-ish aspect for EU
             constrain="domain",
         ),
     )

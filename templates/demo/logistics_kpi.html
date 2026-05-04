@@ -214,10 +214,24 @@
       border-radius: 12px; padding: 6px;
       min-height: 320px;
       position: relative;
+      overflow: hidden;        /* clip any Plotly bleed past the card */
+      min-width: 0;            /* let grid shrink the chart instead of overflowing */
     }
     .chart.wide { grid-column: 1 / -1; }
     .chart-help {
       position: absolute; top: 12px; right: 14px; z-index: 2;
+    }
+    /* Help icons that sit on top of charts open their tooltip BELOW
+       the icon — `.chart` is overflow:hidden so an upward tooltip
+       would get clipped by the card border. */
+    .chart-help .help::after {
+      bottom: auto; top: calc(100% + 8px);
+      transform: translate(0, -4px);
+    }
+    .chart-help .help { right: 0; }
+    .chart-help .help::after { right: 0; left: auto; transform: translate(0, -4px); }
+    .chart-help .help:hover::after, .chart-help .help:focus::after {
+      transform: translate(0, 0);
     }
 
     /* ---------- Help tooltip ---------- */
@@ -444,6 +458,7 @@
       background: var(--card); border: 1px solid var(--line);
       border-radius: 10px; padding: 6px; margin-top: 8px;
       min-height: 260px;
+      overflow: hidden;
     }
   </style>
 </head>
@@ -935,6 +950,24 @@
 
     // ---------- First paint ----------
     renderActiveFigures(false);
+
+    // ResizeObserver picks up every container size change (window
+    // resize, sidebar collapse, drawer open, tab switch) and tells
+    // Plotly to redraw — this is what stops the "chart bleeds outside
+    // its card" class of bug at the source.
+    if (typeof ResizeObserver !== 'undefined') {
+      const ro = new ResizeObserver(entries => {
+        entries.forEach(entry => {
+          const el = entry.target;
+          const id = el.id.replace('fig-', '');
+          if (rendered.has(id) && el.offsetWidth > 0) {
+            try { Plotly.Plots.resize(el); } catch (e) {}
+          }
+        });
+      });
+      document.querySelectorAll('[id^="fig-"]').forEach(el => ro.observe(el));
+    }
+
     window.addEventListener('resize', () => {
       document.querySelectorAll('.tab-panel.active [id^="fig-"]').forEach(el => {
         try { Plotly.Plots.resize(el); } catch (e) {}

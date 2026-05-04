@@ -86,3 +86,6 @@ instance/
 node_modules/
 
 .coverage
+
+# User-uploaded project images (admin panel writes here at runtime)
+static/uploads/
