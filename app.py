@@ -118,6 +118,7 @@ def _register_blueprints(app) -> None:
     from routes.admin_auth import admin_auth_bp
     from routes.admin_manage import admin_manage_bp
     from routes.errors import errors_bp
+    from routes.demo import demo_bp
 
     app.register_blueprint(main_bp)
     app.register_blueprint(projects_bp)
@@ -127,6 +128,7 @@ def _register_blueprints(app) -> None:
     app.register_blueprint(admin_auth_bp)
     app.register_blueprint(admin_manage_bp)
     app.register_blueprint(errors_bp)
+    app.register_blueprint(demo_bp)
 
 
 def _register_request_hooks(app) -> None:

@@ -78,6 +78,18 @@
     {% endif %}
 
     <div class="flex flex-wrap items-center gap-3">
+      {% if demo_url %}
+        <a href="{{ demo_url }}" target="_blank" rel="noopener"
+           class="cta-hover-gradient inline-flex items-center gap-2 px-5 py-2.5 rounded-lg
+                  bg-gradient-to-br from-amber-400 to-orange-500 text-ink-900
+                  text-sm font-semibold shadow-[0_8px_30px_-8px_rgba(245,158,11,0.5)]">
+          <span class="material-symbols-outlined text-base">play_circle</span>
+          Open live demo
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7-7 7M5 12h16"/>
+          </svg>
+        </a>
+      {% endif %}
       {% if project.git_link %}
         <a href="{{ project.git_link }}" target="_blank" rel="noopener"
            class="cta-hover-gradient inline-flex items-center gap-2 px-5 py-2.5 rounded-lg
