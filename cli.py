@@ -62,6 +62,50 @@ def seed_command() -> None:
     )
 
 
+@click.command("sync-logistics-demo")
+@with_appcontext
+def sync_logistics_demo_command() -> None:
+    """Upsert the Logistics KPI cockpit case study to match the live demo.
+
+    Matches the existing project by 'logistics-kpi' slug fragment and
+    overwrites title / short_description / long_description / stack /
+    image_path. The slug itself is left alone so inbound /project/<slug>
+    URLs and the demo-link mapping in routes/projects.py keep working.
+    If no matching record exists, a fresh one is created (slug is then
+    auto-derived from the new title).
+    """
+    from data.seed_data import PROJECTS
+
+    payload = next(
+        (p for p in PROJECTS if "logistics" in p["title"].lower()
+         and "kpi" in p["title"].lower()),
+        None,
+    )
+    if payload is None:
+        raise click.UsageError(
+            "Couldn't find the Logistics KPI entry in data/seed_data.py."
+        )
+
+    project = (Project.query
+               .filter(Project.slug.contains("logistics-kpi"))
+               .first())
+
+    if project is None:
+        project = Project(**payload)
+        db.session.add(project)
+        action = "created"
+    else:
+        for field, value in payload.items():
+            setattr(project, field, value)
+        action = "updated"
+
+    db.session.commit()
+    click.echo(
+        f"Logistics KPI cockpit project {action} (slug: {project.slug})."
+    )
+
+
 def register_cli(app) -> None:
     app.cli.add_command(create_admin_command)
     app.cli.add_command(seed_command)
+    app.cli.add_command(sync_logistics_demo_command)

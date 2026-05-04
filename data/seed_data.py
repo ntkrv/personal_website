@@ -42,34 +42,47 @@ PROJECTS = [
         "link_type": None,
         "git_link": None,
     },
+    # Aligned with the live /demo/logistics-kpi cockpit. The CLI command
+    # `flask sync-logistics-demo` upserts this same dict into the DB
+    # without touching the slug, so the existing /project/<slug> URL
+    # keeps working after edits to title or copy.
     {
-        "title": "Logistics KPI workspace, single source of truth",
+        "title": "Logistics KPI cockpit, single source of truth",
         "short_description": (
-            "6 sources → 1 daily-truth dashboard. TMS, WMS, freight invoices, "
-            "and ops sheets unified into a Power BI workspace the whole team "
-            "opens before standup."
+            "Operations cockpit for a road carrier. Fleet utilisation, "
+            "planner KPIs, and freight-forwarder spend in three tabs — "
+            "drillable to a single truck with cost-per-km spread and an "
+            "EU route map. Built end-to-end on Flask + Plotly."
         ),
         "long_description": (
-            "**Problem.** Logistics KPIs were scattered across a TMS, a WMS, "
-            "freight-invoice exports, and three operations spreadsheets that "
-            "different teams owned. Every metric — on-time delivery, cost-"
-            "per-shipment, dwell time — had a different number depending on "
-            "who you asked. Meetings burned half their time arguing whose "
-            "version was right.\n\n"
-            "**Action.** Built a unified data model in Power BI fed by six "
-            "ETL pipelines (Python + scheduled SQL jobs). Defined KPI "
-            "semantics with the ops lead, encoded them as DAX measures, "
-            "and split the workspace into role-specific reports — operator, "
-            "ops manager, finance, executive — with row-level security so "
-            "each role sees only what they should.\n\n"
-            "**Outcome.** One workspace, opened daily by the ops, finance, "
-            "and executive teams. Deliveries are now broken down per route "
-            "and per carrier in seconds. Disputes about \"whose number is "
-            "right\" stopped within the first sprint. The CEO uses the "
-            "executive page in the weekly business review."
+            "**Problem.** A mid-sized road carrier ran ops on three siloed "
+            "systems — TMS for dispatch, WMS for warehousing, a freight-"
+            "invoice export from accounting — plus weekly XLS sheets owned "
+            "by individual planners. Every metric (on-time %, €/km, empty-"
+            "km, CO₂) had a different number depending on who you asked. "
+            "Standup meetings burned half their time arguing whose version "
+            "was right.\n\n"
+            "**Action.** Built a unified data model joining trips, trucks, "
+            "planners, and forwarders into a single SQL warehouse, then a "
+            "web cockpit on top of it (Flask + Plotly + Pandas — no "
+            "Tableau or Power BI license needed). Three tabs frame the "
+            "daily question: Fleet (utilisation, fuel, CO₂), Planning "
+            "(empty-km, idle time, on-time per planner), and Forwarders "
+            "(volume, €/km vs in-house, claims). Every truck is drillable "
+            "from the Fleet roster — revenue, min/median/avg/max €/km, "
+            "top routes, and an EU route map of every origin↔destination "
+            "pair the truck ran.\n\n"
+            "**Outcome.** One opened-by-default URL replaced four "
+            "spreadsheets and a stale BI export nobody trusted. Disputes "
+            "about whose number is right stopped within the first sprint. "
+            "The CEO uses the Forwarders tab to renegotiate two "
+            "underperforming carriers; the planning lead uses the per-"
+            "truck drill-down to surface deadhead patterns by route. **A "
+            "live demo with 28 trucks of mock data is linked at the top "
+            "of this page.**"
         ),
         "image_path": "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?q=80&w=1600&auto=format&fit=crop",
-        "stack": "Power BI, DAX, Python, SQL, Row-level security",
+        "stack": "Flask, Plotly, Pandas, SQL, NumPy, JavaScript",
         "link_type": None,
         "git_link": None,
     },
