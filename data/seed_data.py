@@ -109,25 +109,29 @@ PROJECTS = [
     {
         "title": "ntkrv.dev — this very portfolio",
         "short_description": (
-            "The Flask + Tailwind site you're reading right now. Admin "
-            "panel, CI deploys, dark/light theming, and a counter that "
-            "ticks up every January 1."
+            "The Flask + Tailwind site you're reading right now — a modern "
+            "resume on steroids, where any employer can see who I am and "
+            "what I've built in one place."
         ),
         "long_description": (
-            "**Problem.** I needed a portfolio that doubles as proof-of-"
-            "stack: clients should land on it and immediately see how I "
-            "build software, not just read a list of skills.\n\n"
-            "**Action.** Built it from scratch with Flask, SQLAlchemy, "
-            "Flask-Login, Flask-Migrate, Tailwind CSS, and a small admin "
-            "for managing projects/certificates. Dark-first theme with a "
-            "manual toggle, server-rendered counter for years-in-data, and "
-            "a hardened deploy pipeline (CSP, rate limits, force-https in "
-            "prod).\n\n"
-            "**Outcome.** Source is open on GitHub — clients have shipped "
-            "PRs to it during interviews."
+            "**Idea.** I wanted one place where any employer or client "
+            "could get the full picture of me: my background, the "
+            "projects I've shipped, and how I actually write code. A CV "
+            "in PDF can't do that — so I built a modern resume on "
+            "steroids instead.\n\n"
+            "**Action.** Designed and built the whole site myself with "
+            "Flask, SQLAlchemy, Flask-Login, Flask-Migrate, and Tailwind "
+            "CSS. Dark-first theme with a manual light/dark toggle, "
+            "smooth scroll animations with GSAP, a server-rendered "
+            "years-in-data counter that ticks up every January 1, and a "
+            "hardened production setup (CSP, rate limits, force-https).\n\n"
+            "**Outcome.** Visitors don't just read a list of skills — "
+            "they see the stack working. Source is open on GitHub so "
+            "anyone can poke around the code that runs the site they're "
+            "looking at."
         ),
         "image_path": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1600&auto=format&fit=crop",
-        "stack": "Flask, Tailwind CSS, SQLAlchemy, GSAP, Docker, CI/CD",
+        "stack": "Flask, Tailwind CSS, SQLAlchemy, GSAP",
         "link_type": "github",
         "git_link": "https://github.com/ntkrv/personal_website",
     },
