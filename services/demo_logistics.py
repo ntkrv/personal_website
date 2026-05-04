@@ -595,10 +595,13 @@ def trucks_summary(period_days: Optional[int] = None) -> list:
 
 # ---- Per-truck drill-down -------------------------------------------------
 
-def _fig_truck_revenue_monthly(truck_trips: pd.DataFrame) -> go.Figure:
-    monthly = truck_trips.copy()
-    monthly["month"] = monthly["date"].dt.to_period("M").dt.to_timestamp()
-    grouped = monthly.groupby("month").agg(
+def _fig_truck_revenue_weekly(truck_trips: pd.DataFrame) -> go.Figure:
+    """Weekly revenue + €/km dual-axis. Weekly works for any period
+    (30 d → 4-5 bars, 6 mo → ~25 bars) without single-point axis glitches.
+    """
+    weekly = truck_trips.copy()
+    weekly["week"] = weekly["date"].dt.to_period("W").dt.start_time
+    grouped = weekly.groupby("week").agg(
         revenue=("cost_eur", "sum"),
         km=("actual_km", "sum"),
     ).reset_index()
@@ -606,46 +609,53 @@ def _fig_truck_revenue_monthly(truck_trips: pd.DataFrame) -> go.Figure:
 
     fig = go.Figure()
     fig.add_trace(go.Bar(
-        x=grouped["month"], y=grouped["revenue"], name="Revenue",
+        x=grouped["week"], y=grouped["revenue"], name="Revenue",
         marker=dict(color=COLORS["amber"]),
-        hovertemplate="<b>%{x|%b %Y}</b><br>€ %{y:,.0f}<extra></extra>",
+        hovertemplate="<b>w/c %{x|%d %b %Y}</b><br>€ %{y:,.0f}<extra></extra>",
     ))
     fig.add_trace(go.Scatter(
-        x=grouped["month"], y=grouped["cpk"], name="€/km",
+        x=grouped["week"], y=grouped["cpk"], name="€/km",
         yaxis="y2", mode="lines+markers",
         line=dict(color=COLORS["cyan"], width=2),
+        marker=dict(size=5),
         hovertemplate="€/km: %{y:.2f}<extra></extra>",
     ))
     fig.update_layout(
         yaxis=dict(title="Revenue €"),
         yaxis2=dict(title="€ / km", overlaying="y", side="right",
                     showgrid=False, tickfont=dict(color=COLORS["cyan"])),
+        xaxis=dict(tickformat="%d %b"),
     )
-    return _apply_layout(fig, height=260, title="Monthly revenue & cost-per-km")
+    return _apply_layout(fig, height=260, title="Weekly revenue & cost-per-km")
 
 
 def _fig_truck_route_map(truck_trips: pd.DataFrame) -> go.Figure:
-    """EU map: lines between origin↔destination pairs, weighted by frequency.
+    """Schematic EU route map: lon/lat as cartesian axes, no basemap.
 
-    Uses Scattergeo (no token required, ships with Plotly's basemap)."""
+    Why not Scattergeo? Plotly's geo subplot needs the container to have
+    measured width when it first paints; inside an animated drawer this
+    races the transition and the map silently fails to draw. A plain
+    cartesian Scatter with lon/lat as x/y ALWAYS renders, requires zero
+    external services or vector data, and reads as a clean cockpit-style
+    schematic when styled in the same dark palette."""
     pair_counts = (truck_trips
                    .groupby(["origin", "destination"])
                    .size().reset_index(name="trips")
                    .sort_values("trips", ascending=False))
 
     fig = go.Figure()
-
-    # Lines per route, opacity scaled by frequency.
     max_trips = max(pair_counts["trips"].max(), 1)
+
+    # Routes: amber lines, width + opacity scaled by trip frequency.
     for _, row in pair_counts.iterrows():
         o_lat, o_lon = EUROPEAN_HUBS[row["origin"]]
         d_lat, d_lon = EUROPEAN_HUBS[row["destination"]]
-        fig.add_trace(go.Scattergeo(
-            lon=[o_lon, d_lon], lat=[o_lat, d_lat],
+        weight = row["trips"] / max_trips
+        fig.add_trace(go.Scatter(
+            x=[o_lon, d_lon], y=[o_lat, d_lat],
             mode="lines",
-            line=dict(width=1 + 2.2 * (row["trips"] / max_trips),
-                      color=COLORS["amber"]),
-            opacity=0.45 + 0.5 * (row["trips"] / max_trips),
+            line=dict(width=1 + 2.5 * weight, color=COLORS["amber"]),
+            opacity=0.35 + 0.55 * weight,
             hoverinfo="skip",
             showlegend=False,
         ))
@@ -658,43 +668,43 @@ def _fig_truck_route_map(truck_trips: pd.DataFrame) -> go.Figure:
     visits.columns = ["city", "visits"]
     visits["lat"] = visits["city"].map(lambda c: EUROPEAN_HUBS[c][0])
     visits["lon"] = visits["city"].map(lambda c: EUROPEAN_HUBS[c][1])
+    max_visits = max(visits["visits"].max(), 1)
 
-    fig.add_trace(go.Scattergeo(
-        lon=visits["lon"], lat=visits["lat"], text=visits["city"],
+    fig.add_trace(go.Scatter(
+        x=visits["lon"], y=visits["lat"], text=visits["city"],
         mode="markers+text",
         marker=dict(
-            size=8 + (visits["visits"] / visits["visits"].max()) * 18,
+            size=10 + (visits["visits"] / max_visits) * 20,
             color=COLORS["cyan"],
-            line=dict(color=COLORS["bg"], width=1.5),
-            opacity=0.9,
+            line=dict(color=COLORS["bg"], width=2),
+            opacity=0.95,
         ),
-        textfont=dict(color=COLORS["text"], size=11),
+        textfont=dict(color=COLORS["text"], size=11, family="Inter"),
         textposition="top center",
         hovertemplate="<b>%{text}</b><br>%{customdata} visits<extra></extra>",
         customdata=visits["visits"],
         showlegend=False,
     ))
 
-    fig.update_geos(
-        scope="europe",
-        showland=True, landcolor=COLORS["card"],
-        showcountries=True, countrycolor=COLORS["line"] if "line" in COLORS else "#2c3a52",
-        showocean=True, oceancolor=COLORS["bg"],
-        showlakes=False, showrivers=False, showcoastlines=False,
-        projection_type="natural earth",
-        bgcolor=COLORS["card"],
-        lataxis=dict(range=[35, 60]),
-        lonaxis=dict(range=[-10, 25]),
-    )
     fig.update_layout(
-        plot_bgcolor=COLORS["card"],
+        plot_bgcolor=COLORS["bg"],
         paper_bgcolor=COLORS["card"],
         font=dict(family="Inter, sans-serif", color=COLORS["text"], size=12),
-        margin=dict(l=0, r=0, t=46, b=0),
-        height=380,
-        title=dict(text="Routes across Europe", x=0, xanchor="left",
-                   font=dict(size=14, color=COLORS["text"])),
-        hoverlabel=dict(bgcolor=COLORS["bg"], bordercolor=COLORS["amber"]),
+        margin=dict(l=10, r=10, t=10, b=10),
+        height=360,
+        hoverlabel=dict(bgcolor=COLORS["bg"], bordercolor=COLORS["amber"],
+                        font=dict(color=COLORS["text"])),
+        xaxis=dict(
+            visible=False,
+            range=[-8, 25],
+            constrain="domain",
+        ),
+        yaxis=dict(
+            visible=False,
+            range=[36, 56],
+            scaleanchor="x", scaleratio=1.3,  # ~Mercator-ish aspect for EU
+            constrain="domain",
+        ),
     )
     return fig
 
@@ -754,7 +764,7 @@ def truck_detail(truck_id: str, period_days: Optional[int] = None) -> Dict:
     }
 
     figures = {
-        "truck_revenue": pio.to_json(_fig_truck_revenue_monthly(truck_trips)),
+        "truck_revenue": pio.to_json(_fig_truck_revenue_weekly(truck_trips)),
         "truck_map": pio.to_json(_fig_truck_route_map(truck_trips)),
     }
 

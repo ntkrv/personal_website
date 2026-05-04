@@ -184,11 +184,11 @@
     .kpi {
       background: var(--card); border: 1px solid var(--line);
       border-radius: 12px; padding: 16px 18px;
-      position: relative; overflow: hidden;
+      position: relative;
     }
     .kpi::after {
       content: ""; position: absolute; left: 0; right: 0; bottom: 0;
-      height: 2px;
+      height: 2px; border-radius: 0 0 12px 12px;
       background: linear-gradient(90deg, var(--amber), transparent);
       opacity: 0.6;
     }
@@ -232,22 +232,30 @@
     .help:hover { color: var(--amber); border-color: var(--amber); }
     .help::after {
       content: attr(data-tip);
-      position: absolute; bottom: calc(100% + 8px); right: -4px;
-      width: 240px; padding: 9px 11px;
+      position: absolute; bottom: calc(100% + 8px); right: 50%;
+      transform: translate(50%, 4px);
+      width: max-content; max-width: 220px;
+      padding: 8px 10px;
       background: var(--bg); border: 1px solid var(--line);
       border-radius: 7px; color: var(--text-2);
       font-size: 11.5px; font-weight: 400; line-height: 1.45;
-      text-align: left;
+      text-align: left; white-space: normal;
       opacity: 0; visibility: hidden;
-      transform: translateY(4px);
       transition: opacity 0.15s, transform 0.15s, visibility 0s 0.15s;
-      pointer-events: none; z-index: 50;
+      pointer-events: none; z-index: 100;
       box-shadow: 0 8px 24px rgba(0,0,0,0.4);
     }
     .help:hover::after, .help:focus::after {
-      opacity: 1; visibility: visible; transform: translateY(0);
+      opacity: 1; visibility: visible;
+      transform: translate(50%, 0);
       transition: opacity 0.15s, transform 0.15s;
     }
+    /* Edge-anchored variants — `.help.left` keeps tip flush to the left,
+       `.help.right` flush to the right when the icon is near a card edge. */
+    .help.left::after  { right: auto; left: 0; transform: translate(0, 4px); }
+    .help.left:hover::after, .help.left:focus::after  { transform: translate(0, 0); }
+    .help.right::after { right: 0; left: auto; transform: translate(0, 4px); }
+    .help.right:hover::after, .help.right:focus::after { transform: translate(0, 0); }
 
     /* ---------- Trucks table ---------- */
     .trucks-card {
@@ -449,7 +457,7 @@
         <div class="sb-logo">
           <span class="material-symbols-outlined" style="font-size:18px;">local_shipping</span>
         </div>
-        <div class="sb-name">Cockpit<small>Logistics OS</small></div>
+        <div class="sb-name">EuroHaul<small>monthly digest</small></div>
       </div>
 
       <div class="sb-section">Operations</div>
@@ -516,19 +524,19 @@
         </div>
         <div class="charts">
           <div class="chart wide" id="fig-fleet_daily_km">
-            <span class="chart-help"><span class="help" data-tip="Bars: daily kilometres. Cyan line: 7-day moving average that smooths the weekend dip.">?</span></span>
+            <span class="chart-help"><span class="help right" data-tip="Bars: daily kilometres. Cyan line: 7-day moving average that smooths the weekend dip.">?</span></span>
             <div class="loading">Loading…</div>
           </div>
           <div class="chart" id="fig-fleet_co2_by_model">
-            <span class="chart-help"><span class="help" data-tip="Stacked CO₂ contribution by truck model, monthly. Use legend to isolate a model.">?</span></span>
+            <span class="chart-help"><span class="help right" data-tip="Stacked CO₂ contribution by truck model, monthly. Use legend to isolate a model.">?</span></span>
             <div class="loading">Loading…</div>
           </div>
           <div class="chart" id="fig-fleet_efficiency">
-            <span class="chart-help"><span class="help" data-tip="Each dot is one truck. X = distance driven, Y = average L/100km. Top-left = workhorses. Top-right = high-mileage gas-guzzlers worth investigating.">?</span></span>
+            <span class="chart-help"><span class="help right" data-tip="Each dot is one truck. X = distance driven, Y = average L/100km. Top-left = workhorses. Top-right = high-mileage gas-guzzlers worth investigating.">?</span></span>
             <div class="loading">Loading…</div>
           </div>
           <div class="chart wide" id="fig-fleet_fuel_by_truck">
-            <span class="chart-help"><span class="help" data-tip="Top 15 most fuel-efficient trucks. Bar colour matches the truck model.">?</span></span>
+            <span class="chart-help"><span class="help right" data-tip="Top 15 most fuel-efficient trucks. Bar colour matches the truck model.">?</span></span>
             <div class="loading">Loading…</div>
           </div>
         </div>
@@ -586,19 +594,19 @@
         </div>
         <div class="charts">
           <div class="chart wide" id="fig-plan_empty_trend">
-            <span class="chart-help"><span class="help" data-tip="Weekly empty-km % per planner. Dashed red line is the 15% target. Lines above the target = planners losing money on deadhead miles.">?</span></span>
+            <span class="chart-help"><span class="help right" data-tip="Weekly empty-km % per planner. Dashed red line is the 15% target. Lines above the target = planners losing money on deadhead miles.">?</span></span>
             <div class="loading">Loading…</div>
           </div>
           <div class="chart" id="fig-plan_idle_box">
-            <span class="chart-help"><span class="help" data-tip="Box plot of idle hours per trip. Higher whiskers = more outlier delays. Tight box = consistent dispatch.">?</span></span>
+            <span class="chart-help"><span class="help right" data-tip="Box plot of idle hours per trip. Higher whiskers = more outlier delays. Tight box = consistent dispatch.">?</span></span>
             <div class="loading">Loading…</div>
           </div>
           <div class="chart" id="fig-plan_routes_area">
-            <span class="chart-help"><span class="help" data-tip="Stacked monthly route count per planner. Width of each band = workload share.">?</span></span>
+            <span class="chart-help"><span class="help right" data-tip="Stacked monthly route count per planner. Width of each band = workload share.">?</span></span>
             <div class="loading">Loading…</div>
           </div>
           <div class="chart wide" id="fig-plan_on_time">
-            <span class="chart-help"><span class="help" data-tip="On-time vs late stack per planner. Annotated with overall on-time %.">?</span></span>
+            <span class="chart-help"><span class="help right" data-tip="On-time vs late stack per planner. Annotated with overall on-time %.">?</span></span>
             <div class="loading">Loading…</div>
           </div>
         </div>
@@ -614,19 +622,19 @@
         </div>
         <div class="charts">
           <div class="chart wide" id="fig-fwd_volume">
-            <span class="chart-help"><span class="help" data-tip="Monthly tonnage stack per forwarder, including in-house. Trend tells you who's growing share.">?</span></span>
+            <span class="chart-help"><span class="help right" data-tip="Monthly tonnage stack per forwarder, including in-house. Trend tells you who's growing share.">?</span></span>
             <div class="loading">Loading…</div>
           </div>
           <div class="chart" id="fig-fwd_cpk">
-            <span class="chart-help"><span class="help" data-tip="Cost per km comparison. Amber bar = in-house cost (your benchmark). Cyan bars = forwarders.">?</span></span>
+            <span class="chart-help"><span class="help right" data-tip="Cost per km comparison. Amber bar = in-house cost (your benchmark). Cyan bars = forwarders.">?</span></span>
             <div class="loading">Loading…</div>
           </div>
           <div class="chart" id="fig-fwd_otp">
-            <span class="chart-help"><span class="help" data-tip="On-time rate per forwarder. Anything below 90% deserves a contract conversation.">?</span></span>
+            <span class="chart-help"><span class="help right" data-tip="On-time rate per forwarder. Anything below 90% deserves a contract conversation.">?</span></span>
             <div class="loading">Loading…</div>
           </div>
           <div class="chart wide" id="fig-fwd_spend">
-            <span class="chart-help"><span class="help" data-tip="Where the freight budget actually goes. Click a slice to isolate.">?</span></span>
+            <span class="chart-help"><span class="help right" data-tip="Where the freight budget actually goes. Click a slice to isolate.">?</span></span>
             <div class="loading">Loading…</div>
           </div>
         </div>
@@ -850,7 +858,7 @@
         </div>
 
         <div class="drawer-section-title">
-          Cost per km <span class="help" data-tip="Spread of €/km across this truck's trips. Wide gap between min and max often signals route-mix or contract-rate variance worth checking.">?</span>
+          Cost per km <span class="help left" data-tip="Spread of €/km across this truck's trips. Wide min–max gap often signals route-mix or contract-rate variance worth checking.">?</span>
         </div>
         <div class="cpk-row">
           <div class="cpk-cell"><div class="l">Min</div><div class="v">€ ${fmt2(s.min_cpk)}</div></div>
@@ -880,11 +888,25 @@
       `;
       dBody.innerHTML = html;
 
-      const revFig = JSON.parse(detail.figures.truck_revenue);
-      Plotly.newPlot('drawer-fig-revenue', revFig.data, revFig.layout, config);
+      // Defer Plotly init to the next frame so the drawer's slide-in
+      // transition has a measured layout to render against — Scatter
+      // sub-plots can come up blank otherwise.
+      requestAnimationFrame(() => {
+        const revFig = JSON.parse(detail.figures.truck_revenue);
+        Plotly.newPlot('drawer-fig-revenue', revFig.data, revFig.layout, config);
 
-      const mapFig = JSON.parse(detail.figures.truck_map);
-      Plotly.newPlot('drawer-fig-map', mapFig.data, mapFig.layout, config);
+        const mapFig = JSON.parse(detail.figures.truck_map);
+        Plotly.newPlot('drawer-fig-map', mapFig.data, mapFig.layout, config);
+
+        // After the drawer finishes sliding (~280 ms), force a reflow so
+        // both charts pick up final container dimensions.
+        setTimeout(() => {
+          ['drawer-fig-revenue', 'drawer-fig-map'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) { try { Plotly.Plots.resize(el); } catch (e) {} }
+          });
+        }, 320);
+      });
     }
 
     async function openTruck(truckId) {
