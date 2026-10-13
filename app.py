@@ -5,6 +5,7 @@ from datetime import datetime
 from flask import Flask, request
 from markupsafe import Markup, escape
 from dotenv import load_dotenv
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from extensions import db, mail, migrate, login_manager, limiter, talisman, csrf
 from models import AdminUser
@@ -49,6 +50,7 @@ def create_app(config_class=None):
 
     _load_config(app, config_class)
     _validate_config(app)
+    _apply_proxy_fix(app)
     configure_logging(app)
     _register_extensions(app)
     _register_blueprints(app)
@@ -81,6 +83,12 @@ def _load_config(app, config_class) -> None:
 def _validate_config(app) -> None:
     if not app.config.get("SECRET_KEY") and not app.config.get("TESTING"):
         raise RuntimeError("SECRET_KEY environment variable must be set.")
+
+
+def _apply_proxy_fix(app) -> None:
+    hops = app.config.get("TRUSTED_PROXY_COUNT", 0)
+    if hops > 0:
+        app.wsgi_app = ProxyFix(app.wsgi_app, x_for=hops, x_proto=hops)
 
 
 def _register_extensions(app) -> None:

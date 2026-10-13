@@ -14,6 +14,18 @@ class Config:
     REMEMBER_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_SAMESITE = "Lax"
 
+    # Number of reverse proxies in front of the app (Nginx, a load
+    # balancer…). When > 0, ProxyFix trusts that many X-Forwarded-For /
+    # X-Forwarded-Proto hops, so rate limits key on the real client IP
+    # instead of the proxy's. Must match the real topology: too high and
+    # clients can spoof their IP via the header.
+    TRUSTED_PROXY_COUNT = int(os.getenv("TRUSTED_PROXY_COUNT", 0))
+
+    # Rate-limit counters. memory:// is per-process, so with several
+    # Gunicorn workers each one counts separately — use a shared backend
+    # (e.g. redis://localhost:6379, needs the `redis` package) in prod.
+    RATELIMIT_STORAGE_URI = os.getenv("RATELIMIT_STORAGE_URI", "memory://")
+
     MAIL_SERVER = os.getenv("MAIL_SERVER")
     MAIL_PORT = int(os.getenv("MAIL_PORT", 587))
     MAIL_USE_TLS = os.getenv("MAIL_USE_TLS", "True") == "True"
@@ -40,6 +52,9 @@ class ProductionConfig(Config):
     SESSION_COOKIE_SECURE = True
     REMEMBER_COOKIE_SECURE = True
     PREFERRED_URL_SCHEME = "https"
+
+    # Production runs behind Nginx (see README → Deployment).
+    TRUSTED_PROXY_COUNT = int(os.getenv("TRUSTED_PROXY_COUNT", 1))
 
 
 class TestingConfig(Config):

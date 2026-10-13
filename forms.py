@@ -63,8 +63,18 @@ class CertificateForm(FlaskForm):
 
 
 class ResetPasswordForm(FlaskForm):
-    new_password = PasswordField("New Password", validators=[DataRequired()])
+    new_password = PasswordField(
+        "New Password",
+        validators=[
+            DataRequired(),
+            Length(min=12, max=128, message="Use 12 to 128 characters."),
+        ],
+    )
     confirm_password = PasswordField(
-        "Confirm Password", validators=[DataRequired(), EqualTo("new_password")]
+        "Confirm Password",
+        validators=[
+            DataRequired(),
+            EqualTo("new_password", message="Passwords must match."),
+        ],
     )
     submit = SubmitField("Reset Password")

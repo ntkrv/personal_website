@@ -73,7 +73,7 @@ def forgot_password():
         user = AdminUser.query.first()
 
         if user and admin_email and submitted_email == admin_email:
-            token = generate_reset_token(user.username)
+            token = generate_reset_token(user)
             send_password_reset_email(admin_email, token)
 
         flash(
@@ -89,19 +89,16 @@ def forgot_password():
 @limiter.limit("5 per minute")
 def reset_password(token):
     """Handles password reset form"""
-    username = verify_reset_token(token)
-    if not username:
+    user = verify_reset_token(token)
+    if user is None:
         flash("Invalid or expired token.", "danger")
         return redirect(url_for("admin_auth.forgot_password"))
 
     form = ResetPasswordForm()
     if form.validate_on_submit():
-        user = AdminUser.query.filter_by(username=username).first()
-        if user:
-            user.set_password(form.new_password.data)
-            db.session.commit()
-            flash("Password has been updated successfully.", "success")
-            return redirect(url_for("admin_auth.login"))
-        flash("Account not found.", "danger")
+        user.set_password(form.new_password.data)
+        db.session.commit()
+        flash("Password has been updated successfully.", "success")
+        return redirect(url_for("admin_auth.login"))
 
     return render_template("admin/reset_password.html", form=form)
