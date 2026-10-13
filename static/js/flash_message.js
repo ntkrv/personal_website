@@ -30,11 +30,25 @@ document.addEventListener("DOMContentLoaded", () => {
       info: "info",
     }[category] || "notifications";
 
-    toast.innerHTML = `
-    <span class="material-symbols-outlined text-white text-lg self-center">${iconName}</span>
-    <span class="flex-1 self-center">${message}</span>
-    <button class="text-white font-bold leading-none focus:outline-none self-center" onclick="this.parentElement.remove()">×</button>
-  `;
+    // Built with DOM APIs: the message is set as text (never parsed as
+    // HTML), and the close handler is attached here because the CSP
+    // blocks inline onclick attributes.
+    const icon = document.createElement("span");
+    icon.className = "material-symbols-outlined text-white text-lg self-center";
+    icon.textContent = iconName;
+
+    const text = document.createElement("span");
+    text.className = "flex-1 self-center";
+    text.textContent = message;
+
+    const close = document.createElement("button");
+    close.type = "button";
+    close.className = "text-white font-bold leading-none focus:outline-none self-center";
+    close.setAttribute("aria-label", "Dismiss");
+    close.textContent = "×";
+    close.addEventListener("click", () => toast.remove());
+
+    toast.append(icon, text, close);
 
     container.appendChild(toast);
 

@@ -686,7 +686,7 @@
   <!-- Plotly.js (vendored) -->
   <script src="{{ url_for('static', filename='js/plotly.min.js') }}"></script>
 
-  <script>
+  <script nonce="{{ csp_nonce() }}">
   (function () {
     'use strict';
 

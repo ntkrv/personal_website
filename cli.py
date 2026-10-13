@@ -44,9 +44,13 @@ def create_admin_command(username: str, password: str) -> None:
 
 
 @click.command("seed")
+@click.confirmation_option(
+    "--yes",
+    prompt="This deletes ALL projects and certificates before seeding. Continue?",
+)
 @with_appcontext
 def seed_command() -> None:
-    """Seed the database with sample projects and certificates."""
+    """Wipe projects/certificates and load the sample set (--yes skips the prompt)."""
     from data.seed_data import PROJECTS, CERTIFICATES
 
     Project.query.delete()

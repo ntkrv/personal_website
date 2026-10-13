@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for
+from extensions import db
 from models import Project
 
 projects_bp = Blueprint("projects", __name__)
@@ -38,5 +39,5 @@ def project_detail(slug):
 
 @projects_bp.route("/project/<int:project_id>")
 def project_redirect(project_id):
-    project = Project.query.get_or_404(project_id)
+    project = db.get_or_404(Project, project_id)
     return redirect(url_for("projects.project_detail", slug=project.slug), code=301)

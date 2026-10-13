@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from slugify import slugify
@@ -62,7 +62,10 @@ class ContactMessage(db.Model):
     name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(120), nullable=False)
     message = db.Column(db.Text, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    # Naive UTC, matching rows written before (datetime.utcnow is deprecated).
+    created_at = db.Column(
+        db.DateTime, default=lambda: datetime.now(timezone.utc).replace(tzinfo=None)
+    )
 
 
 # --- ADMIN USER MODEL ---

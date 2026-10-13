@@ -1,7 +1,7 @@
 from flask import Blueprint, current_app, render_template, redirect, url_for, flash, request
 from forms import ContactForm
 from extensions import db, limiter
-from models import ContactMessage
+from models import ContactMessage, Project
 from utils.email_utils import send_contact_email
 
 
@@ -35,4 +35,7 @@ def contact():
         flash("Message has been sent successfully.", "success")
         return redirect(url_for("main.index"))
 
-    return render_template("index.html", form=form)
+    # Invalid submission: show the home page again with the errors, and
+    # with the same data the index route renders.
+    projects = Project.query.limit(3).all()
+    return render_template("index.html", form=form, projects=projects)

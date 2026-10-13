@@ -12,7 +12,7 @@
 {% block twitter_description %}{{ project.short_description }}{% endblock %}
 {% block twitter_image %}{% if project.image_path and project.image_path.startswith('http') %}{{ project.image_path }}{% else %}https://ntkrv.dev{{ project.image_path or '/static/img/og-image.jpg' }}{% endif %}{% endblock %}
 {% block extra_head %}
-<script type="application/ld+json">
+<script type="application/ld+json" nonce="{{ csp_nonce() }}">
 {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",

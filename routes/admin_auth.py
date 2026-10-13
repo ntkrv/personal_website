@@ -49,7 +49,9 @@ def login():
     return render_template("admin/admin_login.html")
 
 
-@admin_auth_bp.route("/logout")
+# POST-only (CSRF-checked) so a third-party page can't log the admin
+# out with an <img src=".../logout">.
+@admin_auth_bp.route("/logout", methods=["POST"])
 def logout():
     logout_user()
     flash("You have been logged out.", "info")

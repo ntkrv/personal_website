@@ -158,6 +158,8 @@ def test_contact_message_shows_in_dashboard_and_can_be_deleted(app, admin_client
 
 def test_contact_smtp_failure_is_logged_not_raised(app, client, monkeypatch, caplog):
     monkeypatch.setenv("MAIL_DEFAULT_RECIPIENT", "owner@example.com")
+    # app.logger doesn't propagate to root, so hook caplog in directly.
+    app.logger.addHandler(caplog.handler)
 
     def boom(msg):
         raise ConnectionRefusedError("smtp down")
@@ -179,6 +181,7 @@ def test_contact_smtp_failure_is_logged_not_raised(app, client, monkeypatch, cap
 
     assert response.status_code == 302
     assert ContactMessage.query.count() == 1
+    app.logger.removeHandler(caplog.handler)
     assert "Failed to send contact email" in caplog.text
 
 

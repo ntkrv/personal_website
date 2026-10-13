@@ -17,9 +17,11 @@ CSP = {
     "default-src": "'self'",
     "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
     "font-src": ["'self'", "https://fonts.gstatic.com"],
+    # Inline <script> blocks must carry nonce="{{ csp_nonce() }}" —
+    # Talisman adds a fresh nonce per response. Inline event handlers
+    # (onclick=…) are blocked; attach listeners from static JS instead.
     "script-src": [
         "'self'",
-        "'unsafe-inline'",
         "https://www.googletagmanager.com",
     ],
     "connect-src": [
@@ -106,6 +108,7 @@ def _register_extensions(app) -> None:
     talisman.init_app(
         app,
         content_security_policy=CSP,
+        content_security_policy_nonce_in=["script-src"],
         force_https=force_https,
         session_cookie_secure=force_https,
     )
