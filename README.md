@@ -270,7 +270,12 @@ Nginx). Production checklist:
 - `DATABASE_URL` pointing at Postgres or a persistent SQLite path
 - SMTP credentials wired up
 - `npm run build:css` against the deployed checkout
-- `flask db upgrade` on each deploy
+- `flask db upgrade` on each deploy (`scripts/run_prod.sh` does this
+  and starts Gunicorn; it never generates migrations)
+- `TRUSTED_PROXY_COUNT` matching the proxies in front of Gunicorn
+- Admin-uploaded images live in `instance/uploads/projects/` (or
+  `UPLOAD_DIR`) — keep it across deploys; run `flask migrate-uploads`
+  once to move images uploaded before that change out of `static/`
 
 The dark-first stylesheet is cache-busted via `?v=N` on `<link>` and
 `<script>` tags — bump `asset_version` (or just the literal in

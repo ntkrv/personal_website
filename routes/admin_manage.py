@@ -1,10 +1,7 @@
-import os
-import secrets
-
-from flask import Blueprint, current_app, render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_required
 from extensions import db
-from models import Project, Certificate
+from models import Project, Certificate, ContactMessage
 from forms import ProjectForm, CertificateForm
 from services.project_service import (
     create_project,
@@ -16,34 +13,9 @@ from services.certificate_service import (
     update_certificate,
     delete_certificate as delete_certificate_service,
 )
+from utils.uploads import delete_image_if_orphaned, save_image
 
 admin_manage_bp = Blueprint("admin_manage", __name__, url_prefix="/admin")
-
-UPLOAD_SUBDIR = ("uploads", "projects")
-ALLOWED_IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".webp"}
-
-
-def _save_uploaded_image(file_storage) -> str | None:
-    """Save an uploaded image under static/uploads/projects/ and return
-    its public path (e.g. "/static/uploads/projects/abc.jpg").
-
-    Returns None if no file was uploaded or extension isn't allowed.
-    Filename is randomised so admin can't accidentally cause collisions
-    or write outside the upload dir.
-    """
-    if not file_storage or not getattr(file_storage, "filename", ""):
-        return None
-
-    ext = os.path.splitext(file_storage.filename)[1].lower()
-    if ext not in ALLOWED_IMAGE_EXTS:
-        return None
-
-    dest_dir = os.path.join(current_app.static_folder, *UPLOAD_SUBDIR)
-    os.makedirs(dest_dir, exist_ok=True)
-
-    safe_name = secrets.token_hex(16) + ext
-    file_storage.save(os.path.join(dest_dir, safe_name))
-    return "/static/" + "/".join(UPLOAD_SUBDIR) + "/" + safe_name
 
 
 def _project_data_with_image(form, current_path: str | None = None) -> dict:
@@ -53,7 +25,7 @@ def _project_data_with_image(form, current_path: str | None = None) -> dict:
     stripped because services don't expect it.
     """
     data = dict(form.data)
-    uploaded = _save_uploaded_image(data.pop("image_file", None))
+    uploaded = save_image(data.pop("image_file", None))
     if uploaded:
         data["image_path"] = uploaded
     elif not data.get("image_path") and current_path:
@@ -69,8 +41,12 @@ def _project_data_with_image(form, current_path: str | None = None) -> dict:
 def dashboard():
     projects = Project.query.all()
     certificates = Certificate.query.all()
+    messages = ContactMessage.query.order_by(ContactMessage.created_at.desc()).all()
     return render_template(
-        "admin/dashboard.html", projects=projects, certificates=certificates
+        "admin/dashboard.html",
+        projects=projects,
+        certificates=certificates,
+        messages=messages,
     )
 
 
@@ -95,7 +71,10 @@ def edit_project(project_id):
         return redirect(url_for("admin_manage.dashboard"))
     form = ProjectForm(obj=project)
     if form.validate_on_submit():
-        update_project(project, _project_data_with_image(form, project.image_path))
+        old_image = project.image_path
+        update_project(project, _project_data_with_image(form, old_image))
+        if project.image_path != old_image:
+            delete_image_if_orphaned(old_image)
         flash("Project updated successfully!", "success")
         return redirect(url_for("admin_manage.dashboard"))
     return render_template("admin/edit_project.html", form=form, project=project)
@@ -108,7 +87,9 @@ def delete_project(project_id):
     if project is None:
         flash("Project not found.", "danger")
         return redirect(url_for("admin_manage.dashboard"))
+    image = project.image_path
     delete_project_service(project)
+    delete_image_if_orphaned(image)
     flash("Project deleted.", "warning")
     return redirect(url_for("admin_manage.dashboard"))
 
@@ -152,3 +133,17 @@ def delete_certificate(certificate_id):
     delete_certificate_service(certificate)
     flash("Certificate deleted.", "warning")
     return redirect(url_for("admin_manage.dashboard"))
+
+
+# --- Contact messages ---
+@admin_manage_bp.route("/delete_message/<int:message_id>", methods=["POST"])
+@login_required
+def delete_message(message_id):
+    message = db.session.get(ContactMessage, message_id)
+    if message is None:
+        flash("Message not found.", "danger")
+        return redirect(url_for("admin_manage.dashboard"))
+    db.session.delete(message)
+    db.session.commit()
+    flash("Message deleted.", "warning")
+    return redirect(url_for("admin_manage.dashboard", _anchor="messages"))

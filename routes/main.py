@@ -1,7 +1,8 @@
 from datetime import date
-from flask import Blueprint, Response, render_template, url_for
+from flask import Blueprint, Response, render_template, send_from_directory, url_for
 from models import Project
 from forms import ContactForm
+from utils.uploads import upload_dir
 
 main_bp = Blueprint("main", __name__)
 
@@ -16,6 +17,11 @@ def index():
 @main_bp.route("/privacy")
 def privacy():
     return render_template("privacy.html")
+
+
+@main_bp.route("/uploads/projects/<path:filename>")
+def uploaded_image(filename):
+    return send_from_directory(upload_dir(), filename)
 
 
 @main_bp.route("/robots.txt")

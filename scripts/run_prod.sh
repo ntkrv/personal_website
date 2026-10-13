@@ -1,37 +1,41 @@
 #!/bin/bash
 
-# chmod +x run_prod.sh
-# ./run_prod.sh
+# Production start: install deps, build CSS, apply migrations, serve
+# via Gunicorn. Run from the repo root:
+#   ./scripts/run_prod.sh
+#
+# Migrations are applied, never generated, here: create them locally
+# with `flask db migrate`, review, and commit them with the code.
 
-set -e
+set -euo pipefail
 
 echo "📦 Loading environment variables..."
-export $(grep -v '^#' .env | xargs)
+if [ -f .env ]; then
+  # Sourcing (instead of `export $(... | xargs)`) keeps quoted values
+  # with spaces or special characters intact.
+  set -a
+  . ./.env
+  set +a
+fi
+
+export FLASK_APP=wsgi.py
+export FLASK_ENV=production
 
 echo "📦 Installing Python packages..."
 python3 -m pip install --upgrade pip
 python3 -m pip install -r requirements.txt
 
-echo "🎨 Building Tailwind CSS for production..."
-npm run build:css:prod
+echo "🎨 Building Tailwind CSS..."
+npm ci
+npm run build:css
 
-echo "🧬 Running migrations..."
-export FLASK_APP=app.py
-export FLASK_ENV=production
-
-# Ensure instance folder exists
+echo "🧬 Applying migrations..."
 mkdir -p instance
-
-# Ensure production database exists
-touch instance/ntkrv.db
-
-# Initialize migrations if needed
-if [ ! -d "migrations" ]; then
-  flask db init
-fi
-
-flask db migrate -m "Production migration"
 flask db upgrade
 
-echo "🚀 Starting Flask app on 0.0.0.0:8000..."
-flask run --host=0.0.0.0 --port=8000
+BIND="${GUNICORN_BIND:-0.0.0.0:8000}"
+WORKERS="${GUNICORN_WORKERS:-2}"
+
+echo "🚀 Starting Gunicorn on ${BIND} (${WORKERS} workers)..."
+exec gunicorn --bind "${BIND}" --workers "${WORKERS}" \
+  --access-logfile - --error-logfile - wsgi:app

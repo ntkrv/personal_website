@@ -1,7 +1,17 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileSize
 from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField
-from wtforms.validators import DataRequired, Email, Length, Optional, URL, EqualTo
+from wtforms.validators import (
+    DataRequired,
+    Email,
+    EqualTo,
+    Length,
+    Optional,
+    URL,
+    ValidationError,
+)
+
+from utils.uploads import sniff_image_ext
 
 
 class ContactForm(FlaskForm):
@@ -51,6 +61,14 @@ class ProjectForm(FlaskForm):
         choices=[("github", "GitHub"), ("gdrive", "Google Drive")],
         validators=[DataRequired()],
     )
+
+    def validate_image_file(self, field):
+        # FileAllowed only looks at the filename; check the bytes too.
+        if field.data and getattr(field.data, "filename", ""):
+            if sniff_image_ext(field.data) is None:
+                raise ValidationError(
+                    "That file isn't a valid jpg, png, or webp image."
+                )
 
 
 class CertificateForm(FlaskForm):

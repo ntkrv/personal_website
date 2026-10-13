@@ -3,6 +3,7 @@
 Register via `_register_cli` from `app.py`. Usage:
     flask create-admin
     flask seed
+    flask migrate-uploads
 """
 import os
 
@@ -105,7 +106,20 @@ def sync_logistics_demo_command() -> None:
     )
 
 
+@click.command("migrate-uploads")
+@with_appcontext
+def migrate_uploads_command() -> None:
+    """Move case-study images from static/uploads/ to the upload dir."""
+    from utils.uploads import migrate_legacy_uploads
+
+    moved, missing = migrate_legacy_uploads()
+    click.echo(f"Moved {moved} image(s).")
+    for path in missing:
+        click.echo(f"Missing on disk, left as is: {path}")
+
+
 def register_cli(app) -> None:
     app.cli.add_command(create_admin_command)
     app.cli.add_command(seed_command)
     app.cli.add_command(sync_logistics_demo_command)
+    app.cli.add_command(migrate_uploads_command)

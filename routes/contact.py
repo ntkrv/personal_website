@@ -31,15 +31,8 @@ def contact():
         db.session.add(message)
         db.session.commit()
 
-        email_sent = send_contact_email(
-            form.name.data, form.email.data, form.message.data
-        )
-
-        if email_sent:
-            flash("Message has been sent successfully.", "success")
-        else:
-            flash("Failed to send email. Please try again later.", "danger")
-
+        send_contact_email(form.name.data, form.email.data, form.message.data)
+        flash("Message has been sent successfully.", "success")
         return redirect(url_for("main.index"))
 
     return render_template("index.html", form=form)

@@ -26,6 +26,10 @@ class Config:
     # (e.g. redis://localhost:6379, needs the `redis` package) in prod.
     RATELIMIT_STORAGE_URI = os.getenv("RATELIMIT_STORAGE_URI", "memory://")
 
+    # Where admin-uploaded case-study images are stored. Defaults to
+    # instance/uploads/projects/ (outside the code checkout).
+    UPLOAD_DIR = os.getenv("UPLOAD_DIR")
+
     MAIL_SERVER = os.getenv("MAIL_SERVER")
     MAIL_PORT = int(os.getenv("MAIL_PORT", 587))
     MAIL_USE_TLS = os.getenv("MAIL_USE_TLS", "True") == "True"
